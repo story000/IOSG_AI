@@ -1,0 +1,70 @@
+=== 加密货币文章分类报告 ===
+
+分析时间: 2025-07-13 21:10:55
+文章总数: 1312
+
+分类统计:
+  其他: 401 篇 (30.6%)
+  DeFi/RWA: 276 篇 (21.0%)
+  交易所/钱包: 260 篇 (19.8%)
+  项目融资: 125 篇 (9.5%)
+  NFT/GameFi/Metaverse: 98 篇 (7.5%)
+  基金融资: 92 篇 (7.0%)
+  基础设施/项目主网上线: 57 篇 (4.3%)
+  portfolios: 3 篇 (0.2%)
+
+各分类热门文章:
+
+其他:
+  1. [TechFlow] Grok AI正式登陆特斯拉车载系统
+  2. [TechFlow] 中信证券：美国通胀压力或于今年下半年逐步显现
+  3. [PANews] OpenAI再次推迟开放模型发布，以便进行更多安全测试
+  4. [TechFlow] 特朗普：如果鲍威尔下台，那将是一件好事
+  5. [PANews] 今日恐慌与贪婪指数仍为 74，与昨日持平
+
+DeFi/RWA:
+  1. [PANews] 全国政协常委姚志胜：建议香港特区政府争取中央支持发展由官方认证的离岸人民币稳定币
+  2. [PANews] Circle与OKX达成战略合作，OKX用户可享受美元与 USDC 即时兑换服务
+  3. [TechFlow] 中信建投：稳定币合规化提速 资产代币化迎来“权益时代”
+  4. [PANews] 中信建投：稳定币合规化提速 资产代币化迎来“权益时代”
+  5. [PANews] MAP Protocol宣布战略转型为专注比特币、稳定币及代币化资产兑换的全链基础设施
+
+交易所/钱包:
+  1. [PANews] Phantom在钱包内推出永续合约交易功能，由Hyperliquid提供支持
+  2. [PANews] REX Shares已向美SEC提交TRON相关杠杆ETF的申请文件
+  3. [PANews] 币安将支持League of Kingdoms（LOKA）代币置换及更名为Arena-Z（A2Z）
+  4. [PANews] 多家CEX已收到$PUMP代币，或将于近日开盘
+  5. [PANews] PUMP预售约1万个钱包成功买入，参与率约为42.3%
+
+项目融资:
+  1. [PANews] 知情人士：稳定币基础设施初创公司Zerohash将融资1亿美元，估值近10亿美元
+  2. [TechFlow] 去中心化交易所Kuru Labs 完成1150万美元A轮融资，Paradigm领投
+  3. [PANews] 混合型去中心化交易所Kuru Labs完成1150万美元A轮融资，Paradigm领投
+  4. [PANews] 马斯克旗下xAI拟新一轮融资，目标估值飙升至2000亿美元
+  5. [PANews] Robinhood CEO的AI数学公司Harmonic完成1亿美元B轮融资，估值达8.75亿美元
+
+NFT/GameFi/Metaverse:
+  1. [TechFlow] EigenCloud官方将X头像更改为「胖企鹅」主题图片
+  2. [TechFlow] 四部门近日启动 2025 年元宇宙典型案例推荐工作，聚焦数字人、产品、园区、标准
+  3. [PANews] 2025年元宇宙典型案例推荐工作启动，聚焦数字人、产品、园区、标准
+  4. [PANews] 币安推出全球首个符合伊斯兰教法的多币种质押产品“Sharia Earn”
+  5. [PANews] OKX将其X账号头像改为“胖企鹅”NFT主题概念图片
+
+基金融资:
+  1. [TechFlow] 迪拜批准首个代币化货币市场基金，卡塔尔国家银行与 DMZ Finance 联合推出
+  2. [PANews] 市场消息：前Citadel交易员Marcheggiano将成立一只价值10亿美元的对冲基金
+  3. [TechFlow] Cardano基金会资产总额达6.59亿美元，15%为比特币
+  4. [PANews] Cardano基金会资产总额达6.59亿美元，其中76.7%为ADA，15%为比特币
+  5. [PANews] 1inch团队投资基金持续买入，1INCH价格上涨14%
+
+基础设施/项目主网上线:
+  1. [TechFlow] 以太坊发布L1 zkEVM实时证明标准，计划一年内实现全面零知识证明
+  2. [PANews] 以太坊执行客户端支持历史数据修剪，大幅节省节点存储空间
+  3. [TechFlow] 再质押协议Inception宣布终止运营
+  4. [TechFlow] 币安将支持Vana（VANA）网络升级及硬分叉
+  5. [PANews] 币安将支持Vana（VANA）网络升级及硬分叉
+
+portfolios:
+  1. [TechFlow] 今日链上资金流向：Arbitrum 净流入 1040 万美元，Polygon PoS 净流出 1830 万美元
+  2. [Cointelegraph中文] Polygon&quot;&#26368;&#22797;&#26434;&quot;&#30340;&#30828;&#20998;&#21449;Heimdall 2.0&#23558;&#20110;&#21608;&#22235;&#37096;&#32626;
+  3. [PANews] Monad Foundation收购稳定币基础设施项目Portal

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-基于OpenAI API的项目融资文章筛选器
+基于AI API的项目融资文章筛选器 (支持OpenAI和DeepSeek)
 从classify_articles.py的结果中进一步筛选真实的项目融资
 """
 
@@ -11,17 +11,50 @@ from datetime import datetime
 import os
 import re
 
-class OpenAIFundingFilter:
-    def __init__(self, api_key=None):
-        # 设置OpenAI API密钥
-        if api_key:
-            openai.api_key = api_key
-        else:
-            # 从环境变量获取API密钥
-            openai.api_key = os.getenv('OPENAI_API_KEY')
-            if not openai.api_key:
-                print("❌ 请设置OPENAI_API_KEY环境变量或在代码中提供API密钥")
+class AIFundingFilter:
+    def __init__(self, api_key=None, provider="deepseek"):
+        self.provider = provider.lower()
+        self.api_key = api_key
+        
+        # 后台DeepSeek API密钥 (请在这里配置您的DeepSeek API密钥)
+        # 方式1: 直接在代码中配置
+        # self.deepseek_key = "sk-your-actual-deepseek-key-here"  
+        # 方式2: 从环境变量读取
+        self.deepseek_key = os.getenv('DEEPSEEK_API_KEY', 'sk-your-deepseek-key-here')
+        
+        if self.provider == "deepseek":
+            # 使用DeepSeek API
+            if not self.deepseek_key or self.deepseek_key == 'sk-your-deepseek-key-here':
+                print("❌ DeepSeek API密钥未配置")
+                print("请在ai_filter.py第21行配置您的DeepSeek API密钥:")
+                print('self.deepseek_key = "sk-your-actual-deepseek-key-here"')
+                print("或设置环境变量: export DEEPSEEK_API_KEY=sk-your-key")
+                self.api_key = None
                 return
+            self.api_key = self.deepseek_key
+            self.base_url = "https://api.deepseek.com"
+            self.model = "deepseek-chat"
+            print("✅ 使用DeepSeek API")
+            print(f"API密钥: {self.api_key[:10]}...")
+        else:
+            # 使用OpenAI API
+            if api_key:
+                self.api_key = api_key
+            else:
+                self.api_key = os.getenv('OPENAI_API_KEY')
+            if not self.api_key:
+                print("❌ 请提供OpenAI API密钥")
+                return
+            self.base_url = None  # OpenAI默认
+            self.model = "gpt-3.5-turbo"
+            print("✅ 使用OpenAI API")
+        
+        # 设置OpenAI客户端
+        if self.provider == "deepseek":
+            openai.api_key = self.api_key
+            openai.base_url = self.base_url
+        else:
+            openai.api_key = self.api_key
         
         # IOSG投资组合项目列表
         self.portfolios = [
@@ -236,10 +269,17 @@ class OpenAIFundingFilter:
             
         
         try:
-            # Using current OpenAI client library
-            client = openai.OpenAI()
+            # 根据提供商创建客户端
+            if self.provider == "deepseek":
+                client = openai.OpenAI(
+                    api_key=self.api_key,
+                    base_url=self.base_url
+                )
+            else:
+                client = openai.OpenAI(api_key=self.api_key)
+                
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model=self.model,
                 messages=[
                     {"role": "user", "content": prompt}
                 ],
@@ -248,6 +288,8 @@ class OpenAIFundingFilter:
             
             result = response.choices[0].message.content.strip()
             print(f"  🤖 AI返回: {result}")
+            import sys
+            sys.stdout.flush()  # 强制刷新输出
             
             # 解析返回的ID列表
             import re
@@ -276,7 +318,7 @@ class OpenAIFundingFilter:
                 'success': False
             }
     
-    def batch_filter(self, articles, batch_size=10, max_articles=None, article_type="project"):
+    def batch_filter(self, articles, batch_size=20, max_articles=None, article_type="project"):
         """批量筛选文章"""
         if max_articles:
             articles = articles[:max_articles]
@@ -304,12 +346,17 @@ class OpenAIFundingFilter:
             batch_articles = articles[batch_start:batch_end]
             batch_num = (batch_start // batch_size) + 1
             
-            print(f"\n📦 处理{type_name}批次 {batch_num}/{num_batches} ({len(batch_articles)} 篇文章)")
+            # 计算并显示进度
+            progress = int((batch_num / num_batches) * 100)
+            print(f"\n📦 处理{type_name}批次 {batch_num}/{num_batches} ({len(batch_articles)} 篇文章) - 进度: {progress}%")
             print(f"   文章 {batch_start+1}-{batch_end}")
+            import sys
+            sys.stdout.flush()  # 强制刷新进度输出
             
             # 显示当前批次文章标题
             for i, article in enumerate(batch_articles):
                 print(f"   ID{i+1}: {article['title'][:60]}")
+            sys.stdout.flush()  # 强制刷新文章列表
             
             # 调用API批量筛选，传入文章类型
             filter_result = self.filter_batch_articles(batch_articles, article_type)
@@ -317,6 +364,7 @@ class OpenAIFundingFilter:
             if filter_result['success']:
                 selected_indices = filter_result['selected_indices']
                 print(f"  ✅ 选中 {len(selected_indices)} 篇: {selected_indices}")
+                sys.stdout.flush()  # 强制刷新结果输出
                 
                 # 添加选中的文章
                 for idx in selected_indices:
@@ -351,17 +399,21 @@ class OpenAIFundingFilter:
         return filtered_articles
 
 def main():
-    # 查找最新的分类结果文件
-    import glob
+    # 读取最新的分类结果文件
+    latest_file = "latest_classified.json"
     
-    classified_files = glob.glob("classified_articles_*.json")
-    if not classified_files:
-        print("❌ 未找到classified_articles_*.json文件")
-        print("请先运行 python classify_articles.py")
-        return
+    # 如果最新文件不存在，尝试查找旧格式的文件
+    if not os.path.exists(latest_file):
+        import glob
+        classified_files = glob.glob("classified_articles_*.json")
+        if classified_files:
+            latest_file = max(classified_files)
+            print(f"⚠️ 使用旧格式文件: {latest_file}")
+        else:
+            print("❌ 未找到分类结果文件")
+            print("请先运行 python classify_articles.py")
+            return
     
-    # 使用最新的文件
-    latest_file = max(classified_files)
     print(f"读取文件: {latest_file}")
     
     try:
@@ -391,7 +443,7 @@ def main():
         print("❌ 未找到可筛选的文章")
         return
     
-    print(f"=== OpenAI API 文章筛选器 ===")
+    print(f"=== AI 文章筛选器 ===")
     print(f"找到项目融资分类文章: {len(project_funding_articles)} 篇")
     print(f"找到基金融资分类文章: {len(fund_funding_articles)} 篇")
     print(f"找到基础设施/项目主网上线文章: {len(infrastructure_articles)} 篇")
@@ -400,14 +452,29 @@ def main():
     print(f"找到交易所/钱包文章: {len(exchange_wallet_articles)} 篇")
     print(f"找到Portfolio文章: {len(portfolio_articles)} 篇")
     
-    # 设置API密钥
-    api_key = input("请输入OpenAI API密钥 (或按回车使用环境变量OPENAI_API_KEY): ").strip()
-    if not api_key:
-        api_key = None
+    # 选择API提供商
+    print(f"\n=== 选择AI API提供商 ===")
+    print("1. DeepSeek API (后台配置)")
+    print("2. OpenAI API (用户输入)")
+    
+    provider_choice = input("请选择API提供商 (1/2，默认1): ").strip()
+    
+    api_key = None
+    provider = "deepseek"
+    
+    if provider_choice == "2":
+        provider = "openai"
+        api_key = input("请输入OpenAI API密钥: ").strip()
+        if not api_key:
+            print("❌ 未提供OpenAI API密钥")
+            return
+    else:
+        print("✅ 使用后台DeepSeek API")
     
     # 创建筛选器
-    filter = OpenAIFundingFilter(api_key)
-    if not openai.api_key:
+    filter = AIFundingFilter(api_key, provider)
+    if not filter.api_key:
+        print("❌ API密钥配置失败，无法继续")
         return
     
     # 询问处理数量和批大小
@@ -417,11 +484,11 @@ def main():
     else:
         max_articles = None
     
-    batch_size = input("批处理大小？(默认10篇/次，输入数字修改): ").strip()
+    batch_size = input("批处理大小？(默认20篇/次，输入数字修改): ").strip()
     if batch_size.isdigit():
         batch_size = int(batch_size)
     else:
-        batch_size = 10
+        batch_size = 20
     
     # 分别筛选各类文章
     real_project_funding = []
@@ -491,75 +558,85 @@ def main():
                     new_articles.append(article)
             return new_articles
 
+        # 使用全局编号
+        global_counter = 1
+        
         # 项目融资板块
         if real_project_funding:
-            f.write("# 2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）\n")
-            for i, article in enumerate(delete_reports(real_project_funding), 1):
+            f.write("# 2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）\n\n")
+            for article in delete_reports(real_project_funding):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # 基金融资板块
         if real_fund_funding:
-            f.write("# 3. 基金融资介绍\n")
-            for i, article in enumerate(delete_reports(real_fund_funding), 1):
+            f.write("# 3. 基金融资介绍\n\n")
+            for article in delete_reports(real_fund_funding):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # 基础设施/项目主网上线板块
         if real_infrastructure:
-            f.write("# 4. 基础设施/项目主网上线\n")
-            for i, article in enumerate(delete_reports(real_infrastructure), 1):
+            f.write("# 4. 基础设施/项目主网上线\n\n")
+            for article in delete_reports(real_infrastructure):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # DeFi/RWA板块
         if real_defi_rwa:
-            f.write("# 5. DeFi/RWA\n")
-            for i, article in enumerate(delete_reports(real_defi_rwa), 1):
+            f.write("# 5. DeFi/RWA\n\n")
+            for article in delete_reports(real_defi_rwa):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # NFT/GameFi/Metaverse板块
         if real_nft_gamefi:
-            f.write("# 6. NFT/GameFi/Metaverse\n")
-            for i, article in enumerate(delete_reports(real_nft_gamefi), 1):
+            f.write("# 6. NFT/GameFi/Metaverse\n\n")
+            for article in delete_reports(real_nft_gamefi):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # 交易所/钱包板块
         if real_exchange_wallet:
-            f.write("# 7. 交易所/钱包\n")
-            for i, article in enumerate(delete_reports(real_exchange_wallet), 1):
+            f.write("# 7. 交易所/钱包\n\n")
+            for article in delete_reports(real_exchange_wallet):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
         
         # Portfolio板块
         if real_portfolio:
-            f.write("# 8. Our portfolio (这里标红的在公众号编辑时对应标红即可)\n")
-            for i, article in enumerate(delete_reports(real_portfolio), 1):
+            f.write("# 8. Our portfolio (这里标红的在公众号编辑时对应标红即可)\n\n")
+            for article in delete_reports(real_portfolio):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
                 
-                f.write(f"{i}. [{title}]({url})\n\n{content}\n\n")
+                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                global_counter += 1
     
     print(f"📋 格式化输出已保存到: {formatted_output_file}")
     print(f"\n🎯 AI筛选完成！")

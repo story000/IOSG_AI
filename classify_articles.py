@@ -5,6 +5,7 @@
 """
 
 import json
+import os
 import re
 from datetime import datetime
 from collections import defaultdict
@@ -292,14 +293,27 @@ class CryptoArticleClassifier:
         return classified_articles, dict(category_stats)
 
 def main():
-    # 读取JSON文件
-    input_file = "crypto_feeds_unread_20250706_165100.json"
+    # 读取最新的feeds文件
+    input_file = "latest_feeds.json"
+    
+    # 如果最新文件不存在，尝试查找旧格式的文件
+    if not os.path.exists(input_file):
+        import glob
+        old_files = glob.glob("crypto_feeds_unread_*.json")
+        if old_files:
+            input_file = max(old_files, key=os.path.getctime)
+            print(f"⚠️ 使用旧格式文件: {input_file}")
+        else:
+            print(f"❌ 未找到任何feeds文件")
+            print("请先运行 python fetch_specific_feeds.py")
+            return
     
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"❌ 文件 {input_file} 不存在")
+        print("请先运行 python fetch_specific_feeds.py")
         return
     except json.JSONDecodeError:
         print(f"❌ 文件 {input_file} 格式错误")
@@ -381,9 +395,49 @@ def main():
             mentioned_str = f" [{', '.join(mentioned[:2])}{'...' if len(mentioned) > 2 else ''}]" if mentioned else ""
             print(f"  {i}. {portfolio_mark}[{source}] {title} (得分: {confidence}){mentioned_str}")
     
-    # 保存分类结果
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    output_file = f"classified_articles_{timestamp}.json"
+    # 保存分类结果到固定文件
+    output_file = "latest_classified.json"
+    historical_classified_file = "historical_classified.json"
+    
+    # 如果存在旧的分类文件，将其归档到历史文件
+    if os.path.exists(output_file):
+        try:
+            with open(output_file, 'r', encoding='utf-8') as f:
+                old_classified_data = json.load(f)
+            
+            # 读取或创建历史分类文件
+            historical_classified = {'classifications': []}
+            if os.path.exists(historical_classified_file):
+                try:
+                    with open(historical_classified_file, 'r', encoding='utf-8') as f:
+                        historical_classified = json.load(f)
+                except:
+                    print("⚠️ 历史分类文件读取失败，将创建新文件")
+                    historical_classified = {'classifications': []}
+            
+            # 将旧的分类数据添加到历史记录
+            classification_info = {
+                'classification_date': old_classified_data['metadata']['classification_date'],
+                'total_articles': old_classified_data['metadata']['total_articles'],
+                'category_stats': old_classified_data['metadata']['category_stats']
+            }
+            historical_classified['classifications'].append(classification_info)
+            
+            # 保持历史记录在合理数量（最多保留30个分类记录）
+            if len(historical_classified['classifications']) > 30:
+                historical_classified['classifications'] = historical_classified['classifications'][-30:]
+            
+            # 更新历史分类文件
+            historical_classified['last_updated'] = datetime.now().isoformat()
+            historical_classified['total_classifications'] = len(historical_classified['classifications'])
+            
+            with open(historical_classified_file, 'w', encoding='utf-8') as f:
+                json.dump(historical_classified, f, ensure_ascii=False, indent=2)
+            
+            print(f"📚 旧分类数据已归档 ({len(historical_classified['classifications'])} 个记录)")
+            
+        except Exception as e:
+            print(f"⚠️ 归档旧分类数据时出错: {e}")
     
     output_data = {
         'metadata': {
@@ -403,6 +457,7 @@ def main():
     print(f"\n💾 分类结果已保存到: {output_file}")
     
     # 保存简化的分类报告
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     report_file = f"classification_report_{timestamp}.txt"
     with open(report_file, 'w', encoding='utf-8') as f:
         f.write("=== 加密货币文章分类报告 ===\n\n")
