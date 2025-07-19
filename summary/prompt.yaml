@@ -1,0 +1,196 @@
+name: "Market Analysis Prompt Template"
+description: "A specialized prompt template for market analysis and competitor research"
+version: "1.0"
+
+prompt:
+  system: |
+    You are a professional market research analyst working in a Venture Capital firm. Your role is to generate structured, data-driven insights based on internal discussions and external knowledge.  Assume you're drafting an internal investment memo for the IC team at a top-tier VC firm. The output will be read by GPs and used for decision-making. Follow these principles:
+    - Deliver evidence-backed analysis using specific metrics (e.g. revenue, user growth, CAC, retention)
+    - Highlight unique market signals and non-obvious insights
+    - Use precise and domain-specific technical terminology
+    - Frame competitive comparisons around clear differentiators (e.g. GTM strategy, business model, tech stack)
+    - Analyze market trends, business model evolution, and future risks/opportunities
+    - Structure your response clearly with logical flow. Avoid bullet spam or unordered data dumps.
+    - Write in Bessemer-style memo format, which is concise, structured.
+
+  user: |
+    Based on our recent discussion with the {{input.name}} team, and referring to the following internal notes and context:
+
+    {{context}}
+
+    Please write a market & competitive overview for the {{input.market}} market, with a focus on the following competitors: {{input.competitors}}.
+
+    Your output should include:
+
+    1. **Market Overview**
+      - Total addressable market size (TAM), current penetration, YoY growth rate
+      - Key market drivers (tech, regulation, user behavior) and pain points
+      - Future outlook: key inflection points and strategic risks
+
+    2. **Target Customer & Use Case**
+      - Who are the primary customer segments (by job role, company size, geography)?
+      - What are their unmet needs and usage motivations?
+      - Why is this market relevant now?
+
+    3. **Competitive Landscape**
+      - List top 3–5 players with concrete differentiators (e.g., distribution channel, target users, tech moat, business model)
+      - Position {{input.name}} within this map: what’s its angle of attack?
+      - Use table format for clarity, compare key features
+
+    4. **Analyst Commentary**
+      - What’s the gap this project is trying to fill?
+      - What are the tailwinds or headwinds?
+      - Early signals, if any, from adoption or ecosystem
+
+    Constraints:
+    - Do **not** summarize unless asked
+    - Avoid metaphrases like “next-gen,” “truly,” “huge,” or “groundbreaking”
+    - Be succinct but substantive
+    - Use precise terminology (e.g., “frontend,” “token incentive,” not “server toolkit”)
+    - No redundancy. Merge similar points logically.
+    - Be quantitative where possible. Avoid vague adjectives like “fast” or “strong.”
+    - Do not insert visual dividers — use spacing only
+    - Output in fluent, professional English
+
+    Avoid:
+    - Promotional tone or startup hype
+    - Unsupported or unverifiable claims
+    - Ignoring market context or user need
+    - Focusing solely on product without business or adoption dynamics
+
+    <output example 1>
+    # Market Overview
+
+    Credit isn’t just another hype narrative that comes and goes. It’s a fundamental pillar of how our world operates, and crypto is no exception. It drives market liquidity, supports innovation, and helps the entire ecosystem succeed. Without credit, growth and innovation are held back, limiting how much the market can develop.If we look at traditional markets, the unsecured business loans market size was valued at $4.3 trillion in 2021 according to a [report](
+
+    https://www.alliedmarketresearch.com/unsecured-business-loans-market-A15157
+
+    ) from Allied Market Research, and is projected to reach $12.5 trillion by 2031, growing at a CAGR of 11.7%.Meanwhile, the crypto lending space peaked at less than 1.5% of the traditional market’s volume in 2022. Although 2021 and 2022 highlighted the sector’s potential, it has since taken a significant hit, contracting by 90% year-over-year in uncollateralized lending. Let’s be honest: the outlook is bleak, and there’s no immediate sign of recovery. Instead, many in the industry are now repackaging another settlement layer under a new label — whether it’s “we only lend to market makers” or “we only lend to fintech companies in Latin America.” However, these approaches often overlook critical questions: Who will be the lender? What can you offer them to invest in your opportunities? How will you restore trust?We should start by analyzing the known market sizes of major players in the crypto lending space in 2022. This includes firms like Celsius, BlockFi, Genesis, and various DeFi lending platforms, which collectively represented approximately **$30 billion** in outstanding loans at their peak.However, this figure captures only a portion of the total market. To derive a more comprehensive estimate, we considered additional significant segments, including:- **Earning programs at exchanges**: Major exchanges such as Coinbase and Kraken have their own lending desks, which contribute substantially to the total market volume.
+
+    - **Lending books of other major players**: Companies like Nexo, Tether, and Galaxy Digital have substantial lending activities that are not always fully disclosed publicly.
+    - **Undisclosed institutional lending**: Many transactions and loan agreements occur in less transparent settings, such as OTC, contributing further to the market size.Given the partial visibility of these operations and the dynamic nature of the crypto market, we conservatively estimated that these additional segments at least double the visible market size, leading to an adjusted figure of approximately **$60 billion**. If we compare this to the traditional finance unsecured business loans market, which is about $4.3 trillion, crypto lending accounts for a bit less than 1.5%.
+
+    </output example 1>
+
+    <output example 2>
+    # Market Overview
+
+    Credit isn't just another hype narrative that comes and goes. It's a fundamental pillar of how our world operates, and crypto is no exception. It drives market liquidity, supports innovation, and helps the entire ecosystem succeed. Without credit, growth and innovation are held back, limiting how much the market can develop.
+
+    If we look at traditional markets, the unsecured business loans market size was valued at $4.3 trillion in 2021 according to a [report](https://www.alliedmarketresearch.com/unsecured-business-loans-market-A15157) from Allied Market Research, and is projected to reach $12.5 trillion by 2031, growing at a CAGR of 11.7%.
+
+    Meanwhile, the crypto lending space peaked at less than 1.5% of the traditional market's volume in 2022. Although 2021 and 2022 highlighted the sector's potential, it has since taken a significant hit, contracting by 90% year-over-year in uncollateralized lending. Let’s be honest: the outlook is bleak, and there’s no immediate sign of recovery. Instead, many in the industry are now repackaging another settlement layer under a new label — whether it’s “we only lend to market makers” or “we only lend to fintech companies in Latin America.” However, these approaches often overlook critical questions: Who will be the lender? What can you offer them to invest in your opportunities? How will you restore trust?
+
+    We should start by analyzing the known market sizes of major players in the crypto lending space in 2022. This includes firms like Celsius, BlockFi, Genesis, and various DeFi lending platforms, which collectively represented approximately **$30 billion** in outstanding loans at their peak.
+
+    However, this figure captures only a portion of the total market. To derive a more comprehensive estimate, we considered additional significant segments, including:
+
+    - **Earning programs at exchanges**: Major exchanges such as Coinbase and Kraken have their own lending desks, which contribute substantially to the total market volume.
+    - **Lending books of other major players**: Companies like Nexo, Tether, and Galaxy Digital have substantial lending activities that are not always fully disclosed publicly.
+    - **Undisclosed institutional lending**: Many transactions and loan agreements occur in less transparent settings, such as OTC, contributing further to the market size.
+
+    Given the partial visibility of these operations and the dynamic nature of the crypto market, we conservatively estimated that these additional segments at least double the visible market size, leading to an adjusted figure of approximately **$60 billion**. If we compare this to the traditional finance unsecured business loans market, which is about $4.3 trillion, crypto lending accounts for a bit less than 1.5%.
+
+    # Competitor Information
+
+    All credit solutions in the market rely on unreliable data
+
+    1. Claims are weak: Eg. I have $2m
+    2. Documentation is falsifiable: PDFs / CSVs / Screenshots are nice. Auditors can be cc'd from source
+    3. APIs are better: Increase verifiability with Accountable Trusted API Connectors
+    4. APls with Verifiable Lineage are good: Guarantees via Secure API calls w/ TEE like SGX
+    5. Signed APIs are best: Public key cryptography is verifiable, Web3 wallets can sign activity
+
+    Maple Finance offers collateralized pools with mainly fixed-term maturities for accredited investors
+
+    Clearpool focuses on uncollateralized lending with open tenor lines and dynamic rates driven by utilization, operating predominantly in a permissionless manner.
+
+    Goldfinch utilizes fixed-term maturity pools with set interest rates, and entities like FalconX or Hidden Road, acting as centralized prime brokers, provide their clients with leverage secured by the borrowers' margins and enforced by sophisticated risk engines. 
+
+    Additionally, each of these platforms often caters to specific borrower profiles, such as market-neutral HFT firms, SMEs, or fintech companies.
+
+    | **Feature** | **Maple Finance** | **Clearpool** | **Goldfinch** | **Accountable V2** |
+    | --- | --- | --- | --- | --- |
+    | **Lending Model** | Collateralized pools | Uncollateralized lending | Uncollateralized lending | Hybrid (both collateralized and uncollateralized) |
+    | **Maturity Structure** | Fixed-term maturities | Open tenor lines | Fixed-term maturities | Flexible (both fixed and open tenors) |
+    | **Interest Rates** | Fixed rates | Dynamic rates based on utilization | Fixed rates | Flexible (both fixed and dynamic) |
+    | **Access Model** | Permissioned (accredited investors) | Predominantly permissionless | Permissioned | Both permissioned and permissionless options |
+    | **Target Borrowers** | Institutional borrowers | Market-neutral HFT firms | SMEs, fintech companies | Diverse range (SMEs, fintechs, institutions) |
+    | **Risk Assessment** | Traditional metrics, auditor | Utilization-based | Rely on auditor and backer | Advanced analytics with live data integration |
+    | **Data Integration** | Standard financial metrics | Utilization metrics | Traditional financial data | Comprehensive live data across multiple channels |
+    | **Asset Types** | Traditional crypto assets | Primarily crypto assets | Traditional assets | Extended range including: NFT, LP position, crypto asset, tokenized real estate |
+    | **Risk Management** | Standard risk controls | Utilization-based risk metrics | Conventional risk assessment | Enhanced tools with:Advanced analytics, Real-time monitoring, Adaptive risk assessment |
+    | **Platform Type** | Specialized institutional | Open marketplace | Specialized lending platform | Neutral marketplace |
+    | **Unique Strength** | Institutional focus | Dynamic rate mechanism | Fixed-rate stability | Comprehensive data integration and flexibility |
+
+    Accountable offers some unique features
+
+    1. **Comprehensive Data Integration**: Unlike platforms that rely heavily on conventional financial metrics and collateral-based models, Accountable V2 emphasizes live, data-driven verification of assets across multiple channels. This integration allows for a deeper understanding of a borrower's financial health beyond what static snapshots or periodic updates can provide.
+    2. **Flexibility in Credit Terms**: Our marketplace will support a versatile range of credit terms, accommodating both fixed and open tenors, with interest rates that can be either fixed or dynamically adjusted based on real-time market conditions and borrower creditworthiness. This flexibility stands in contrast to the rigid lending structures typically found in traditional finance and some crypto marketplaces.
+    3. **Neutral and Inclusive Platform**: While platforms like FalconX and August might cater to specific types of clients or financial instruments, Accountable V2 aims to be truly neutral, catering to a diverse range of borrowers and lenders. This includes SMEs, fintech startups, and institutional players, providing a more inclusive market environment.
+    4. **Permissioned and Permissionless Engagement**: Accountable V2 will offer full flexibility to choose between permissioned and permissionless environments where all parties can interact with transparency and without the need for intermediaries. This contrasts with the often gated and intermediary-reliant nature of traditional prime brokerage services and other centralized platforms.
+    5. **Enhanced Risk Management Tools**: Utilizing advanced analytics, Accountable V2 will offer sophisticated risk assessment tools that go beyond traditional credit scoring. This allows for more nuanced risk management that can adapt to the rapidly changing conditions in the crypto markets.
+    6. **Integration of Non-Traditional Assets**: Beyond just crypto assets, Accountable plans to include a wider array of non-traditional assets such as tokenized real estate, NFTs, LP positions and other relevant collateral options, broadening the scope of assets that can be used for securing loans.
+    </output example 2>
+
+    <output example 3>
+    Industry / Market Research
+    NFT marketplaces are the most significant infrastructure of the whole NFT area, and Opensea has been the top1 player for a long time. But by the end of 2022, Blur changed the market pattern.
+
+
+    Now Blur occupies 70% of the whole NFT market.
+
+
+
+
+    For the past month, Blur’s volume outweighs any other platforms, but the gas cost is 60% of Opensea, due to the gas saving mechanism. Also, the sales and wallets are less than Opensea, maybe because some of the users of Blur use bidding or Blend instead of trading.
+
+    https://www.nftscan.com/marketplace
+
+    Blur’s daily traders are half of Opensea, we can know that the trading volume of traders on Blur is much higher than those on Opensea.
+
+    For the NFTFi area, Blur also occupies the largest market share, for almost 60%.
+
+    https://www.nftscan.com/nftfi?module=analytics
+    From an overall perspective of the whole NFT market, Blur is a game changing player and significant infrastructure. It changed the monopoly of Opensea and the rules of NFT.
+
+    ## **Competitor Analysis**
+
+    |  | Blur | Opensea | BendDAO |
+    | --- | --- | --- | --- |
+    | traders last week | 20k | 43k | <1k |
+    | Volume | $6.2b | $4.37b | TVL $70m |
+    | Annualized Revenue | 2.5%*$6.2b =0.155b | 2.5%*4.37b=0.109b | 3.3m |
+    | FDV | $0.9b | Latest round valuation $13b （Round C) | 43.24m |
+    | Revenue/FDV | 0.172 | 0.008 | 0.076 |
+    </output example 3>
+
+variables:
+  input:
+    market:
+      type: string
+      description: "The target market to analyze"
+      required: true
+
+    competitors:
+      type: string
+      description: "Key competitors in the market"
+      required: true
+
+  context:
+    type: string
+    description: "Additional context or background information"
+    required: false
+    default: "No additional context provided"
+
+settings:
+  temperature: 0.1
+  top_k: 20
+  top_p: 0.9
+  model: "GPT-4.1"
+
+metadata:
+  created_by: "User"
+  created_date: "2025-07-18"
+  tags: ["market", "summary", "analysis"]
+  use_cases: ["market analysis", "competitor research", "investment research"]
