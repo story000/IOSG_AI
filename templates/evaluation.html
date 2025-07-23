@@ -1,476 +1,456 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周报系统评估 - IOSG News Analysis</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .navbar-custom {
-            background-color: #ff604a !important;
-        }
-        .evaluation-card {
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .evaluation-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 6px 6px 0 0;
-        }
-        .metric-card {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .metric-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #007bff;
-        }
-        .metric-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-        }
-        .start-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            border: none;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-        }
-        .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-        }
-        .progress-container {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .log-container {
-            background: #1e1e1e;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            padding: 1rem;
-            border-radius: 6px;
-            max-height: 400px;
-            overflow-y: auto;
-            margin: 1rem 0;
-        }
-        .results-container {
-            display: none;
-            margin-top: 2rem;
-        }
-        .confusion-matrix {
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        .confusion-matrix table {
-            margin: 0;
-        }
-        .confusion-matrix th,
-        .confusion-matrix td {
-            text-align: center;
-            vertical-align: middle;
-            border: 1px solid #dee2e6;
-            padding: 0.75rem;
-        }
-        .confusion-matrix .true-positive {
-            background-color: #d4edda;
-        }
-        .confusion-matrix .false-positive {
-            background-color: #f8d7da;
-        }
-        .confusion-matrix .false-negative {
-            background-color: #fff3cd;
-        }
-        .confusion-matrix .true-negative {
-            background-color: #e2e3e5;
-        }
-    </style>
-</head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <i class="fas fa-chart-line"></i> IOSG Crypto News
-            </a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/"><i class="fas fa-home"></i> 主页</a>
-                <a class="nav-link" href="/auto"><i class="fas fa-robot"></i> 自动报告</a>
-                <a class="nav-link" href="/labelhub"><i class="fas fa-tags"></i> 标注中心</a>
-                <a class="nav-link active" href="/evaluation"><i class="fas fa-chart-bar"></i> 系统评估</a>
+{% extends "base.html" %}
+
+{% block title %}系统评估 - IOSG Crypto News Analysis{% endblock %}
+
+{% block extra_css %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .evaluation-card {
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .evaluation-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 6px 6px 0 0;
+    }
+    .metric-card {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+    .metric-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-top: 0.5rem;
+    }
+    .start-btn {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.2s ease;
+    }
+    .start-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    }
+    .progress-container {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .log-container {
+        background: #1e1e1e;
+        color: #00ff00;
+        font-family: 'Courier New', monospace;
+        padding: 1rem;
+        border-radius: 6px;
+        max-height: 400px;
+        overflow-y: auto;
+        margin: 1rem 0;
+    }
+    .results-container {
+        display: none;
+        margin-top: 2rem;
+    }
+    .confusion-matrix {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .confusion-matrix table {
+        margin: 0;
+    }
+    .confusion-matrix th,
+    .confusion-matrix td {
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+    }
+    .confusion-matrix .true-positive {
+        background-color: #d4edda;
+    }
+    .confusion-matrix .false-positive {
+        background-color: #f8d7da;
+    }
+    .confusion-matrix .false-negative {
+        background-color: #fff3cd;
+    }
+    .confusion-matrix .true-negative {
+        background-color: #e2e3e5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- 页面标题 -->
+    <div class="evaluation-card">
+        <div class="evaluation-header text-center">
+            <h1><i class="fas fa-chart-bar"></i> 周报系统评估</h1>
+            <p class="mb-0">基于历史标注数据评估系统的重要性判断和分类准确性</p>
+        </div>
+    </div>
+
+    <!-- 控制面板 -->
+    <div class="evaluation-card">
+        <div class="card-body p-4">
+            <h5><i class="fas fa-cog"></i> 评估控制</h5>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <p class="mb-2">
+                        <strong>数据源：</strong>historical_classified.json 中所有人工标注的文章<br>
+                        <strong>评估维度：</strong>重要性判断(Precision/Recall/F1) + 分类准确性
+                    </p>
+                    <div id="datasetInfo" class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> 点击开始评估以加载测试数据集信息
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn start-btn" onclick="startEvaluation()">
+                        <i class="fas fa-play"></i> 开始评估
+                    </button>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="container">
-        <!-- 页面标题 -->
+    <!-- 进度显示 -->
+    <div id="progressContainer" class="progress-container" style="display: none;">
+        <h5><i class="fas fa-hourglass-half"></i> 评估进度</h5>
+        <div class="progress mb-3" style="height: 25px;">
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                 style="width: 0%">0%</div>
+        </div>
+        <div id="currentStep" class="text-muted">准备开始...</div>
+        
+        <!-- 实时日志 -->
+        <div class="log-container" id="logContainer">
+            <div id="logs">等待开始评估...</div>
+        </div>
+    </div>
+
+    <!-- 评估结果 -->
+    <div id="resultsContainer" class="results-container">
+        <!-- 重要性评估结果 -->
         <div class="evaluation-card">
-            <div class="evaluation-header text-center">
-                <h1><i class="fas fa-chart-bar"></i> 周报系统评估</h1>
-                <p class="mb-0">基于历史标注数据评估系统的重要性判断和分类准确性</p>
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-star"></i> 重要性判断评估</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="metric-card">
+                            <div class="metric-value" id="precisionValue">-</div>
+                            <div class="metric-label">Precision</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card">
+                            <div class="metric-value" id="recallValue">-</div>
+                            <div class="metric-label">Recall</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card">
+                            <div class="metric-value" id="f1Value">-</div>
+                            <div class="metric-label">F1 Score</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-card">
+                            <div class="metric-value" id="accuracyValue">-</div>
+                            <div class="metric-label">Accuracy</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 混淆矩阵 -->
+                <h6 class="mt-4">重要性判断混淆矩阵</h6>
+                <div class="confusion-matrix">
+                    <table class="table table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="align-middle">实际</th>
+                                <th colspan="2">预测</th>
+                            </tr>
+                            <tr>
+                                <th>重要</th>
+                                <th>不重要</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>重要</th>
+                                <td class="true-positive" id="tp">-</td>
+                                <td class="false-negative" id="fn">-</td>
+                            </tr>
+                            <tr>
+                                <th>不重要</th>
+                                <td class="false-positive" id="fp">-</td>
+                                <td class="true-negative" id="tn">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- 控制面板 -->
+        <!-- 分类准确性评估结果 -->
         <div class="evaluation-card">
-            <div class="card-body p-4">
-                <h5><i class="fas fa-cog"></i> 评估控制</h5>
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <p class="mb-2">
-                            <strong>数据源：</strong>historical_classified.json 中所有人工标注的文章<br>
-                            <strong>评估维度：</strong>重要性判断(Precision/Recall/F1) + 分类准确性
-                        </p>
-                        <div id="datasetInfo" class="alert alert-info">
-                            <i class="fas fa-info-circle"></i> 点击开始评估以加载测试数据集信息
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-tags"></i> 分类准确性评估</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value" id="classificationAccuracy">-</div>
+                            <div class="metric-label">总体分类准确率</div>
                         </div>
                     </div>
-                    <div class="col-md-4 text-end">
-                        <button class="btn start-btn" onclick="startEvaluation()">
-                            <i class="fas fa-play"></i> 开始评估
-                        </button>
+                    <div class="col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value" id="testArticlesCount">-</div>
+                            <div class="metric-label">测试文章数量</div>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- 分类详细结果 -->
+                <h6 class="mt-4">各类别分类准确性</h6>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>类别</th>
+                                <th>正确分类</th>
+                                <th>总数</th>
+                                <th>准确率</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryDetails">
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">等待评估结果...</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- 进度显示 -->
-        <div id="progressContainer" class="progress-container" style="display: none;">
-            <h5><i class="fas fa-hourglass-half"></i> 评估进度</h5>
-            <div class="progress mb-3" style="height: 25px;">
-                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
-                     style="width: 0%">0%</div>
+        <!-- 详细错误分析 -->
+        <div class="evaluation-card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> 错误分析</h5>
             </div>
-            <div id="currentStep" class="text-muted">准备开始...</div>
-            
-            <!-- 实时日志 -->
-            <div class="log-container" id="logContainer">
-                <div id="logs">等待开始评估...</div>
-            </div>
-        </div>
-
-        <!-- 评估结果 -->
-        <div id="resultsContainer" class="results-container">
-            <!-- 重要性评估结果 -->
-            <div class="evaluation-card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-star"></i> 重要性判断评估</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="metric-card">
-                                <div class="metric-value" id="precisionValue">-</div>
-                                <div class="metric-label">Precision</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-card">
-                                <div class="metric-value" id="recallValue">-</div>
-                                <div class="metric-label">Recall</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-card">
-                                <div class="metric-value" id="f1Value">-</div>
-                                <div class="metric-label">F1 Score</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-card">
-                                <div class="metric-value" id="accuracyValue">-</div>
-                                <div class="metric-label">Accuracy</div>
-                            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>重要性误判案例</h6>
+                        <div id="importanceErrors" class="small">
+                            等待分析结果...
                         </div>
                     </div>
-                    
-                    <!-- 混淆矩阵 -->
-                    <h6 class="mt-4">重要性判断混淆矩阵</h6>
-                    <div class="confusion-matrix">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2" class="align-middle">实际</th>
-                                    <th colspan="2">预测</th>
-                                </tr>
-                                <tr>
-                                    <th>重要</th>
-                                    <th>不重要</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>重要</th>
-                                    <td class="true-positive" id="tp">-</td>
-                                    <td class="false-negative" id="fn">-</td>
-                                </tr>
-                                <tr>
-                                    <th>不重要</th>
-                                    <td class="false-positive" id="fp">-</td>
-                                    <td class="true-negative" id="tn">-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 分类准确性评估结果 -->
-            <div class="evaluation-card">
-                <div class="card-header bg-success text-white">
-                    <h5 class="mb-0"><i class="fas fa-tags"></i> 分类准确性评估</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="metric-card">
-                                <div class="metric-value" id="classificationAccuracy">-</div>
-                                <div class="metric-label">总体分类准确率</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="metric-card">
-                                <div class="metric-value" id="testArticlesCount">-</div>
-                                <div class="metric-label">测试文章数量</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 分类详细结果 -->
-                    <h6 class="mt-4">各类别分类准确性</h6>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>类别</th>
-                                    <th>正确分类</th>
-                                    <th>总数</th>
-                                    <th>准确率</th>
-                                </tr>
-                            </thead>
-                            <tbody id="categoryDetails">
-                                <tr>
-                                    <td colspan="4" class="text-center text-muted">等待评估结果...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 详细错误分析 -->
-            <div class="evaluation-card">
-                <div class="card-header bg-warning text-dark">
-                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> 错误分析</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>重要性误判案例</h6>
-                            <div id="importanceErrors" class="small">
-                                等待分析结果...
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h6>分类错误案例</h6>
-                            <div id="classificationErrors" class="small">
-                                等待分析结果...
-                            </div>
+                    <div class="col-md-6">
+                        <h6>分类错误案例</h6>
+                        <div id="classificationErrors" class="small">
+                            等待分析结果...
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+{% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let evaluationRunning = false;
+{% block extra_js %}
+<script>
+    let evaluationRunning = false;
 
-        async function startEvaluation() {
-            if (evaluationRunning) return;
+    async function startEvaluation() {
+        if (evaluationRunning) return;
+        
+        evaluationRunning = true;
+        document.querySelector('.start-btn').disabled = true;
+        document.getElementById('progressContainer').style.display = 'block';
+        document.getElementById('resultsContainer').style.display = 'none';
+        
+        try {
+            // 开始评估
+            const response = await fetch('/evaluation/start', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            });
             
-            evaluationRunning = true;
-            document.querySelector('.start-btn').disabled = true;
-            document.getElementById('progressContainer').style.display = 'block';
-            document.getElementById('resultsContainer').style.display = 'none';
+            if (!response.ok) {
+                throw new Error('评估启动失败');
+            }
             
-            try {
-                // 开始评估
-                const response = await fetch('/evaluation/start', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'}
-                });
-                
-                if (!response.ok) {
-                    throw new Error('评估启动失败');
-                }
-                
-                // 开始轮询状态
-                pollEvaluationStatus();
-                
-            } catch (error) {
-                showError('评估启动失败: ' + error.message);
+            // 开始轮询状态
+            pollEvaluationStatus();
+            
+        } catch (error) {
+            showError('评估启动失败: ' + error.message);
+            resetEvaluation();
+        }
+    }
+
+    async function pollEvaluationStatus() {
+        try {
+            const response = await fetch('/evaluation/status');
+            const status = await response.json();
+            
+            updateProgress(status);
+            
+            if (status.completed) {
+                showResults(status.results);
                 resetEvaluation();
-            }
-        }
-
-        async function pollEvaluationStatus() {
-            try {
-                const response = await fetch('/evaluation/status');
-                const status = await response.json();
-                
-                updateProgress(status);
-                
-                if (status.completed) {
-                    showResults(status.results);
-                    resetEvaluation();
-                } else if (status.failed) {
-                    showError('评估失败: ' + status.error);
-                    resetEvaluation();
-                } else {
-                    // 继续轮询
-                    setTimeout(pollEvaluationStatus, 1000);
-                }
-                
-            } catch (error) {
-                showError('获取状态失败: ' + error.message);
+            } else if (status.failed) {
+                showError('评估失败: ' + status.error);
                 resetEvaluation();
-            }
-        }
-
-        function updateProgress(status) {
-            const progressBar = document.getElementById('progressBar');
-            const currentStep = document.getElementById('currentStep');
-            const logs = document.getElementById('logs');
-            
-            progressBar.style.width = status.progress + '%';
-            progressBar.textContent = status.progress + '%';
-            currentStep.textContent = status.current_step || '进行中...';
-            
-            if (status.logs && status.logs.length > 0) {
-                logs.innerHTML = status.logs.map(log => 
-                    `<div>[${log.timestamp}] ${log.message}</div>`
-                ).join('');
-                logs.scrollTop = logs.scrollHeight;
-            }
-        }
-
-        function showResults(results) {
-            document.getElementById('resultsContainer').style.display = 'block';
-            
-            // 重要性评估结果
-            const importance = results.importance_evaluation;
-            document.getElementById('precisionValue').textContent = (importance.precision * 100).toFixed(1) + '%';
-            document.getElementById('recallValue').textContent = (importance.recall * 100).toFixed(1) + '%';
-            document.getElementById('f1Value').textContent = (importance.f1_score * 100).toFixed(1) + '%';
-            document.getElementById('accuracyValue').textContent = (importance.accuracy * 100).toFixed(1) + '%';
-            
-            // 混淆矩阵
-            document.getElementById('tp').textContent = importance.confusion_matrix.true_positive;
-            document.getElementById('fn').textContent = importance.confusion_matrix.false_negative;
-            document.getElementById('fp').textContent = importance.confusion_matrix.false_positive;
-            document.getElementById('tn').textContent = importance.confusion_matrix.true_negative;
-            
-            // 分类准确性结果
-            const classification = results.classification_evaluation;
-            document.getElementById('classificationAccuracy').textContent = (classification.overall_accuracy * 100).toFixed(1) + '%';
-            document.getElementById('testArticlesCount').textContent = classification.total_articles;
-            
-            // 各类别详细结果
-            const categoryDetails = document.getElementById('categoryDetails');
-            categoryDetails.innerHTML = '';
-            for (const [category, stats] of Object.entries(classification.category_details)) {
-                const accuracy = (stats.correct / stats.total * 100).toFixed(1);
-                categoryDetails.innerHTML += `
-                    <tr>
-                        <td>${category}</td>
-                        <td>${stats.correct}</td>
-                        <td>${stats.total}</td>
-                        <td>${accuracy}%</td>
-                    </tr>
-                `;
-            }
-            
-            // 错误分析
-            showErrorAnalysis(results.error_analysis);
-        }
-
-        function showErrorAnalysis(errorAnalysis) {
-            // 重要性误判案例
-            const importanceErrors = document.getElementById('importanceErrors');
-            if (errorAnalysis.importance_errors.length > 0) {
-                importanceErrors.innerHTML = errorAnalysis.importance_errors.slice(0, 5).map(error => 
-                    `<div class="border-bottom pb-2 mb-2">
-                        <strong>${error.error_type}:</strong> ${error.title}<br>
-                        <small class="text-muted">预测: ${error.predicted}, 实际: ${error.actual}</small>
-                    </div>`
-                ).join('');
             } else {
-                importanceErrors.innerHTML = '<div class="text-success">无重要性误判案例</div>';
+                // 继续轮询
+                setTimeout(pollEvaluationStatus, 1000);
             }
             
-            // 分类错误案例
-            const classificationErrors = document.getElementById('classificationErrors');
-            if (errorAnalysis.classification_errors.length > 0) {
-                classificationErrors.innerHTML = errorAnalysis.classification_errors.slice(0, 5).map(error => 
-                    `<div class="border-bottom pb-2 mb-2">
-                        <strong>分类错误:</strong> ${error.title}<br>
-                        <small class="text-muted">预测: ${error.predicted}, 实际: ${error.actual}</small>
-                    </div>`
-                ).join('');
-            } else {
-                classificationErrors.innerHTML = '<div class="text-success">无分类错误案例</div>';
-            }
+        } catch (error) {
+            showError('获取状态失败: ' + error.message);
+            resetEvaluation();
         }
+    }
 
-        function showError(message) {
-            document.getElementById('currentStep').innerHTML = 
-                `<div class="alert alert-danger">${message}</div>`;
+    function updateProgress(status) {
+        const progressBar = document.getElementById('progressBar');
+        const currentStep = document.getElementById('currentStep');
+        const logs = document.getElementById('logs');
+        
+        progressBar.style.width = status.progress + '%';
+        progressBar.textContent = status.progress + '%';
+        currentStep.textContent = status.current_step || '进行中...';
+        
+        if (status.logs && status.logs.length > 0) {
+            logs.innerHTML = status.logs.map(log => 
+                `<div>[${log.timestamp}] ${log.message}</div>`
+            ).join('');
+            logs.scrollTop = logs.scrollHeight;
         }
+    }
 
-        function resetEvaluation() {
-            evaluationRunning = false;
-            document.querySelector('.start-btn').disabled = false;
+    function showResults(results) {
+        document.getElementById('resultsContainer').style.display = 'block';
+        
+        // 重要性评估结果
+        const importance = results.importance_evaluation;
+        document.getElementById('precisionValue').textContent = (importance.precision * 100).toFixed(1) + '%';
+        document.getElementById('recallValue').textContent = (importance.recall * 100).toFixed(1) + '%';
+        document.getElementById('f1Value').textContent = (importance.f1_score * 100).toFixed(1) + '%';
+        document.getElementById('accuracyValue').textContent = (importance.accuracy * 100).toFixed(1) + '%';
+        
+        // 混淆矩阵
+        document.getElementById('tp').textContent = importance.confusion_matrix.true_positive;
+        document.getElementById('fn').textContent = importance.confusion_matrix.false_negative;
+        document.getElementById('fp').textContent = importance.confusion_matrix.false_positive;
+        document.getElementById('tn').textContent = importance.confusion_matrix.true_negative;
+        
+        // 分类准确性结果
+        const classification = results.classification_evaluation;
+        document.getElementById('classificationAccuracy').textContent = (classification.overall_accuracy * 100).toFixed(1) + '%';
+        document.getElementById('testArticlesCount').textContent = classification.total_articles;
+        
+        // 各类别详细结果
+        const categoryDetails = document.getElementById('categoryDetails');
+        categoryDetails.innerHTML = '';
+        for (const [category, stats] of Object.entries(classification.category_details)) {
+            const accuracy = (stats.correct / stats.total * 100).toFixed(1);
+            categoryDetails.innerHTML += `
+                <tr>
+                    <td>${category}</td>
+                    <td>${stats.correct}</td>
+                    <td>${stats.total}</td>
+                    <td>${accuracy}%</td>
+                </tr>
+            `;
         }
+        
+        // 错误分析
+        showErrorAnalysis(results.error_analysis);
+    }
 
-        // 页面加载时获取数据集信息
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                const response = await fetch('/evaluation/dataset_info');
-                const info = await response.json();
-                
-                document.getElementById('datasetInfo').innerHTML = `
-                    <i class="fas fa-info-circle"></i> 
-                    测试数据集: ${info.total_labeled} 篇已标注文章 | 
-                    重要文章: ${info.important_count} 篇 | 
-                    不重要文章: ${info.not_important_count} 篇 |
-                    分类覆盖: ${info.categories.join(', ')}
-                `;
-            } catch (error) {
-                console.error('获取数据集信息失败:', error);
-            }
-        });
-    </script>
-</body>
-</html>
+    function showErrorAnalysis(errorAnalysis) {
+        // 重要性误判案例
+        const importanceErrors = document.getElementById('importanceErrors');
+        if (errorAnalysis.importance_errors.length > 0) {
+            importanceErrors.innerHTML = errorAnalysis.importance_errors.slice(0, 5).map(error => 
+                `<div class="border-bottom pb-2 mb-2">
+                    <strong>${error.error_type}:</strong> ${error.title}<br>
+                    <small class="text-muted">预测: ${error.predicted}, 实际: ${error.actual}</small>
+                </div>`
+            ).join('');
+        } else {
+            importanceErrors.innerHTML = '<div class="text-success">无重要性误判案例</div>';
+        }
+        
+        // 分类错误案例
+        const classificationErrors = document.getElementById('classificationErrors');
+        if (errorAnalysis.classification_errors.length > 0) {
+            classificationErrors.innerHTML = errorAnalysis.classification_errors.slice(0, 5).map(error => 
+                `<div class="border-bottom pb-2 mb-2">
+                    <strong>分类错误:</strong> ${error.title}<br>
+                    <small class="text-muted">预测: ${error.predicted}, 实际: ${error.actual}</small>
+                </div>`
+            ).join('');
+        } else {
+            classificationErrors.innerHTML = '<div class="text-success">无分类错误案例</div>';
+        }
+    }
+
+    function showError(message) {
+        document.getElementById('currentStep').innerHTML = 
+            `<div class="alert alert-danger">${message}</div>`;
+    }
+
+    function resetEvaluation() {
+        evaluationRunning = false;
+        document.querySelector('.start-btn').disabled = false;
+    }
+
+    // 页面加载时获取数据集信息
+    document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('/evaluation/dataset_info');
+            const info = await response.json();
+            
+            document.getElementById('datasetInfo').innerHTML = `
+                <i class="fas fa-info-circle"></i> 
+                测试数据集: ${info.total_labeled} 篇已标注文章 | 
+                重要文章: ${info.important_count} 篇 | 
+                不重要文章: ${info.not_important_count} 篇 |
+                分类覆盖: ${info.categories.join(', ')}
+            `;
+        } catch (error) {
+            console.error('获取数据集信息失败:', error);
+        }
+    });
+</script>
+{% endblock %}
