@@ -14,11 +14,11 @@ import yaml
 import difflib
 
 class AIFundingFilter:
-    def __init__(self, api_key=None, provider="deepseek"):
+    def __init__(self, api_key=None, provider="openai"):
         self.provider = provider.lower()
         self.api_key = api_key
-        
-        # 后台DeepSeek API密钥 (请在这里配置您的DeepSeek API密钥)
+
+        # 后台OpenAI API密钥 (请在这里配置您的OpenAI API密钥)
         # 方式1: 直接在代码中配置
         # self.deepseek_key = "sk-your-actual-deepseek-key-here"  
         # 方式2: 从环境变量读取
@@ -48,8 +48,8 @@ class AIFundingFilter:
                 print("❌ 请提供OpenAI API密钥")
                 return
             self.base_url = None  # OpenAI默认
-            self.model = "gpt-3.5-turbo"
-            print("✅ 使用OpenAI API")
+            self.model = "gpt-4.1"
+            print("✅ 使用OpenAI API", f"模型: {self.model}")
         
         # 设置OpenAI客户端
         if self.provider == "deepseek":
@@ -140,6 +140,7 @@ class AIFundingFilter:
     def _calculate_title_similarity(self, title1, title2):
         """
         计算两个标题的相似度
+        使用 difflib.SequenceMatcher 计算字符串相似度
         """
         clean_title1 = self._clean_title_for_comparison(title1)
         clean_title2 = self._clean_title_for_comparison(title2)
@@ -149,7 +150,7 @@ class AIFundingFilter:
     
     def deduplicate_articles_by_title(self, articles, category_name=""):
         """
-        根据标题相似度去重文章
+        根据标题字符相似度去重文章
         :param articles: 文章列表
         :param category_name: 分类名称（用于日志输出）
         :return: (去重后的文章列表, 重复文章统计)
@@ -164,7 +165,7 @@ class AIFundingFilter:
         # 已处理的文章索引
         processed = set()
         
-        print(f"  🔍 开始对{category_name}进行标题去重（阈值: {self.similarity_threshold:.0%}）...")
+        print(f"  🔍 开始对{category_name}进行字符相似度去重（阈值: {self.similarity_threshold:.0%}）...")
         
         for i, article1 in enumerate(articles):
             if i in processed:
@@ -178,12 +179,13 @@ class AIFundingFilter:
             for j, article2 in enumerate(articles[i+1:], i+1):
                 if j in processed:
                     continue
-                    
-                similarity = self._calculate_title_similarity(
+                
+                # 使用字符相似度
+                char_similarity = self._calculate_title_similarity(
                     article1['title'], article2['title']
                 )
                 
-                if similarity >= self.similarity_threshold:
+                if char_similarity >= self.similarity_threshold:
                     current_group.append(article2)
                     processed.add(j)
                     
@@ -206,13 +208,449 @@ class AIFundingFilter:
         removed_count = len(articles) - len(unique_articles)
         removal_rate = (removed_count / len(articles)) * 100 if len(articles) > 0 else 0
         
-        print(f"  📊 {category_name}去重完成: {len(articles)} → {len(unique_articles)} 篇 (删除{removed_count}篇, {removal_rate:.1f}%)")
+        print(f"  📊 {category_name}字符相似度去重完成: {len(articles)} → {len(unique_articles)} 篇 (删除{removed_count}篇, {removal_rate:.1f}%)")
         
         return unique_articles, {
             'removed_count': removed_count,
             'duplicate_groups': duplicate_groups,
             'removal_rate': removal_rate
         }
+
+    def ai_batch_semantic_deduplication(self, filtered_results):
+        """
+        AI批量语义去重：收集所有文章标题，让AI一次性识别重复组
+        """
+        print(f"\n🤖 开始AI批量语义去重...")
+        
+        # 收集所有文章，按优先级排序
+        priority_categories = [
+            ("portfolio", "Portfolio"),
+            ("project", "项目融资"), 
+            ("fund", "基金融资"),
+            ("blockchain", "公链/L2/主网"),
+            ("middleware", "中间件/工具协议"),
+            ("defi", "DeFi"),
+            ("rwa", "RWA"),
+            ("nft", "NFT"),
+            ("gamefi", "GameFi"),
+            ("metaverse", "Metaverse/Web3社交"),
+            ("exchange_wallet", "交易所/钱包"),
+            ("ai_crypto", "AI + Crypto"),
+            ("depin", "DePIN")
+        ]
+        
+        # 构建全局文章列表，记录来源
+        all_articles = []
+        article_sources = {}  # 记录文章ID到(category_key, index)的映射
+        
+        global_id = 1
+        for category_key, category_name in priority_categories:
+            articles = filtered_results.get(category_key, [])
+            for i, article in enumerate(articles):
+                article_id = f"ID{global_id}"
+                all_articles.append({
+                    'id': article_id,
+                    'title': article['title'],
+                    'article': article,
+                    'category_key': category_key,
+                    'category_name': category_name,
+                    'index': i
+                })
+                article_sources[article_id] = (category_key, i)
+                global_id += 1
+        
+        if len(all_articles) <= 1:
+            print("  📊 文章数量不足，无需AI去重")
+            return filtered_results, {'removed_count': 0, 'duplicate_groups': []}
+        
+        # 获取AI语义去重配置
+        semantic_dedup_config = self.config.get('ai_semantic_deduplication', {})
+        settings = semantic_dedup_config.get('settings', {})
+        batch_size_limit = settings.get('batch_size_limit', 100)
+        
+        # 显示文章数量（但不限制）
+        if len(all_articles) > batch_size_limit:
+            print(f"  📋 文章数量({len(all_articles)})超过推荐限制({batch_size_limit})，将处理全部文章")
+        
+        print(f"  📋 收集到 {len(all_articles)} 篇文章，准备AI语义去重...")
+        
+        # 从配置文件生成AI去重提示
+        articles_text = ""
+        for item in all_articles:
+            articles_text += f"\n{item['id']}: {item['title']} [{item['category_name']}]"
+        
+        prompt_template = semantic_dedup_config.get('prompt_template', '')
+        
+        # 格式化prompt
+        prompt = prompt_template.format(
+            total_articles=len(all_articles),
+            articles_text=articles_text
+        )
+
+        try:
+            # 获取API调用设置
+            max_tokens = settings.get('max_tokens', 1000)
+            temperature = settings.get('temperature', 0)
+            
+            # 调用AI API
+            if self.provider == "deepseek":
+                client = openai.OpenAI(
+                    api_key=self.api_key,
+                    base_url=self.base_url
+                )
+            else:
+                client = openai.OpenAI(api_key=self.api_key)
+                
+            response = client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            
+            result = response.choices[0].message.content.strip()
+            print(f"  🤖 AI返回: {result}")
+            
+            # 解析AI返回的重复组
+            import re
+            import ast
+            
+            # 尝试解析为Python列表
+            try:
+                if result.strip() == "[]":
+                    duplicate_groups = []
+                else:
+                    # 使用正则表达式提取ID组合，支持ID格式
+                    pattern = r'\[(ID\d+(?:,\s*ID\d+)+)\]'
+                    matches = re.findall(pattern, result)
+                    duplicate_groups = []
+                    
+                    if matches:
+                        # 处理ID格式的返回
+                        for match in matches:
+                            ids = re.findall(r'ID\d+', match)
+                            if len(ids) >= 2:
+                                duplicate_groups.append(ids)
+                    else:
+                        # 尝试处理纯数字格式的返回
+                        pattern = r'\[([0-9,\s]+)\]'
+                        matches = re.findall(pattern, result)
+                        for match in matches:
+                            numbers = re.findall(r'\d+', match)
+                            if len(numbers) >= 2:
+                                ids = [f"ID{num}" for num in numbers]
+                                duplicate_groups.append(ids)
+                
+            except Exception as e:
+                print(f"  ⚠️ 解析AI返回结果失败: {e}")
+                duplicate_groups = []
+            
+            if not duplicate_groups:
+                print("  📊 AI未发现重复文章")
+                return filtered_results, {'removed_count': 0, 'duplicate_groups': []}
+            
+            # 处理重复组，按优先级保留文章
+            removed_count = 0
+            articles_to_remove = set()  # 存储要删除的文章(category_key, index)
+            
+            print(f"  📝 AI发现 {len(duplicate_groups)} 个重复组:")
+            
+            for group_idx, id_group in enumerate(duplicate_groups, 1):
+                print(f"    重复组 {group_idx}: {len(id_group)} 篇文章")
+                
+                # 获取这组文章的详细信息
+                group_articles = []
+                for article_id in id_group:
+                    if article_id in article_sources:
+                        category_key, index = article_sources[article_id]
+                        # 找到对应的文章
+                        for item in all_articles:
+                            if item['id'] == article_id:
+                                group_articles.append({
+                                    'id': article_id,
+                                    'title': item['title'],
+                                    'category_key': category_key,
+                                    'category_name': item['category_name'],
+                                    'index': index,
+                                    'priority': next(i for i, (k, _) in enumerate(priority_categories) if k == category_key)
+                                })
+                                break
+                
+                # 按优先级排序（优先级数字越小越优先）
+                group_articles.sort(key=lambda x: x['priority'])
+                
+                # 保留第一篇（最高优先级），删除其他
+                keep_article = group_articles[0]
+                remove_articles = group_articles[1:]
+                
+                print(f"      ✅ 保留: {keep_article['title'][:50]}... [{keep_article['category_name']}]")
+                
+                for article in remove_articles:
+                    print(f"      ❌ 删除: {article['title'][:50]}... [{article['category_name']}]")
+                    articles_to_remove.add((article['category_key'], article['index']))
+                    removed_count += 1
+            
+            # 从结果中删除重复文章
+            for category_key, category_name in priority_categories:
+                if category_key in filtered_results:
+                    original_articles = filtered_results[category_key]
+                    # 构建要保留的文章列表
+                    filtered_articles = []
+                    for i, article in enumerate(original_articles):
+                        if (category_key, i) not in articles_to_remove:
+                            filtered_articles.append(article)
+                    
+                    # 更新结果
+                    if len(filtered_articles) != len(original_articles):
+                        removed_from_category = len(original_articles) - len(filtered_articles)
+                        print(f"    📊 从{category_name}删除 {removed_from_category} 篇重复文章")
+                        filtered_results[category_key] = filtered_articles
+            
+            print(f"  🎯 AI批量语义去重完成，共删除 {removed_count} 篇重复文章")
+            
+            return filtered_results, {
+                'removed_count': removed_count,
+                'duplicate_groups': duplicate_groups
+            }
+            
+        except Exception as e:
+            print(f"  ❌ AI批量语义去重失败: {e}")
+            return filtered_results, {'removed_count': 0, 'duplicate_groups': []}
+
+    def _summarize_report_with_ai(self, article_content):
+        """
+        使用AI总结研报内容
+        """
+        # 获取paragraph_water_info配置
+        paragraph_config = self.config.get('paragraph_water_info', {})
+        prompt_template = paragraph_config.get('prompt_template', '')
+        
+        if not prompt_template:
+            print("  ⚠️ 未找到paragraph_water_info配置，使用原文")
+            return article_content
+        
+        # 格式化prompt
+        prompt = prompt_template.format(article_text=article_content)
+        
+        try:
+            # 调用AI API
+            if self.provider == "deepseek":
+                client = openai.OpenAI(
+                    api_key=self.api_key,
+                    base_url=self.base_url
+                )
+            else:
+                client = openai.OpenAI(api_key=self.api_key)
+                
+            response = client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=1500,
+                temperature=0.3
+            )
+            
+            summarized = response.choices[0].message.content.strip()
+            print(f"  ✅ AI总结完成，原文{len(article_content)}字 → 总结{len(summarized)}字")
+            return summarized
+            
+        except Exception as e:
+            print(f"  ❌ AI总结失败: {e}，使用原文")
+            return article_content
+
+    def _generate_funding_table_with_ai(self, project_articles):
+        """
+        使用AI统一生成融资信息表格（JSON格式转Markdown表格）
+        """
+        # 合并所有融资文章
+        all_funding_articles = project_articles
+        
+        if not all_funding_articles:
+            return ""
+        
+        # 获取融资表格提取配置
+        funding_config = self.config.get('funding_table_extraction', {})
+        prompt_template = funding_config.get('prompt_template', '')
+        
+        if not prompt_template:
+            print("  ⚠️ 未找到funding_table_extraction配置，跳过表格生成")
+            return ""
+        
+        print(f"  📊 正在统一生成融资信息表格（{len(all_funding_articles)}条融资新闻）...")
+        
+        # 构建所有文章的内容
+        articles_content = ""
+        for i, article in enumerate(all_funding_articles, 1):
+            articles_content += f"\n=== 融资新闻 {i} ===\n"
+            articles_content += f"标题：{article['title']}\n"
+            articles_content += f"内容：{article['content']}\n"
+        
+        # 格式化prompt
+        prompt = prompt_template.format(
+            total_articles=len(all_funding_articles),
+            articles_content=articles_content
+        )
+        
+        try:
+            # 调用AI API
+            if self.provider == "deepseek":
+                client = openai.OpenAI(
+                    api_key=self.api_key,
+                    base_url=self.base_url
+                )
+            else:
+                client = openai.OpenAI(api_key=self.api_key)
+                
+            settings = funding_config.get('settings', {})
+            max_tokens = settings.get('max_tokens', 4000)
+            temperature = settings.get('temperature', 0)
+            
+            response = client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            
+            ai_result = response.choices[0].message.content.strip()
+            print(f"  🤖 AI返回原始数据: {ai_result[:200]}...")
+            
+            # 解析JSON并生成标准markdown表格
+            table_result = self._parse_json_to_markdown_table(ai_result)
+            
+            print(f"  ✅ 融资信息表格生成完成")
+            return table_result
+                
+        except Exception as e:
+            print(f"  ❌ 生成融资表格失败: {e}")
+            return ""
+
+    def _parse_json_to_markdown_table(self, ai_result):
+        """
+        解析AI返回的JSON数据并生成标准Markdown表格
+        """
+        try:
+            import json
+            
+            # 尝试提取JSON部分
+            json_text = ai_result
+            if '{' in ai_result:
+                # 找到第一个{和最后一个}
+                start = ai_result.find('{')
+                end = ai_result.rfind('}') + 1
+                json_text = ai_result[start:end]
+            
+            # 解析JSON
+            data = json.loads(json_text)
+            funding_list = data.get('funding_list', [])
+            
+            if not funding_list:
+                print("  ⚠️ 未找到融资信息")
+                return ""
+            
+            # 生成标准markdown表格
+            table_lines = []
+            table_lines.append("| 受资方 | 投资方 | 赛道 | 涉及金额 |")
+            table_lines.append("|--------|--------|------|----------|")
+            
+            for item in funding_list:
+                company = item.get('company', '未披露')
+                investors = item.get('investors', '未披露')
+                sector = item.get('sector', '未披露')
+                amount = item.get('amount', '未披露')
+                
+                # 确保单元格内容不包含|字符，避免破坏表格
+                company = str(company).replace('|', '/')
+                investors = str(investors).replace('|', '/')
+                sector = str(sector).replace('|', '/')
+                amount = str(amount).replace('|', '/')
+                
+                table_lines.append(f"| {company} | {investors} | {sector} | {amount} |")
+            
+            # 组装最终表格
+            table_result = '\n'.join(table_lines)
+            
+            print(f"  📊 成功解析 {len(funding_list)} 条融资信息")
+            return f"\n{table_result}\n"
+                
+        except json.JSONDecodeError as e:
+            print(f"  ❌ JSON解析失败: {e}")
+            print(f"  📝 AI原始回复: {ai_result}")
+            # 如果JSON解析失败，尝试使用原有的表格修复方法
+            return self._fix_table_format(ai_result)
+        except Exception as e:
+            print(f"  ❌ 表格解析失败: {e}")
+            return ""
+
+    def _fix_table_format(self, table_content):
+        """
+        修复表格格式，确保Markdown表格正确显示
+        """
+        if not table_content:
+            return ""
+        
+        lines = table_content.split('\n')
+        fixed_lines = []
+        header_found = False
+        separator_added = False
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+                
+            # 检查是否是表格行
+            if line.startswith('|') and line.endswith('|'):
+                # 确保每个单元格都有适当的空格
+                cells = line.split('|')
+                formatted_cells = []
+                
+                for cell in cells:
+                    cell = cell.strip()
+                    if cell:  # 非空单元格
+                        formatted_cells.append(f" {cell} ")
+                    else:  # 空单元格（开头或结尾的|）
+                        formatted_cells.append("")
+                
+                # 重新组装行
+                formatted_line = "|".join(formatted_cells)
+                
+                # 如果是第一行（表头），添加分隔符
+                if not header_found and any(keyword in formatted_line for keyword in ["受资方", "投资方", "赛道", "涉及金额"]):
+                    fixed_lines.append(formatted_line)
+                    # 添加标准的分隔符行
+                    separator = "| -------- | -------- | ------ | ---------- |"
+                    fixed_lines.append(separator)
+                    header_found = True
+                    separator_added = True
+                elif header_found and not separator_added:
+                    # 如果表头已找到但分隔符未添加
+                    separator = "| -------- | -------- | ------ | ---------- |"
+                    fixed_lines.append(separator)
+                    fixed_lines.append(formatted_line)
+                    separator_added = True
+                else:
+                    fixed_lines.append(formatted_line)
+        
+        # 如果没有找到表头，添加标准表头
+        if not header_found and fixed_lines:
+            header = "| 受资方 | 投资方 | 赛道 | 涉及金额 |"
+            separator = "| -------- | -------- | ------ | ---------- |"
+            fixed_lines.insert(0, separator)
+            fixed_lines.insert(0, header)
+        
+        result = '\n'.join(fixed_lines)
+        
+        # 确保表格前后有空行
+        if result:
+            result = f"\n{result}\n"
+        
+        return result
     
     def cross_category_deduplication(self, filtered_results):
         """
@@ -535,13 +973,13 @@ def main():
     
     # 选择API提供商
     print(f"\n=== 选择AI API提供商 ===")
-    print("1. DeepSeek API (后台配置)")
+    print("1. OpenAI API (后台配置)")
     print("2. OpenAI API (用户输入)")
     
     provider_choice = input("请选择API提供商 (1/2，默认1): ").strip()
     
     api_key = None
-    provider = "deepseek"
+    provider = "openai"
     
     if provider_choice == "2":
         provider = "openai"
@@ -550,7 +988,7 @@ def main():
             print("❌ 未提供OpenAI API密钥")
             return
     else:
-        print("✅ 使用后台DeepSeek API")
+        print("✅ 使用后台API")
     
     # 创建筛选器
     filter = AIFundingFilter(api_key, provider)
@@ -570,6 +1008,19 @@ def main():
         batch_size = int(batch_size)
     else:
         batch_size = 20
+    
+    # 询问是否使用AI批量语义去重
+    print(f"\n=== 去重方式选择 ===")
+    print("是否在字符相似度去重后使用AI批量语义去重？")
+    print("AI语义去重能识别意思相同但表述不同的重复文章，但会消耗额外API调用")
+    
+    ai_dedup_choice = input("使用AI批量语义去重？(y/n，默认y): ").strip().lower()
+    use_ai_semantic_dedup = ai_dedup_choice != "n"
+    
+    if use_ai_semantic_dedup:
+        print("✅ 将使用AI批量语义去重")
+    else:
+        print("✅ 仅使用字符相似度去重")
     
     # 定义所有类别的配置
     categories_config = [
@@ -599,7 +1050,7 @@ def main():
             
             # 再进行标题去重
             if ai_filtered:
-                print(f"\n🔄 对{category_name}进行标题去重...")
+                print(f"\n🔄 对{category_name}进行字符相似度去重...")
                 deduplicated, dedup_stat = filter.deduplicate_articles_by_title(ai_filtered, category_name)
                 filtered_results[article_type] = deduplicated
                 dedup_stats[category_name] = dedup_stat
@@ -612,7 +1063,7 @@ def main():
     
     # Portfolio文章不需要AI筛选，但需要去重
     if portfolio_articles:
-        print(f"\n⭐ Portfolio文章无需AI筛选，直接进行标题去重...")
+        print(f"\n⭐ Portfolio文章无需AI筛选，直接进行字符相似度去重...")
         deduplicated_portfolio, portfolio_dedup_stat = filter.deduplicate_articles_by_title(portfolio_articles, "Portfolio")
         filtered_results["portfolio"] = deduplicated_portfolio
         dedup_stats["Portfolio"] = portfolio_dedup_stat
@@ -624,14 +1075,18 @@ def main():
     print(f"\n🔄 执行跨板块去重...")
     filtered_results, cross_dedup_stats = filter.cross_category_deduplication(filtered_results)
     
-
+    # AI批量语义去重（可选）
+    ai_semantic_dedup_stats = {'removed_count': 0, 'duplicate_groups': []}
+    if use_ai_semantic_dedup:
+        filtered_results, ai_semantic_dedup_stats = filter.ai_batch_semantic_deduplication(filtered_results)
     
     # 保存结果
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     
  
     # 生成格式化输出
-    formatted_output_file = f"formatted_report_{timestamp}.txt"
+    suffix = "_ai_deduplicated" if use_ai_semantic_dedup else "_deduplicated"
+    formatted_output_file = f"formatted_report_{timestamp}{suffix}.txt"
     with open(formatted_output_file, 'w', encoding='utf-8') as f:
         def clean_content(content):
             import re
@@ -654,49 +1109,112 @@ def main():
                     new_articles.append(article)
             return new_articles
 
+        # 收集所有文章并按内容长度分类
+        all_sections = [
+            ("项目融资", filtered_results.get("project", []), "项目融资介绍"),
+            ("基金融资", filtered_results.get("fund", []), "基金融资介绍"),
+            ("公链/L2/主网", filtered_results.get("blockchain", []), "公链/L2/主网"),
+            ("中间件/工具协议", filtered_results.get("middleware", []), "中间件/工具协议"),
+            ("DeFi", filtered_results.get("defi", []), "DeFi"),
+            ("RWA", filtered_results.get("rwa", []), "RWA"),
+            ("NFT", filtered_results.get("nft", []), "NFT"),
+            ("GameFi", filtered_results.get("gamefi", []), "GameFi"),
+            ("Metaverse/Web3社交", filtered_results.get("metaverse", []), "Metaverse/Web3社交"),
+            ("交易所/钱包", filtered_results.get("exchange_wallet", []), "交易所/钱包"),
+            ("AI + Crypto", filtered_results.get("ai_crypto", []), "AI + Crypto"),
+            ("DePIN", filtered_results.get("depin", []), "DePIN"),
+            ("Portfolio", filtered_results.get("portfolio", []), "Our portfolio")
+        ]
+        
+        # 按内容长度分类文章
+        news_articles = {}  
+        report_articles = {}  
+        
+        for category_name, articles_list, section_title in all_sections:
+            if articles_list:
+                news_articles[category_name] = {'title': section_title, 'articles': []}
+                report_articles[category_name] = {'title': section_title, 'articles': []}
+                
+                for article in delete_reports(articles_list):
+                    content = clean_content(article.get('content_text', ''))
+                    
+                    # 根据内容长度分类
+                    if len(content) > 700:
+                        report_articles[category_name]['articles'].append({
+                            'title': article['title'],
+                            'url': article['url'],
+                            'content': content
+                        })
+                    else:
+                        news_articles[category_name]['articles'].append({
+                            'title': article['title'],
+                            'url': article['url'],
+                            'content': content
+                        })
+        
         # 使用全局编号
         global_counter = 1
         
-        # 使用循环处理所有分类的输出
-        output_sections = [
-            ("项目融资", filtered_results.get("project", []), "2. 项目融资介绍"),
-            ("基金融资", filtered_results.get("fund", []), "3. 基金融资介绍"),
-            ("公链/L2/主网", filtered_results.get("blockchain", []), "4. 公链/L2/主网"),
-            ("中间件/工具协议", filtered_results.get("middleware", []), "5. 中间件/工具协议"),
-            ("DeFi", filtered_results.get("defi", []), "6. DeFi"),
-            ("RWA", filtered_results.get("rwa", []), "7. RWA"),
-            ("NFT", filtered_results.get("nft", []), "8. NFT"),
-            ("GameFi", filtered_results.get("gamefi", []), "9. GameFi"),
-            ("Metaverse/Web3社交", filtered_results.get("metaverse", []), "10. Metaverse/Web3社交"),
-            ("交易所/钱包", filtered_results.get("exchange_wallet", []), "11. 交易所/钱包"),
-            ("AI + Crypto", filtered_results.get("ai_crypto", []), "12. AI + Crypto"),
-            ("DePIN", filtered_results.get("depin", []), "13. DePIN")
-        ]
+        # 先写入新闻板块
+        f.write("# 📰 新闻\n\n")
         
-        for category_name, articles_list, section_title in output_sections:
-            if articles_list:
-                f.write(f"# {section_title}\n\n")
-                for article in delete_reports(articles_list):
-                    title = article['title']
-                    url = article['url']
-                    content = clean_content(article.get('content_text', ''))
-                    
-                    f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+        # 为融资相关板块生成表格
+        funding_table = ""
+        project_funding_articles = []
+        fund_funding_articles = []
+        
+        # 收集项目融资和基金融资的新闻文章
+        if "项目融资" in news_articles and news_articles["项目融资"]['articles']:
+            project_funding_articles = news_articles["项目融资"]['articles']
+            
+        # 生成融资信息表格
+        if project_funding_articles:
+            funding_table = filter._generate_funding_table_with_ai(project_funding_articles)
+
+        for category_name, category_data in news_articles.items():
+            if category_data['articles']:
+                f.write(f"## {category_data['title']}\n\n")
+                
+                # 如果是融资相关板块且有表格，先写入表格
+                if "项目融资" in category_name and funding_table:
+                    print(f"  📊 正在写入投融资清单表格到报告...")
+                    f.write("### 📊 投融资清单\n\n")
+                    f.write(funding_table)
+                    f.write("\n\n### 📰 详细新闻\n\n")
+                
+                for article in category_data['articles']:
+                    f.write(f"{global_counter}. [{article['title']}]({article['url']})\n\n{article['content']}\n\n")
                     global_counter += 1
         
-        # Portfolio板块
-        if filtered_results["portfolio"]:
-            f.write("# 14. Our portfolio (这里标红的在公众号编辑时对应标红即可)\n\n")
-            for article in delete_reports(filtered_results["portfolio"]):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
+        # 再写入研报板块（使用AI总结）
+        f.write("# 📊 研报\n\n")
+        
+        # 为融资研报生成表格
+        report_funding_table = ""
+        
+        for category_name, category_data in report_articles.items():
+            if category_data['articles']:
+                f.write(f"## {category_data['title']}\n\n")
                 
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
+                for article in category_data['articles']:
+                    # 使用AI总结研报内容
+                    print(f"  🤖 正在AI总结研报: {article['title'][:50]}...")
+                    summarized_content = filter._summarize_report_with_ai(article['content'])
+                    f.write(f"{global_counter}. [{article['title']}]({article['url']})\n\n{summarized_content}\n\n")
+                    global_counter += 1
     
     print(f"📋 格式化输出已保存到: {formatted_output_file}")
-    print(f"\n🎯 AI筛选 + 标题去重 + 跨板块去重完成！")
+    
+    # 统计新闻和研报数量
+    total_news = sum(len(data['articles']) for data in news_articles.values())
+    total_reports = sum(len(data['articles']) for data in report_articles.values())
+    
+    print(f"\n📊 文章分类统计:")
+    print(f"   📰 新闻: {total_news} 篇")
+    print(f"   📊 研报: {total_reports} 篇 (已AI总结)")
+    print(f"   总计: {total_news + total_reports} 篇")
+    
+    print(f"\n🎯 AI筛选 + 标题去重 + 跨板块去重 + 新闻研报分类 + AI研报总结完成！")
     
     # 统计输出，使用循环
     stats_config = [
@@ -740,13 +1258,25 @@ def main():
     
     print(f"   总计: {total_original} → {total_filtered} 篇")
     
-    if total_dedup_removed > 0 or total_cross_removed > 0:
+    # 计算AI语义去重删除数量
+    ai_semantic_removed = ai_semantic_dedup_stats.get('removed_count', 0)
+    
+    if total_dedup_removed > 0 or total_cross_removed > 0 or ai_semantic_removed > 0:
         print(f"\n📊 去重统计汇总:")
         if total_dedup_removed > 0:
-            print(f"   标题去重删除: {total_dedup_removed} 篇 ({(total_dedup_removed / total_original * 100):.1f}%)")
+            print(f"   字符相似度去重删除: {total_dedup_removed} 篇 ({(total_dedup_removed / total_original * 100):.1f}%)")
         if total_cross_removed > 0:
             print(f"   跨板块去重删除: {total_cross_removed} 篇 ({(total_cross_removed / total_original * 100):.1f}%)")
-        print(f"   总去重删除: {total_dedup_removed + total_cross_removed} 篇 ({((total_dedup_removed + total_cross_removed) / total_original * 100):.1f}%)")
+        if ai_semantic_removed > 0:
+            print(f"   AI语义去重删除: {ai_semantic_removed} 篇 ({(ai_semantic_removed / total_original * 100):.1f}%)")
+        
+        total_removed = total_dedup_removed + total_cross_removed + ai_semantic_removed
+        print(f"   总去重删除: {total_removed} 篇 ({(total_removed / total_original * 100):.1f}%)")
+        
+        # 显示AI语义去重组数
+        if ai_semantic_removed > 0:
+            duplicate_groups_count = len(ai_semantic_dedup_stats.get('duplicate_groups', []))
+            print(f"   AI识别重复组: {duplicate_groups_count} 组")
     
     
     # 在控制台显示格式化输出预览
@@ -764,30 +1294,44 @@ def main():
         content = re.sub(r'\s+', ' ', content).strip()
         return content
     
-    # 预览输出前3个有内容的类别
-    preview_sections = [
-        ("项目融资", "2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）", "project"),
-        ("基金融资", "3. 基金融资介绍", "fund"),
-        ("Portfolio", "14. Our portfolio (这里标红的在公众号编辑时对应标红即可)", "portfolio")
-    ]
-    
-    for category_name, section_title, result_key in preview_sections:
-        articles_list = filtered_results.get(result_key, [])
-        if articles_list:
-            print(f"\n# {section_title}")
-            for i, article in enumerate(articles_list[:2], 1):
-                title = article['title']
-                url = article['url']
-                content = clean_content_preview(article.get('content_text', ''))
-                preview_content = content[:150] + "..." if len(content) > 150 else content
-                
-                if result_key == "portfolio":
-                    mentioned = article.get('mentioned_projects', [])
-                    mentioned_str = f" [{', '.join(mentioned)}]" if mentioned else ""
-                    print(f"\n{i}.[{title}]({url}){mentioned_str}")
-                else:
-                    print(f"\n{i}.[{title}]({url})")
+    # 预览新闻部分（项目融资和基金融资的前几篇短新闻）
+    print(f"\n# 📰 新闻预览")
+    preview_counter = 1
+    for category in ['项目融资', '基金融资']:
+        if category in news_articles and news_articles[category]['articles']:
+            print(f"\n## {news_articles[category]['title']}")
+            for article in news_articles[category]['articles'][:2]:
+                preview_content = article['content'][:100] + "..." if len(article['content']) > 100 else article['content']
+                print(f"\n{preview_counter}. [{article['title']}]({article['url']})")
                 print(f"{preview_content}")
+                preview_counter += 1
+    
+    # 预览研报部分（显示AI总结效果）
+    print(f"\n# 📊 研报预览 (AI总结)")
+    for category in ['项目融资', 'DeFi']:
+        if category in report_articles and report_articles[category]['articles']:
+            print(f"\n## {report_articles[category]['title']}")
+            for article in report_articles[category]['articles'][:1]:
+                print(f"\n{preview_counter}. [{article['title']}]({article['url']})")
+                print(f"[原文长度: {len(article['content'])} 字符，将使用AI进行结构化总结]")
+                
+                # 显示AI总结的格式示例
+                print("预期AI总结格式:")
+                print("=== 段落精炼 ===")
+                print("[1] 段落摘要")
+                print("[2] 段落摘要")
+                print("...")
+                print("\n=== 水下信息提取 ===")
+                print("- 水下信息 1")
+                print("- 水下信息 2")
+                print("...")
+                print("\n=== 金句提炼 ===")
+                print("★ 金句 1")
+                print("★ 金句 2")
+                print("...")
+                
+                preview_counter += 1
+                break
 
 if __name__ == "__main__":
     main()

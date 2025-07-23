@@ -71,12 +71,16 @@
       .rating-btn {
         border: 2px solid #dee2e6;
         background: white;
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.8rem;
         border-radius: 6px;
         cursor: pointer;
         transition: all 0.2s ease;
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .rating-btn:hover {
         border-color: #007bff;
@@ -195,14 +199,23 @@
         <div class="header-section text-center">
           <h1><i class="fas fa-tags"></i> Label Hub 标注中心</h1>
           <p class="mb-0">为历史新闻文章进行人工标注，提升AI分类准确性</p>
+          <div class="mt-3">
+            <small class="badge" style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem;">
+              <i class="fas fa-info-circle"></i> 
+              支持与系统完全对应的13个分类标签 + Portfolio项目识别
+            </small>
+          </div>
         </div>
 
         <!-- 控制面板 -->
         <div class="control-panel">
-          <div class="row align-items-center">
+          <div class="row align-items-center mb-3">
             <div class="col-md-4">
               <button class="btn refresh-btn me-2" onclick="loadNextArticle()">
                 <i class="fas fa-sync-alt"></i> 刷新
+              </button>
+              <button class="btn btn-outline-primary btn-sm" onclick="loadStats()">
+                <i class="fas fa-chart-bar"></i> 统计
               </button>
             </div>
             <div class="col-md-4 text-center">
@@ -221,6 +234,33 @@
                 <label class="form-check-label" for="skipLabeled">
                   跳过已标注文章
                 </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 统计信息面板 -->
+          <div id="statsPanel" class="alert alert-info" style="display: none;">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <h6><i class="fas fa-tasks"></i> 标注进度</h6>
+                <div class="progress mb-2" style="height: 20px;">
+                  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+                <small id="progressText">0/0 (0%)</small>
+              </div>
+              <div class="col-md-3 text-center">
+                <h6><i class="fas fa-robot"></i> AI准确率</h6>
+                <h4 class="mb-0" id="aiAccuracy">-</h4>
+                <small class="text-muted" id="aiAccuracyDetails">-</small>
+              </div>
+              <div class="col-md-3 text-center">
+                <h6><i class="fas fa-star"></i> 重要文章</h6>
+                <span class="badge bg-success me-1" id="importantCount">0</span>
+                <span class="badge bg-secondary" id="notImportantCount">0</span>
+              </div>
+              <div class="col-md-3 text-center">
+                <h6><i class="fas fa-tags"></i> 热门分类</h6>
+                <div id="topCategories" class="small">-</div>
               </div>
             </div>
           </div>
@@ -358,9 +398,9 @@
             <div class="article-header">
               <div class="article-title">${article.title}</div>
               <div class="article-meta">
-                <span class="classification-badge">${
-                  article.classification
-                }</span>
+                <span class="classification-badge">
+                  <i class="fas fa-robot"></i> AI分类: ${article.classification}
+                </span>
                 <span class="ms-2">
                   <i class="fas fa-newspaper"></i> ${article.source_feed}
                 </span>
@@ -381,12 +421,12 @@
             
             <div class="label-section">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-12">
                   <div class="rating-group">
                     <span class="rating-label">
-                      <i class="fas fa-tag"></i> 文章分类标签
+                      <i class="fas fa-tag"></i> 文章分类标签 (与系统13个分类完全对应)
                     </span>
-                    <div class="rating-buttons">
+                    <div class="rating-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.4rem; margin-bottom: 1rem;">
                       <button class="rating-btn ${
                         humanLabel === "项目融资" ? "selected" : ""
                       }" 
@@ -400,28 +440,70 @@
                         <i class="fas fa-piggy-bank"></i> 基金融资
                       </button>
                       <button class="rating-btn ${
-                        humanLabel === "基础设施/项目主网上线" ? "selected" : ""
+                        humanLabel === "公链/L2/主网" ? "selected" : ""
                       }" 
-                              onclick="setLabel(${index}, 'human_label', '基础设施/项目主网上线', this)">
-                        <i class="fas fa-network-wired"></i> 基础设施/项目主网上线
+                              onclick="setLabel(${index}, 'human_label', '公链/L2/主网', this)">
+                        <i class="fas fa-network-wired"></i> 公链/L2/主网
                       </button>
                       <button class="rating-btn ${
-                        humanLabel === "DeFi/RWA" ? "selected" : ""
+                        humanLabel === "中间件/工具协议" ? "selected" : ""
                       }" 
-                              onclick="setLabel(${index}, 'human_label', 'DeFi/RWA', this)">
-                        <i class="fas fa-chart-line"></i> DeFi/RWA
+                              onclick="setLabel(${index}, 'human_label', '中间件/工具协议', this)">
+                        <i class="fas fa-tools"></i> 中间件/工具协议
                       </button>
                       <button class="rating-btn ${
-                        humanLabel === "NFT/GameFi/Metaverse" ? "selected" : ""
+                        humanLabel === "DeFi" ? "selected" : ""
                       }" 
-                              onclick="setLabel(${index}, 'human_label', 'NFT/GameFi/Metaverse', this)">
-                        <i class="fas fa-gamepad"></i> NFT/GameFi/Metaverse
+                              onclick="setLabel(${index}, 'human_label', 'DeFi', this)">
+                        <i class="fas fa-chart-line"></i> DeFi
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "RWA" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'RWA', this)">
+                        <i class="fas fa-building"></i> RWA
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "NFT" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'NFT', this)">
+                        <i class="fas fa-image"></i> NFT
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "GameFi" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'GameFi', this)">
+                        <i class="fas fa-gamepad"></i> GameFi
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "Metaverse/Web3社交" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'Metaverse/Web3社交', this)">
+                        <i class="fas fa-vr-cardboard"></i> Metaverse/Web3社交
                       </button>
                       <button class="rating-btn ${
                         humanLabel === "交易所/钱包" ? "selected" : ""
                       }" 
                               onclick="setLabel(${index}, 'human_label', '交易所/钱包', this)">
                         <i class="fas fa-exchange-alt"></i> 交易所/钱包
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "AI + Crypto" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'AI + Crypto', this)">
+                        <i class="fas fa-brain"></i> AI + Crypto
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "DePIN" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'DePIN', this)">
+                        <i class="fas fa-satellite"></i> DePIN
+                      </button>
+                      <button class="rating-btn ${
+                        humanLabel === "portfolios" ? "selected" : ""
+                      }" 
+                              onclick="setLabel(${index}, 'human_label', 'portfolios', this)">
+                        <i class="fas fa-star"></i> Portfolio项目
                       </button>
                       <button class="rating-btn ${
                         humanLabel === "其他" ? "selected" : ""
@@ -431,34 +513,38 @@
                       </button>
                     </div>
                   </div>
-                </div>
-                
-                <div class="col-md-4">
+                  
                   <div class="rating-group">
                     <span class="rating-label">
-                      <i class="fas fa-star"></i> 重要程度
+                      <i class="fas fa-star"></i> 重要程度评定
                     </span>
-                    <div class="rating-buttons">
+                    <div class="rating-buttons d-flex justify-content-start">
                       <button class="rating-btn positive ${
                         humanImportance === true ? "selected" : ""
                       }" 
                               onclick="setLabel(${index}, 'human_importance', true, this)">
-                        <i class="fas fa-exclamation"></i> 重要
+                        <i class="fas fa-thumbs-up"></i> 重要
                       </button>
-                      <button class="rating-btn ${
+                      <button class="rating-btn negative ${
                         humanImportance === false ? "selected" : ""
                       }" 
                               onclick="setLabel(${index}, 'human_importance', false, this)">
-                        <i class="fas fa-minus"></i> 不重要
+                        <i class="fas fa-thumbs-down"></i> 不重要
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="d-flex justify-content-between align-items-center mt-2">
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="small text-muted">
+                  <i class="fas fa-lightbulb"></i> 
+                  提示：如文章涉及IOSG Portfolio项目请选择"Portfolio项目" | 
+                  <i class="fas fa-keyboard"></i> 
+                  快捷键：Ctrl+S 保存，Ctrl+1-9 快选分类
+                </div>
                 <button class="btn btn-sm save-btn" onclick="saveArticleLabel(${index})">
-                  <i class="fas fa-save"></i> 保存并下一篇
+                  <i class="fas fa-save"></i> 保存并下一篇 (Ctrl+S)
                 </button>
               </div>
             </div>
@@ -569,6 +655,111 @@
         });
       }
 
+      // 加载统计信息
+      async function loadStats() {
+        const statsPanel = document.getElementById("statsPanel");
+        const isVisible = statsPanel.style.display !== "none";
+        
+        if (isVisible) {
+          // 隐藏统计面板
+          statsPanel.style.display = "none";
+          return;
+        }
+        
+        try {
+          const response = await fetch("/labelhub/stats");
+          const stats = await response.json();
+          
+          if (stats.error) {
+            throw new Error(stats.error);
+          }
+          
+          // 更新进度条
+          const progressBar = document.getElementById("progressBar");
+          const progressText = document.getElementById("progressText");
+          progressBar.style.width = stats.labeling_progress + "%";
+          progressBar.textContent = stats.labeling_progress + "%";
+          progressText.textContent = `${stats.labeled_articles}/${stats.total_articles} (${stats.labeling_progress}%)`;
+          
+          // 更新AI准确率
+          document.getElementById("aiAccuracy").textContent = stats.ai_accuracy + "%";
+          document.getElementById("aiAccuracyDetails").textContent = `${stats.ai_correct}/${stats.ai_total} 正确`;
+          
+          // 更新重要程度统计
+          document.getElementById("importantCount").textContent = stats.importance_counts.important;
+          document.getElementById("notImportantCount").textContent = stats.importance_counts.not_important;
+          
+          // 更新热门分类
+          const topCategories = Object.entries(stats.label_counts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 3)
+            .map(([category, count]) => `${category}(${count})`)
+            .join(", ");
+          document.getElementById("topCategories").textContent = topCategories || "暂无数据";
+          
+          // 显示统计面板
+          statsPanel.style.display = "block";
+          
+        } catch (error) {
+          showToast(`加载统计失败: ${error.message}`, "error");
+        }
+      }
+      
+      // 快捷键功能
+      document.addEventListener("keydown", function (e) {
+        // Ctrl+S 保存
+        if (e.ctrlKey && e.key === "s") {
+          e.preventDefault();
+          if (currentArticle) {
+            saveArticleLabel(0);
+          }
+          return;
+        }
+        
+        // Ctrl+数字键 快速选择分类
+        if (e.ctrlKey && e.key >= "1" && e.key <= "9") {
+          e.preventDefault();
+          const shortcuts = [
+            "项目融资", "基金融资", "公链/L2/主网", "中间件/工具协议", 
+            "DeFi", "RWA", "NFT", "GameFi", "Metaverse/Web3社交"
+          ];
+          const index = parseInt(e.key) - 1;
+          if (index < shortcuts.length && currentArticle) {
+            const category = shortcuts[index];
+            currentArticle.human_label = category;
+            // 找到对应按钮并触发点击效果
+            const buttons = document.querySelectorAll('.rating-btn');
+            buttons.forEach(btn => {
+              btn.classList.remove('selected');
+              if (btn.textContent.includes(category)) {
+                btn.classList.add('selected');
+              }
+            });
+            hasUnsavedChanges = true;
+            showToast(`已选择: ${category}`, "success");
+          }
+          return;
+        }
+        
+        // Ctrl+0 选择其他
+        if (e.ctrlKey && e.key === "0") {
+          e.preventDefault();
+          if (currentArticle) {
+            currentArticle.human_label = "其他";
+            const buttons = document.querySelectorAll('.rating-btn');
+            buttons.forEach(btn => {
+              btn.classList.remove('selected');
+              if (btn.textContent.includes("其他")) {
+                btn.classList.add('selected');
+              }
+            });
+            hasUnsavedChanges = true;
+            showToast("已选择: 其他", "success");
+          }
+          return;
+        }
+      });
+      
       // 页面离开前提醒未保存的更改
       window.addEventListener("beforeunload", function (e) {
         if (hasUnsavedChanges) {

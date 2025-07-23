@@ -802,7 +802,7 @@ def get_labelhub_articles():
         except FileNotFoundError:
             return jsonify({'error': '未找到历史分类数据文件'}), 404
         
-        articles = data.get('articles', [])
+        articles = data.get('all_articles', [])
         
         # 过滤文章
         available_articles = []
@@ -859,14 +859,17 @@ def save_labelhub_label():
         except FileNotFoundError:
             return jsonify({'error': '未找到历史分类数据文件'}), 404
         
-        # 查找并更新文章
+        # 查找并更新文章（兼容新旧格式）
+        articles_list = historical_data.get('all_articles', historical_data.get('articles', []))
         article_found = False
-        for article in historical_data['articles']:
+        for article in articles_list:
             if article['id'] == article_id:
                 if human_label is not None:
                     article['human_label'] = human_label
                 if human_importance is not None:
                     article['human_importance'] = bool(human_importance)  # 确保存储为布尔值
+                # 添加标注时间戳
+                article['human_labeled_at'] = datetime.now().isoformat()
                 article_found = True
                 break
         
@@ -881,6 +884,184 @@ def save_labelhub_label():
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/labelhub/stats', methods=['GET'])
+def get_labelhub_stats():
+    """获取标注统计信息"""
+    try:
+        # 读取历史分类数据
+        try:
+            with open('historical_classified.json', 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            return jsonify({'error': '未找到历史分类数据文件'}), 404
+        
+        # 兼容新旧格式
+        articles = data.get('all_articles', data.get('articles', []))
+        
+        # 统计信息
+        total_articles = len(articles)
+        labeled_articles = len([a for a in articles if a.get('human_label') is not None])
+        unlabeled_articles = total_articles - labeled_articles
+        
+        # 按分类统计
+        label_counts = {}
+        for article in articles:
+            label = article.get('human_label')
+            if label:
+                label_counts[label] = label_counts.get(label, 0) + 1
+        
+        # 重要程度统计
+        importance_counts = {
+            'important': len([a for a in articles if a.get('human_importance') is True]),
+            'not_important': len([a for a in articles if a.get('human_importance') is False])
+        }
+        
+        # AI分类与人工标注准确率对比
+        ai_correct = 0
+        ai_total = 0
+        for article in articles:
+            ai_class = article.get('classification')
+            human_label = article.get('human_label')
+            if ai_class and human_label:
+                ai_total += 1
+                if ai_class == human_label:
+                    ai_correct += 1
+        
+        ai_accuracy = round((ai_correct / ai_total) * 100, 1) if ai_total > 0 else 0
+        
+        return jsonify({
+            'total_articles': total_articles,
+            'labeled_articles': labeled_articles,
+            'unlabeled_articles': unlabeled_articles,
+            'label_counts': label_counts,
+            'importance_counts': importance_counts,
+            'ai_accuracy': ai_accuracy,
+            'ai_correct': ai_correct,
+            'ai_total': ai_total,
+            'labeling_progress': round((labeled_articles / total_articles) * 100, 1) if total_articles > 0 else 0
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# 全局评估状态
+evaluation_status = {
+    'running': False,
+    'progress': 0,
+    'current_step': '',
+    'logs': [],
+    'completed': False,
+    'failed': False,
+    'error': None,
+    'results': None
+}
+
+@app.route('/evaluation')
+def evaluation():
+    """评估页面"""
+    return render_template('evaluation.html')
+
+@app.route('/evaluation/dataset_info')
+def get_dataset_info():
+    """获取测试数据集信息"""
+    try:
+        with open('historical_classified.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        articles = data.get('all_articles', data.get('articles', []))
+        
+        # 筛选有标注的文章
+        labeled_articles = [a for a in articles if 
+                          a.get('human_label') is not None and 
+                          a.get('human_importance') is not None]
+        
+        # 统计信息
+        important_count = len([a for a in labeled_articles if a.get('human_importance') is True])
+        not_important_count = len([a for a in labeled_articles if a.get('human_importance') is False])
+        
+        # 获取所有分类
+        categories = list(set(a.get('human_label') for a in labeled_articles if a.get('human_label')))
+        
+        return jsonify({
+            'total_labeled': len(labeled_articles),
+            'important_count': important_count,
+            'not_important_count': not_important_count,
+            'categories': sorted(categories)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/evaluation/start', methods=['POST'])
+def start_evaluation():
+    """开始评估"""
+    global evaluation_status
+    
+    if evaluation_status['running']:
+        return jsonify({'error': '评估正在进行中'}), 400
+    
+    # 重置状态
+    evaluation_status.update({
+        'running': True,
+        'progress': 0,
+        'current_step': '初始化评估...',
+        'logs': [],
+        'completed': False,
+        'failed': False,
+        'error': None,
+        'results': None
+    })
+    
+    def run_evaluation():
+        try:
+            # 导入评估模块
+            from evaluation_system import SystemEvaluator
+            
+            evaluator = SystemEvaluator()
+            
+            # 添加日志函数
+            def add_log(message):
+                evaluation_status['logs'].append({
+                    'timestamp': datetime.now().strftime('%H:%M:%S'),
+                    'message': message
+                })
+            
+            # 运行评估
+            results = evaluator.run_evaluation(
+                progress_callback=lambda p, step: evaluation_status.update({
+                    'progress': p, 
+                    'current_step': step
+                }),
+                log_callback=add_log
+            )
+            
+            evaluation_status.update({
+                'completed': True,
+                'results': results,
+                'progress': 100,
+                'current_step': '评估完成'
+            })
+            
+        except Exception as e:
+            evaluation_status.update({
+                'failed': True,
+                'error': str(e),
+                'current_step': f'评估失败: {str(e)}'
+            })
+        finally:
+            evaluation_status['running'] = False
+    
+    # 在新线程中运行评估
+    thread = threading.Thread(target=run_evaluation)
+    thread.start()
+    
+    return jsonify({'status': 'started'})
+
+@app.route('/evaluation/status')
+def get_evaluation_status():
+    """获取评估状态"""
+    return jsonify(evaluation_status)
 
 @socketio.on('connect')
 def handle_connect():
