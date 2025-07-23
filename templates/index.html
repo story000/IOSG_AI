@@ -150,7 +150,8 @@
               <p class="card-text">
                 从指定的加密货币新闻源获取最新的未读文章：
                 <br />• PANews <br />• TechFlow <br />• Wu Blockchain <br />•
-                Cointelegraph中文
+                Cointelegraph中文 <br />• ChainFeeds <br />• The BlockBeats <br />•
+                Odaily <br />• Coindesk
               </p>
               <button
                 class="btn btn-primary btn-process"
@@ -196,9 +197,18 @@
             <div class="card-body">
               <p class="card-text">
                 使用智能算法对文章进行分类：
-                <br />• 项目融资 <br />• 基金融资 <br />• 基础设施/主网上线
-                <br />• DeFi/RWA <br />• NFT/GameFi/Metaverse <br />•
-                交易所/钱包 <br />• Portfolio项目
+                {% if categories %}
+                  {% for category in categories %}
+                    <br />• {{ category }}
+                  {% endfor %}
+                  <br />• Portfolio项目
+                {% else %}
+                  <br />• 项目融资 <br />• 基金融资 <br />• 公链/L2/主网
+                  <br />• 中间件/工具协议 <br />• DeFi <br />• RWA
+                  <br />• NFT <br />• GameFi <br />• Metaverse/Web3社交
+                  <br />• 交易所/钱包 <br />• AI + Crypto <br />• DePIN
+                  <br />• Portfolio项目
+                {% endif %}
               </p>
               <button
                 class="btn btn-success btn-process"

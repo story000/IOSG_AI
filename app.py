@@ -18,6 +18,7 @@ import sys
 import io
 import contextlib
 import markdown
+import yaml
 
 # Load environment variables
 try:
@@ -93,10 +94,27 @@ class LogCapture:
     def flush(self):
         self.original_stdout.flush()
 
+def load_crypto_config():
+    """Load crypto configuration from YAML file"""
+    try:
+        with open('crypto_config.yaml', 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+        return config
+    except Exception as e:
+        print(f"Error loading crypto config: {e}")
+        return {}
+
 @app.route('/')
 def index():
     """Main page"""
-    return render_template('index.html')
+    # Load crypto configuration
+    crypto_config = load_crypto_config()
+    categories = list(crypto_config.get('classification', {}).get('categories', {}).keys())
+    
+    # Filter out 'portfolios' and '其他' for display
+    display_categories = [cat for cat in categories if cat not in ['portfolios', '其他']]
+    
+    return render_template('index.html', categories=display_categories)
 
 @app.route('/auto')
 def auto_report():

@@ -1,0 +1,358 @@
+# AI Filter Prompts Configuration
+# 用于统一管理 ai_filter.py 中的各种筛选提示词
+
+# 通用配置
+common:
+  return_format: "[id1, id2, id3]"
+  empty_return: "[]"
+  instructions: |
+    返回注意：
+    1. 只返回符合条件的文章ID，不要返回其他内容
+    2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
+
+categories:
+  项目融资:
+    prompt_template: |
+      请分析以下{count}篇加密货币新闻，判断哪些是真实的项目融资新闻。
+
+      筛选标准：
+      {criteria}
+
+      请只返回符合条件的文章ID，格式：{return_format}
+      如果没有符合条件的文章，返回：{empty_return}
+
+      {instructions}
+      文章列表：
+      {articles}
+    
+    criteria:
+      keep:
+        - "具体的单个加密货币/区块链/Web3项目获得融资"
+        - "有明确的项目名称，明确完成了融资"
+      
+      discard:
+        - "基金募资、交易所融资、传统企业投资、政府资助，计划"
+        - "上市公司，筹集资金购买加密货币等非初创项目融资行为"
+        - "并购收购、股票投资、个人投资"
+        - "爆仓、交易、价格变动等非融资内容"
+
+  基金融资:
+    prompt_template: |
+      请分析以下{count}篇加密货币新闻，判断哪些是真实的基金融资新闻。
+
+      筛选标准：
+      {criteria}
+
+      请只返回符合条件的文章ID，格式：{return_format}
+      如果没有符合条件的文章，返回：{empty_return}
+
+      {instructions}
+      文章列表：
+      {articles}
+    
+    criteria:
+      keep:
+        - "投资机构/VC设立新的加密货币/区块链投资基金"
+        - "基金公司募集专门投资Web3/crypto的新基金"
+        - "有明确的基金规模、基金名称、管理机构"
+      
+      discard:
+        - "单个项目的融资（不是基金设立）"
+        - "交易所业务、个人投资"
+        - "并购收购、股票投资"
+        - "爆仓、交易、价格变动等非融资内容"
+
+  AI + Crypto:
+    criteria:
+      discard:
+      - AI新闻无Token模型、无区块链应用
+      keep:
+      - AI模型训练激励、AI agent infra、模型分发网络上线
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些涉及AI与Crypto结合的项目。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  DeFi:
+    criteria:
+      discard:
+      - 价格变动、黑客攻击、市场分析
+      keep:
+      - DEX、借贷协议、稳定币、衍生品上线或更新
+      - 再质押、质押收益机制优化
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些是真实的DeFi协议发展新闻。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  DePIN:
+    criteria:
+      discard:
+      - 仅硬件产品、缺乏区块链激励机制
+      keep:
+      - 去中心化物理网络部署、节点激励机制、新项目上线
+      - 如地图采集、通信、存储、能源等硬件结合的链上协议
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些属于DePIN项目。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  GameFi:
+    criteria:
+      discard:
+      - 仅NFT交易游戏化、价格走势
+      keep:
+      - 链游上线、重要更新、Token经济发布
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些是真实的GameFi新闻。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  Metaverse / Web3社交:
+    criteria:
+      discard:
+      - 虚构项目炒作、图片展示类
+      keep:
+      - Web3社交协议更新、虚拟空间上线、身份社交功能创新
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些是真实的元宇宙或Web3社交类新闻。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  NFT:
+    criteria:
+      discard:
+      - 小项目发布、收藏推荐、价格分析
+      keep:
+      - 新NFT平台上线、NFT协议更新
+      - 大型IP NFT联名
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些是真实的NFT相关新闻。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  RWA:
+    criteria:
+      discard:
+      - DeFi 纯链上资产
+      - 融资信息
+      keep:
+      - 债券、房产、信用资产等链上代币化
+      - RWA协议产品发布、监管进展
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些涉及现实世界资产（RWA）的上链项目。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  中间件 / 工具协议:
+    criteria:
+      discard:
+      - 仅产品理念或愿景，无实质进展
+      - 融资或合作公告
+      keep:
+      - 跨链协议、预言机、数据索引工具的上线或升级
+      - 隐私协议（ZK、身份验证）发布
+      - 钱包工具包 / AA 模块 / SDK
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些属于区块链中间件或工具协议的技术更新或上线。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  交易所 / 钱包:
+    criteria:
+      discard:
+      - 纯粹的上币公告、价格变动
+      - 融资相关内容
+      - 个人交易策略、技术分析
+      - 小型交易所日常运营
+      keep:
+      - 主要交易所新产品发布、重要合作
+      - 新交易所正式上线、获得牌照
+      - 钱包重要功能更新、安全机制
+      - 监管政策对交易所的重要影响
+      - 交易所与传统金融机构合作
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些是真实的交易所/钱包新闻。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+  公链 / L2 / 主网:
+    criteria:
+      discard:
+      - 价格变动
+      - 融资相关
+      - 小版本升级
+      - 非核心主网变化
+      keep:
+      - 区块链主网正式上线、测试网启动
+      - L1/L2网络发布或升级
+      - 模块化区块链发布（如DA层）
+      - 新型高性能链、Solana竞争者
+    prompt_template: '请分析以下{count}篇加密货币新闻，判断哪些属于Layer1/Layer2链或主网相关的重大上线事件。
+
+
+      筛选标准：
+
+      {criteria}
+
+
+      请只返回符合条件的文章ID，格式：{return_format}
+
+      如果没有符合条件的文章，返回：{empty_return}
+
+
+      {instructions}
+
+      文章列表：
+
+      {articles}
+
+      '
+category_mapping:
+  AI + Crypto: ai_crypto
+  DeFi: defi
+  DePIN: depin
+  GameFi: gamefi
+  Metaverse / Web3社交: metaverse_social
+  NFT: nft
+  RWA: rwa
+  中间件 / 工具协议: middleware
+  交易所 / 钱包: exchange_wallet
+  公链 / L2 / 主网: l1_l2_mainnet
+
+

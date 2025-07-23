@@ -10,6 +10,8 @@ import time
 from datetime import datetime
 import os
 import re
+import yaml
+import difflib
 
 class AIFundingFilter:
     def __init__(self, api_key=None, provider="deepseek"):
@@ -56,162 +58,250 @@ class AIFundingFilter:
         else:
             openai.api_key = self.api_key
         
-        # IOSG投资组合项目列表
-        self.portfolios = [
-            "Autonomys", "Avalanche", "Celestia", "Conflux", "Cosmos", "Dfinity", "IoTex", 
-            "Marlin", "Mina", "Near", "Oasis Labs", "Phala", "Polkadot", "Monad", "0x", 
-            "Morpho", "Brink", "Centrifuge", "ChainSafe", "DeBank", "dHEDGE", "DODO", 
-            "Bluefin", "Impossible Finance", "Kyber", "MakerDAO", "Mangata", "MCDEX", 
-            "Metapool", "Orderly Network", "prePO", "Solv", "SynFutures", "Synthetix", 
-            "Transak", "UMA", "Volmex Finance", "Wootrade", "Arbitrum", "Aurora", "Aztec", 
-            "BOB", "Celer", "Connext", "Debridge", "Fhenix", "Moonbeam", "NIL", "Scroll", 
-            "Starkware", "Taiko", "zkSync", "Optimism", "Polygon", "Atherscope", "AltLayer", 
-            "Arweave", "Automata", "Babylon", "Blocknative", "CARV", "ConsenSys", "Covalent", 
-            "Dappback", "EigenLayer", "Filecoin", "Flashbots", "Gelato", "Infura", "Ingonyama", 
-            "Kiln", "Kyve", "Liquifi", "Lisk", "Lurk Labs", "Plasm", "Astar Network", 
-            "Primev", "Renzo", "Redstone", "REDPILL", "Space and Time", "zCloak network", 
-            "Swell", "3rm", "WeaveDB", "Ancient8", "Artifact", "Mixmob", "Big Time", 
-            "Blade DAO", "NOR", "Gomble Games", "Illuvium", "Playmint", "Polemos", 
-            "Shrapnel", "The Beacon", "Kettle", "Alethea AI", "CyberConnect", "ETHSign", 
-            "GALXE", "Mintbase", "Mintgate", "PIANITY", "RMRK", "Roll", "Ardrive", "Coin98", 
-            "Kravata", "Push", "Safe", "Mask Network", "MetaMask", "Onekey", "DAOhaus", 
-            "DAOSquare", "DeFi Alliance", "Gitcoin", "LearnWeb3", "MetaCartel", 
-            "Permanent Ventures", "Seed Club", "Arkhivist", "Audit Wizard", "Hats", 
-            "Runtime Verification"
+        
+        # 从YAML文件加载配置
+        self.config = self._load_config()
+        self.portfolios = self.config.get('portfolio_projects', [])
+        self.prompts_config = self.config.get('ai_filter', {})
+        
+        # 标题去重相似度阈值
+        self.similarity_threshold = 0.7
+
+    def _load_config(self):
+        """从YAML文件加载配置"""
+        try:
+            config_file = "crypto_config.yaml"
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+            print(f"✅ 已加载配置文件: {config_file}")
+            return config
+        except FileNotFoundError:
+            print("❌ 未找到crypto_config.yaml配置文件，使用默认配置")
+            return {}
+        except Exception as e:
+            print(f"❌ 加载配置失败: {e}，使用默认配置")
+            return {}
+
+    def _format_criteria(self, criteria):
+        """格式化筛选标准为可读文本"""
+        formatted = ""
+        if 'keep' in criteria:
+            for item in criteria['keep']:
+                formatted += f"✅ 保留：{item}\n"
+        if 'discard' in criteria:
+            for item in criteria['discard']:
+                formatted += f"❌ 抛弃：{item}\n"
+        return formatted.strip()
+
+    def _generate_prompt(self, category_name, count, articles_text):
+        """根据类别生成prompt"""
+        if not self.prompts_config:
+            # 使用旧的硬编码方式作为fallback
+            return self._get_legacy_prompt(category_name, count, articles_text)
+        
+        config = self.prompts_config
+        
+        # 查找对应的类别配置
+        category_config = None
+        for cat_name, cat_config in config['categories'].items():
+            if cat_name == category_name:
+                category_config = cat_config
+                break
+        
+        if not category_config:
+            print(f"⚠️ 未找到类别 '{category_name}' 的配置，使用项目融资配置")
+            category_config = config['categories']['项目融资']
+        
+        # 格式化筛选标准
+        criteria_text = self._format_criteria(category_config['criteria'])
+        
+        # 生成完整的prompt
+        prompt = category_config['prompt_template'].format(
+            count=count,
+            criteria=criteria_text,
+            return_format=config['common']['return_format'],
+            empty_return=config['common']['empty_return'],
+            instructions=config['common']['instructions'],
+            articles=articles_text
+        )
+        
+        return prompt
+    
+    def _clean_title_for_comparison(self, title):
+        """
+        清理标题用于相似度比较
+        """
+        # 移除多余空格和标点
+        title = re.sub(r'\s+', ' ', title).strip()
+        # 移除常见的新闻前缀
+        title = re.sub(r'^\d+\.\s*', '', title)
+        return title.lower()
+    
+    def _calculate_title_similarity(self, title1, title2):
+        """
+        计算两个标题的相似度
+        """
+        clean_title1 = self._clean_title_for_comparison(title1)
+        clean_title2 = self._clean_title_for_comparison(title2)
+        
+        similarity = difflib.SequenceMatcher(None, clean_title1, clean_title2).ratio()
+        return similarity
+    
+    def deduplicate_articles_by_title(self, articles, category_name=""):
+        """
+        根据标题相似度去重文章
+        :param articles: 文章列表
+        :param category_name: 分类名称（用于日志输出）
+        :return: (去重后的文章列表, 重复文章统计)
+        """
+        if len(articles) <= 1:
+            return articles, {'removed_count': 0, 'duplicate_groups': []}
+        
+        # 用于存储去重后的文章
+        unique_articles = []
+        # 用于存储重复文章组
+        duplicate_groups = []
+        # 已处理的文章索引
+        processed = set()
+        
+        print(f"  🔍 开始对{category_name}进行标题去重（阈值: {self.similarity_threshold:.0%}）...")
+        
+        for i, article1 in enumerate(articles):
+            if i in processed:
+                continue
+                
+            # 当前文章组（包含相似的文章）
+            current_group = [article1]
+            processed.add(i)
+            
+            # 与后续文章比较
+            for j, article2 in enumerate(articles[i+1:], i+1):
+                if j in processed:
+                    continue
+                    
+                similarity = self._calculate_title_similarity(
+                    article1['title'], article2['title']
+                )
+                
+                if similarity >= self.similarity_threshold:
+                    current_group.append(article2)
+                    processed.add(j)
+                    
+            # 如果有重复文章，记录到重复组；否则添加到唯一文章
+            if len(current_group) > 1:
+                duplicate_groups.append(current_group)
+                # 保留第一篇文章（通常是最早发布的）
+                unique_articles.append(current_group[0])
+                
+                # 输出重复信息
+                print(f"    📝 发现重复组（{len(current_group)}篇）:")
+                for k, article in enumerate(current_group):
+                    status = "✅ 保留" if k == 0 else "❌ 删除"
+                    title_preview = article['title'][:50] + "..." if len(article['title']) > 50 else article['title']
+                    print(f"      {status} {title_preview}")
+                    
+            else:
+                unique_articles.append(current_group[0])
+                
+        removed_count = len(articles) - len(unique_articles)
+        removal_rate = (removed_count / len(articles)) * 100 if len(articles) > 0 else 0
+        
+        print(f"  📊 {category_name}去重完成: {len(articles)} → {len(unique_articles)} 篇 (删除{removed_count}篇, {removal_rate:.1f}%)")
+        
+        return unique_articles, {
+            'removed_count': removed_count,
+            'duplicate_groups': duplicate_groups,
+            'removal_rate': removal_rate
+        }
+    
+    def cross_category_deduplication(self, filtered_results):
+        """
+        跨板块去重：如果文章在高优先级板块出现，则从低优先级板块删除
+        优先级：Portfolio > 项目融资 > 基金融资 > 其他板块
+        """
+        # 定义优先级顺序
+        priority_categories = [
+            ("portfolio", "Portfolio"),
+            ("project", "项目融资"), 
+            ("fund", "基金融资"),
+            ("blockchain", "公链/L2/主网"),
+            ("middleware", "中间件/工具协议"),
+            ("defi", "DeFi"),
+            ("rwa", "RWA"),
+            ("nft", "NFT"),
+            ("gamefi", "GameFi"),
+            ("metaverse", "Metaverse/Web3社交"),
+            ("exchange_wallet", "交易所/钱包"),
+            ("ai_crypto", "AI + Crypto"),
+            ("depin", "DePIN")
         ]
         
-        # 项目融资筛选提示词
-        self.project_funding_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的项目融资新闻。
+        # 存储已经在高优先级板块出现的文章标题
+        seen_titles = set()
+        cross_dedup_stats = {}
+        
+        # 按优先级处理每个板块
+        for category_key, category_name in priority_categories:
+            articles = filtered_results.get(category_key, [])
+            if not articles:
+                cross_dedup_stats[category_name] = {'removed_count': 0}
+                continue
+                
+            # 当前板块的文章
+            current_titles = set()
+            remaining_articles = []
+            removed_count = 0
+            
+            for article in articles:
+                article_title_clean = self._clean_title_for_comparison(article['title'])
+                
+                # 检查是否与已处理的高优先级板块文章重复
+                is_duplicate = False
+                for seen_title in seen_titles:
+                    similarity = difflib.SequenceMatcher(None, article_title_clean, seen_title).ratio()
+                    if similarity >= self.similarity_threshold:
+                        is_duplicate = True
+                        break
+                
+                if is_duplicate:
+                    removed_count += 1
+                    print(f"  ❌ 从{category_name}删除重复文章: {article['title'][:50]}...")
+                else:
+                    remaining_articles.append(article)
+                    current_titles.add(article_title_clean)
+            
+            # 更新结果
+            filtered_results[category_key] = remaining_articles
+            cross_dedup_stats[category_name] = {'removed_count': removed_count}
+            
+            # 将当前板块的标题加入已见标题集合
+            seen_titles.update(current_titles)
+            
+            if removed_count > 0:
+                original_count = len(articles)
+                remaining_count = len(remaining_articles)
+                print(f"  📊 {category_name}跨板块去重: {original_count} → {remaining_count} 篇 (删除{removed_count}篇)")
+        
+        # 统计总的跨板块去重情况
+        total_cross_removed = sum(stats['removed_count'] for stats in cross_dedup_stats.values())
+        if total_cross_removed > 0:
+            print(f"📊 跨板块去重完成，共删除 {total_cross_removed} 篇重复文章")
+        else:
+            print(f"📊 跨板块去重完成，未发现重复文章")
+            
+        return filtered_results, cross_dedup_stats
 
-筛选标准：
-✅ 保留：具体的单个加密货币/区块链/Web3项目获得融资
-✅ 保留：有明确的项目名称，明确完成了融资
-❌ 抛弃：基金募资、交易所融资、传统企业投资、政府资助，计划
-❌ 抛弃：上市公司，筹集资金购买加密货币等非初创项目融资行为
-❌ 抛弃：并购收购、股票投资、个人投资
-❌ 抛弃：爆仓、交易、价格变动等非融资内容
-
+    def _get_legacy_prompt(self, category_name, count, articles_text):
+        """旧的硬编码prompt方式（作为fallback）"""
+        # 这里可以保留原来的prompt逻辑作为备用
+        legacy_prompt = f"""请分析以下{count}篇加密货币新闻，判断哪些是真实的{category_name}新闻。
+        
 请只返回符合条件的文章ID，格式：[id1, id2, id3]
 如果没有符合条件的文章，返回：[]
 
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
 文章列表：
-{articles}"""
-
-        # 基金融资筛选提示词
-        self.fund_funding_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的基金融资新闻。
-
-筛选标准：
-✅ 保留：投资机构/VC设立新的加密货币/区块链投资基金
-✅ 保留：基金公司募集专门投资Web3/crypto的新基金
-✅ 保留：有明确的基金规模、基金名称、管理机构
-❌ 抛弃：单个项目的融资（不是基金设立）
-❌ 抛弃：交易所业务、个人投资
-❌ 抛弃：并购收购、股票投资
-❌ 抛弃：爆仓、交易、价格变动等非融资内容
-
-请只返回符合条件的文章ID，格式：[id1, id2, id3]
-如果没有符合条件的文章，返回：[]
-
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
-文章列表：
-{articles}"""
-
-        # 基础设施/项目主网上线筛选提示词
-        self.infrastructure_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的基础设施/项目主网上线新闻。
-
-筛选标准：
-✅ 保留：区块链主网正式上线、测试网上线
-✅ 保留：Layer 1/Layer 2网络升级、硬分叉
-✅ 保留：重要协议更新、网络扩容方案
-✅ 保留：跨链桥、互操作性解决方案上线
-❌ 抛弃：价格变动、交易相关内容
-❌ 抛弃：融资、投资相关内容
-❌ 抛弃：简单的功能更新、小版本升级
-❌ 抛弃：个人观点、市场分析
-
-请只返回符合条件的文章ID，格式：[id1, id2, id3]
-如果没有符合条件的文章，返回：[]
-
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
-文章列表：
-{articles}"""
-
-        # DeFi/RWA筛选提示词
-        self.defi_rwa_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的DeFi/RWA新闻。
-
-筛选标准：
-✅ 保留：去中心化金融协议上线、重大更新
-✅ 保留：现实世界资产(RWA)代币化项目
-✅ 保留：重要的流动性池、借贷协议变化
-✅ 保留：稳定币机制、算法稳定币发展
-✅ 保留：收益farming、质押机制创新
-❌ 抛弃：纯粹的价格变动、交易量变化
-❌ 抛弃：融资相关内容
-❌ 抛弃：个人投资建议、市场预测
-❌ 抛弃：安全事件、黑客攻击
-
-请只返回符合条件的文章ID，格式：[id1, id2, id3]
-如果没有符合条件的文章，返回：[]
-
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
-文章列表：
-{articles}"""
-
-        # NFT/GameFi/Metaverse筛选提示词
-        self.nft_gamefi_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的NFT/GameFi/Metaverse新闻。
-
-筛选标准：
-✅ 保留：重要NFT项目发布、合作伙伴关系
-✅ 保留：区块链游戏正式上线、重大更新
-✅ 保留：元宇宙平台重要功能发布
-✅ 保留：P2E游戏机制创新、游戏代币经济
-✅ 保留：知名IP进入NFT/GameFi领域
-❌ 抛弃：纯粹的价格变动、交易量变化
-❌ 抛弃：融资相关内容
-❌ 抛弃：个人收藏、小型NFT项目
-❌ 抛弃：市场炒作、价格预测
-
-请只返回符合条件的文章ID，格式：[id1, id2, id3]
-如果没有符合条件的文章，返回：[]
-
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
-文章列表：
-{articles}"""
-
-        # 交易所/钱包筛选提示词
-        self.exchange_wallet_prompt = """请分析以下{count}篇加密货币新闻，判断哪些是真实的交易所/钱包新闻。
-
-筛选标准：
-✅ 保留：主要交易所新产品发布、重要合作
-✅ 保留：新交易所正式上线、获得牌照
-✅ 保留：钱包重要功能更新、安全机制
-✅ 保留：监管政策对交易所的重要影响
-✅ 保留：交易所与传统金融机构合作
-❌ 抛弃：纯粹的上币公告、价格变动
-❌ 抛弃：融资相关内容
-❌ 抛弃：个人交易策略、技术分析
-❌ 抛弃：小型交易所日常运营
-
-请只返回符合条件的文章ID，格式：[id1, id2, id3]
-如果没有符合条件的文章，返回：[]
-
-返回注意：
-1. 只返回符合条件的文章ID，不要返回其他内容
-2. 返回文章的 ID+数字，错误格式：数组定位、标题、数字
-文章列表：
-{articles}"""
-
+{articles_text}"""
+        return legacy_prompt
 
     def filter_batch_articles(self, articles_batch, article_type="project"):
         """批处理筛选文章"""
@@ -224,48 +314,31 @@ class AIFundingFilter:
             title = article.get('title', '')
             content = article.get('content_text', '')[:100]
             id_mapping[article_id] = i
-            if article_type in ["project", "infrastructure", "defi_rwa", "nft_gamefi", "exchange_wallet"]:
+            if article_type in ["project", "blockchain", "middleware", "defi", "rwa", "nft", "gamefi", "metaverse", "exchange_wallet", "ai_crypto", "depin"]:
                 articles_text += f"\n{article_id}: {title}\n"
             else:  # fund and others
                 articles_text += f"\n{article_id}: {title}  - {content} \n"
         
-        # 根据文章类型选择不同的prompt
-        if article_type == "project":
-            prompt = self.project_funding_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        elif article_type == "fund":
-            prompt = self.fund_funding_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        elif article_type == "infrastructure":
-            prompt = self.infrastructure_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        elif article_type == "defi_rwa":
-            prompt = self.defi_rwa_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        elif article_type == "nft_gamefi":
-            prompt = self.nft_gamefi_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        elif article_type == "exchange_wallet":
-            prompt = self.exchange_wallet_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
-        else:
-            # 默认使用项目融资prompt
-            prompt = self.project_funding_prompt.format(
-                count=len(articles_batch),
-                articles=articles_text
-            )
+        # 映射文章类型到中文类别名称
+        type_to_category = {
+            "project": "项目融资",
+            "fund": "基金融资",
+            "blockchain": "公链/L2/主网",
+            "middleware": "中间件/工具协议",
+            "defi": "DeFi",
+            "rwa": "RWA",
+            "nft": "NFT",
+            "gamefi": "GameFi",
+            "metaverse": "Metaverse/Web3社交",
+            "exchange_wallet": "交易所/钱包",
+            "ai_crypto": "AI + Crypto",
+            "depin": "DePIN"
+        }
+        
+        category_name = type_to_category.get(article_type, "项目融资")
+        
+        # 使用新的prompt生成方法
+        prompt = self._generate_prompt(category_name, len(articles_batch), articles_text)
             
         
         try:
@@ -404,15 +477,9 @@ def main():
     
     # 如果最新文件不存在，尝试查找旧格式的文件
     if not os.path.exists(latest_file):
-        import glob
-        classified_files = glob.glob("classified_articles_*.json")
-        if classified_files:
-            latest_file = max(classified_files)
-            print(f"⚠️ 使用旧格式文件: {latest_file}")
-        else:
-            print("❌ 未找到分类结果文件")
-            print("请先运行 python classify_articles.py")
-            return
+        print("❌ 未找到分类结果文件")
+        print("请先运行 python classify_articles.py")
+        return
     
     print(f"读取文件: {latest_file}")
     
@@ -427,17 +494,25 @@ def main():
     articles_by_category = data.get('articles_by_category', {})
     project_funding_articles = articles_by_category.get('项目融资', [])
     fund_funding_articles = articles_by_category.get('基金融资', [])
-    infrastructure_articles = articles_by_category.get('基础设施/项目主网上线', [])
-    defi_rwa_articles = articles_by_category.get('DeFi/RWA', [])
-    nft_gamefi_articles = articles_by_category.get('NFT/GameFi/Metaverse', [])
+    blockchain_articles = articles_by_category.get('公链/L2/主网', [])
+    middleware_articles = articles_by_category.get('中间件/工具协议', [])
+    defi_articles = articles_by_category.get('DeFi', [])
+    rwa_articles = articles_by_category.get('RWA', [])
+    nft_articles = articles_by_category.get('NFT', [])
+    gamefi_articles = articles_by_category.get('GameFi', [])
+    metaverse_articles = articles_by_category.get('Metaverse/Web3社交', [])
     exchange_wallet_articles = articles_by_category.get('交易所/钱包', [])
+    ai_crypto_articles = articles_by_category.get('AI + Crypto', [])
+    depin_articles = articles_by_category.get('DePIN', [])
     portfolio_articles = articles_by_category.get('portfolios', [])
     
     # 计算总文章数
     total_articles = (len(project_funding_articles) + len(fund_funding_articles) + 
-                     len(infrastructure_articles) + len(defi_rwa_articles) + 
-                     len(nft_gamefi_articles) + len(exchange_wallet_articles) + 
-                     len(portfolio_articles))
+                     len(blockchain_articles) + len(middleware_articles) + 
+                     len(defi_articles) + len(rwa_articles) + len(nft_articles) +
+                     len(gamefi_articles) + len(metaverse_articles) + 
+                     len(exchange_wallet_articles) + len(ai_crypto_articles) + 
+                     len(depin_articles) + len(portfolio_articles))
     
     if total_articles == 0:
         print("❌ 未找到可筛选的文章")
@@ -446,10 +521,16 @@ def main():
     print(f"=== AI 文章筛选器 ===")
     print(f"找到项目融资分类文章: {len(project_funding_articles)} 篇")
     print(f"找到基金融资分类文章: {len(fund_funding_articles)} 篇")
-    print(f"找到基础设施/项目主网上线文章: {len(infrastructure_articles)} 篇")
-    print(f"找到DeFi/RWA文章: {len(defi_rwa_articles)} 篇")
-    print(f"找到NFT/GameFi/Metaverse文章: {len(nft_gamefi_articles)} 篇")
+    print(f"找到公链/L2/主网文章: {len(blockchain_articles)} 篇")
+    print(f"找到中间件/工具协议文章: {len(middleware_articles)} 篇")
+    print(f"找到DeFi文章: {len(defi_articles)} 篇")
+    print(f"找到RWA文章: {len(rwa_articles)} 篇")
+    print(f"找到NFT文章: {len(nft_articles)} 篇")
+    print(f"找到GameFi文章: {len(gamefi_articles)} 篇")
+    print(f"找到Metaverse/Web3社交文章: {len(metaverse_articles)} 篇")
     print(f"找到交易所/钱包文章: {len(exchange_wallet_articles)} 篇")
+    print(f"找到AI + Crypto文章: {len(ai_crypto_articles)} 篇")
+    print(f"找到DePIN文章: {len(depin_articles)} 篇")
     print(f"找到Portfolio文章: {len(portfolio_articles)} 篇")
     
     # 选择API提供商
@@ -490,43 +571,58 @@ def main():
     else:
         batch_size = 20
     
-    # 分别筛选各类文章
-    real_project_funding = []
-    real_fund_funding = []
-    real_infrastructure = []
-    real_defi_rwa = []
-    real_nft_gamefi = []
-    real_exchange_wallet = []
-    real_portfolio = []
+    # 定义所有类别的配置
+    categories_config = [
+        ("项目融资", project_funding_articles, "project"),
+        ("基金融资", fund_funding_articles, "fund"),
+        ("公链/L2/主网", blockchain_articles, "blockchain"),
+        ("中间件/工具协议", middleware_articles, "middleware"),
+        ("DeFi", defi_articles, "defi"),
+        ("RWA", rwa_articles, "rwa"),
+        ("NFT", nft_articles, "nft"),
+        ("GameFi", gamefi_articles, "gamefi"),
+        ("Metaverse/Web3社交", metaverse_articles, "metaverse"),
+        ("交易所/钱包", exchange_wallet_articles, "exchange_wallet"),
+        ("AI + Crypto", ai_crypto_articles, "ai_crypto"),
+        ("DePIN", depin_articles, "depin")
+    ]
     
-    if project_funding_articles:
-        print(f"\n🎯 开始筛选项目融资文章...")
-        real_project_funding = filter.batch_filter(project_funding_articles, batch_size, max_articles, "project")
+    # 统一筛选各类文章
+    filtered_results = {}
+    dedup_stats = {}
     
-    if fund_funding_articles:
-        print(f"\n🎯 开始筛选基金融资文章...")
-        real_fund_funding = filter.batch_filter(fund_funding_articles, batch_size, max_articles, "fund")
+    for category_name, articles, article_type in categories_config:
+        if articles:
+            print(f"\n🎯 开始筛选{category_name}文章...")
+            # 先进行AI筛选
+            ai_filtered = filter.batch_filter(articles, batch_size, max_articles, article_type)
+            
+            # 再进行标题去重
+            if ai_filtered:
+                print(f"\n🔄 对{category_name}进行标题去重...")
+                deduplicated, dedup_stat = filter.deduplicate_articles_by_title(ai_filtered, category_name)
+                filtered_results[article_type] = deduplicated
+                dedup_stats[category_name] = dedup_stat
+            else:
+                filtered_results[article_type] = []
+                dedup_stats[category_name] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
+        else:
+            filtered_results[article_type] = []
+            dedup_stats[category_name] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
     
-    if infrastructure_articles:
-        print(f"\n🎯 开始筛选基础设施/项目主网上线文章...")
-        real_infrastructure = filter.batch_filter(infrastructure_articles, batch_size, max_articles, "infrastructure")
-    
-    if defi_rwa_articles:
-        print(f"\n🎯 开始筛选DeFi/RWA文章...")
-        real_defi_rwa = filter.batch_filter(defi_rwa_articles, batch_size, max_articles, "defi_rwa")
-    
-    if nft_gamefi_articles:
-        print(f"\n🎯 开始筛选NFT/GameFi/Metaverse文章...")
-        real_nft_gamefi = filter.batch_filter(nft_gamefi_articles, batch_size, max_articles, "nft_gamefi")
-    
-    if exchange_wallet_articles:
-        print(f"\n🎯 开始筛选交易所/钱包文章...")
-        real_exchange_wallet = filter.batch_filter(exchange_wallet_articles, batch_size, max_articles, "exchange_wallet")
-    
-    # Portfolio文章不需要AI筛选，直接使用
+    # Portfolio文章不需要AI筛选，但需要去重
     if portfolio_articles:
-        print(f"\n⭐ Portfolio文章无需AI筛选，直接使用...")
-        real_portfolio = portfolio_articles
+        print(f"\n⭐ Portfolio文章无需AI筛选，直接进行标题去重...")
+        deduplicated_portfolio, portfolio_dedup_stat = filter.deduplicate_articles_by_title(portfolio_articles, "Portfolio")
+        filtered_results["portfolio"] = deduplicated_portfolio
+        dedup_stats["Portfolio"] = portfolio_dedup_stat
+    else:
+        filtered_results["portfolio"] = []
+        dedup_stats["Portfolio"] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
+    
+    # 跨板块去重：优先级 Portfolio > 项目融资 > 基金融资 > 其他板块
+    print(f"\n🔄 执行跨板块去重...")
+    filtered_results, cross_dedup_stats = filter.cross_category_deduplication(filtered_results)
     
 
     
@@ -561,76 +657,37 @@ def main():
         # 使用全局编号
         global_counter = 1
         
-        # 项目融资板块
-        if real_project_funding:
-            f.write("# 2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）\n\n")
-            for article in delete_reports(real_project_funding):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
+        # 使用循环处理所有分类的输出
+        output_sections = [
+            ("项目融资", filtered_results.get("project", []), "2. 项目融资介绍"),
+            ("基金融资", filtered_results.get("fund", []), "3. 基金融资介绍"),
+            ("公链/L2/主网", filtered_results.get("blockchain", []), "4. 公链/L2/主网"),
+            ("中间件/工具协议", filtered_results.get("middleware", []), "5. 中间件/工具协议"),
+            ("DeFi", filtered_results.get("defi", []), "6. DeFi"),
+            ("RWA", filtered_results.get("rwa", []), "7. RWA"),
+            ("NFT", filtered_results.get("nft", []), "8. NFT"),
+            ("GameFi", filtered_results.get("gamefi", []), "9. GameFi"),
+            ("Metaverse/Web3社交", filtered_results.get("metaverse", []), "10. Metaverse/Web3社交"),
+            ("交易所/钱包", filtered_results.get("exchange_wallet", []), "11. 交易所/钱包"),
+            ("AI + Crypto", filtered_results.get("ai_crypto", []), "12. AI + Crypto"),
+            ("DePIN", filtered_results.get("depin", []), "13. DePIN")
+        ]
         
-        # 基金融资板块
-        if real_fund_funding:
-            f.write("# 3. 基金融资介绍\n\n")
-            for article in delete_reports(real_fund_funding):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
-        
-        # 基础设施/项目主网上线板块
-        if real_infrastructure:
-            f.write("# 4. 基础设施/项目主网上线\n\n")
-            for article in delete_reports(real_infrastructure):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
-        
-        # DeFi/RWA板块
-        if real_defi_rwa:
-            f.write("# 5. DeFi/RWA\n\n")
-            for article in delete_reports(real_defi_rwa):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
-        
-        # NFT/GameFi/Metaverse板块
-        if real_nft_gamefi:
-            f.write("# 6. NFT/GameFi/Metaverse\n\n")
-            for article in delete_reports(real_nft_gamefi):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
-        
-        # 交易所/钱包板块
-        if real_exchange_wallet:
-            f.write("# 7. 交易所/钱包\n\n")
-            for article in delete_reports(real_exchange_wallet):
-                title = article['title']
-                url = article['url']
-                content = clean_content(article.get('content_text', ''))
-                
-                f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
-                global_counter += 1
+        for category_name, articles_list, section_title in output_sections:
+            if articles_list:
+                f.write(f"# {section_title}\n\n")
+                for article in delete_reports(articles_list):
+                    title = article['title']
+                    url = article['url']
+                    content = clean_content(article.get('content_text', ''))
+                    
+                    f.write(f"{global_counter}. [{title}]({url})\n\n{content}\n\n")
+                    global_counter += 1
         
         # Portfolio板块
-        if real_portfolio:
-            f.write("# 8. Our portfolio (这里标红的在公众号编辑时对应标红即可)\n\n")
-            for article in delete_reports(real_portfolio):
+        if filtered_results["portfolio"]:
+            f.write("# 14. Our portfolio (这里标红的在公众号编辑时对应标红即可)\n\n")
+            for article in delete_reports(filtered_results["portfolio"]):
                 title = article['title']
                 url = article['url']
                 content = clean_content(article.get('content_text', ''))
@@ -639,25 +696,57 @@ def main():
                 global_counter += 1
     
     print(f"📋 格式化输出已保存到: {formatted_output_file}")
-    print(f"\n🎯 AI筛选完成！")
-    print(f"   项目融资: {len(project_funding_articles)} → {len(real_project_funding)} 篇")
-    print(f"   基金融资: {len(fund_funding_articles)} → {len(real_fund_funding)} 篇")
-    print(f"   基础设施/项目主网上线: {len(infrastructure_articles)} → {len(real_infrastructure)} 篇")
-    print(f"   DeFi/RWA: {len(defi_rwa_articles)} → {len(real_defi_rwa)} 篇")
-    print(f"   NFT/GameFi/Metaverse: {len(nft_gamefi_articles)} → {len(real_nft_gamefi)} 篇")
-    print(f"   交易所/钱包: {len(exchange_wallet_articles)} → {len(real_exchange_wallet)} 篇")
-    print(f"   Portfolio: {len(portfolio_articles)} → {len(real_portfolio)} 篇")
+    print(f"\n🎯 AI筛选 + 标题去重 + 跨板块去重完成！")
+    
+    # 统计输出，使用循环
+    stats_config = [
+        ("项目融资", project_funding_articles, "project"),
+        ("基金融资", fund_funding_articles, "fund"),
+        ("公链/L2/主网", blockchain_articles, "blockchain"),
+        ("中间件/工具协议", middleware_articles, "middleware"),
+        ("DeFi", defi_articles, "defi"),
+        ("RWA", rwa_articles, "rwa"),
+        ("NFT", nft_articles, "nft"),
+        ("GameFi", gamefi_articles, "gamefi"),
+        ("Metaverse/Web3社交", metaverse_articles, "metaverse"),
+        ("交易所/钱包", exchange_wallet_articles, "exchange_wallet"),
+        ("AI + Crypto", ai_crypto_articles, "ai_crypto"),
+        ("DePIN", depin_articles, "depin"),
+        ("Portfolio", portfolio_articles, "portfolio")
+    ]
+    
+    for category_name, original_articles, result_key in stats_config:
+        filtered_count = len(filtered_results.get(result_key, []))
+        dedup_removed = dedup_stats.get(category_name, {}).get('removed_count', 0)
+        cross_removed = cross_dedup_stats.get(category_name, {}).get('removed_count', 0)
+        
+        removal_info = []
+        if dedup_removed > 0:
+            removal_info.append(f"标题去重{dedup_removed}篇")
+        if cross_removed > 0:
+            removal_info.append(f"跨板块去重{cross_removed}篇")
+            
+        if removal_info:
+            removal_str = f" ({', '.join(removal_info)})"
+            print(f"   {category_name}: {len(original_articles)} → {filtered_count} 篇{removal_str}")
+        else:
+            print(f"   {category_name}: {len(original_articles)} → {filtered_count} 篇")
     
     # 计算总计
-    total_original = (len(project_funding_articles) + len(fund_funding_articles) + 
-                     len(infrastructure_articles) + len(defi_rwa_articles) + 
-                     len(nft_gamefi_articles) + len(exchange_wallet_articles) + 
-                     len(portfolio_articles))
-    total_filtered = (len(real_project_funding) + len(real_fund_funding) + 
-                     len(real_infrastructure) + len(real_defi_rwa) + 
-                     len(real_nft_gamefi) + len(real_exchange_wallet) + 
-                     len(real_portfolio))
+    total_original = sum(len(articles) for _, articles, _ in stats_config)
+    total_filtered = sum(len(filtered_results.get(result_key, [])) for _, _, result_key in stats_config)
+    total_dedup_removed = sum(dedup_stats.get(cat_name, {}).get('removed_count', 0) for cat_name, _, _ in stats_config)
+    total_cross_removed = sum(cross_dedup_stats.get(cat_name, {}).get('removed_count', 0) for cat_name, _, _ in stats_config)
+    
     print(f"   总计: {total_original} → {total_filtered} 篇")
+    
+    if total_dedup_removed > 0 or total_cross_removed > 0:
+        print(f"\n📊 去重统计汇总:")
+        if total_dedup_removed > 0:
+            print(f"   标题去重删除: {total_dedup_removed} 篇 ({(total_dedup_removed / total_original * 100):.1f}%)")
+        if total_cross_removed > 0:
+            print(f"   跨板块去重删除: {total_cross_removed} 篇 ({(total_cross_removed / total_original * 100):.1f}%)")
+        print(f"   总去重删除: {total_dedup_removed + total_cross_removed} 篇 ({((total_dedup_removed + total_cross_removed) / total_original * 100):.1f}%)")
     
     
     # 在控制台显示格式化输出预览
@@ -675,38 +764,30 @@ def main():
         content = re.sub(r'\s+', ' ', content).strip()
         return content
     
-    if real_project_funding:
-        print("\n# 2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）")
-        for i, article in enumerate(real_project_funding[:2], 1):
-            title = article['title']
-            url = article['url']
-            content = clean_content_preview(article.get('content_text', ''))
-            preview_content = content[:150] + "..." if len(content) > 150 else content
-            print(f"\n{i}.[{title}]({url})")
-            print(f"{preview_content}")
+    # 预览输出前3个有内容的类别
+    preview_sections = [
+        ("项目融资", "2. 项目融资介绍 (后续需加上项目类别并删除前缀，不要写据XX报道）", "project"),
+        ("基金融资", "3. 基金融资介绍", "fund"),
+        ("Portfolio", "14. Our portfolio (这里标红的在公众号编辑时对应标红即可)", "portfolio")
+    ]
     
-    if real_fund_funding:
-        print("\n# 3. 基金融资介绍")
-        for i, article in enumerate(real_fund_funding[:2], 1):
-            title = article['title']
-            url = article['url']
-            content = clean_content_preview(article.get('content_text', ''))
-            preview_content = content[:150] + "..." if len(content) > 150 else content
-            print(f"\n{i}.[{title}]({url})")
-            print(f"{preview_content}")
-    
-    # Portfolio板块
-    if portfolio_articles: 
-        print("\n# 4. Our portfolio (这里标红的在公众号编辑时对应标红即可)")
-        for i, article in enumerate(portfolio_articles[:2], 1):
-            title = article['title']
-            url = article['url']
-            content = clean_content_preview(article.get('content_text', ''))
-            mentioned = article.get('mentioned_projects', [])
-            mentioned_str = f" [{', '.join(mentioned)}]" if mentioned else ""
-            preview_content = content[:150] + "..." if len(content) > 150 else content
-            print(f"\n{i}.[{title}]({url}){mentioned_str}")
-            print(f"{preview_content}")
+    for category_name, section_title, result_key in preview_sections:
+        articles_list = filtered_results.get(result_key, [])
+        if articles_list:
+            print(f"\n# {section_title}")
+            for i, article in enumerate(articles_list[:2], 1):
+                title = article['title']
+                url = article['url']
+                content = clean_content_preview(article.get('content_text', ''))
+                preview_content = content[:150] + "..." if len(content) > 150 else content
+                
+                if result_key == "portfolio":
+                    mentioned = article.get('mentioned_projects', [])
+                    mentioned_str = f" [{', '.join(mentioned)}]" if mentioned else ""
+                    print(f"\n{i}.[{title}]({url}){mentioned_str}")
+                else:
+                    print(f"\n{i}.[{title}]({url})")
+                print(f"{preview_content}")
 
 if __name__ == "__main__":
     main()

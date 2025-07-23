@@ -8,7 +8,7 @@ import time
 from token_manager import TokenManager
 
 class InoreaderClient:
-    def __init__(self, client_id, client_secret, redirect_uri="https://aerthos.vercel.app/api/oauth/callback"):
+    def __init__(self, client_id, client_secret, redirect_uri="http://localhost:8080/callback"):
         self.client_id = client_id
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri

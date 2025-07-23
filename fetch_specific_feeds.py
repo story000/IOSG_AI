@@ -65,12 +65,82 @@ def format_article(article):
     
     return formatted
 
+def list_all_feeds(client):
+    """列出所有可用的订阅feeds"""
+    try:
+        print("\n=== 正在获取所有订阅feeds ===")
+        subscription_list = client.get_subscription_list()
+        subscriptions = subscription_list.get('subscriptions', [])
+        
+        if not subscriptions:
+            print("❌ 未找到任何订阅feeds")
+            return
+        
+        print(f"📋 找到 {len(subscriptions)} 个订阅feeds:")
+        print("-" * 80)
+        
+        for i, sub in enumerate(subscriptions, 1):
+            feed_id = sub.get('id', '')
+            title = sub.get('title', '未知标题')
+            html_url = sub.get('htmlUrl', '')
+            categories = sub.get('categories', [])
+            
+            print(f"{i:3d}. 📰 {title}")
+            print(f"     🔗 Feed ID: {feed_id}")
+            if html_url:
+                print(f"     🌐 网站: {html_url}")
+            if categories:
+                category_names = [cat.get('label', '') for cat in categories]
+                print(f"     📁 分类: {', '.join(category_names)}")
+            print()
+        
+        print("-" * 80)
+        
+        # 显示目标feeds的匹配情况
+        target_feeds_config = {
+            "feed/https://rss.panewslab.com/zh/gtimg/rss": "PANews",
+            "feed/https://www.techflowpost.com/rss.aspx": "TechFlow",
+            "feed/https://wublockchain123.substack.com/feed": "Wu Blockchain",
+            "feed/https://cn.cointelegraph.com/rss": "Cointelegraph中文"
+        }
+        
+        print("🎯 目标feeds匹配检查:")
+        subscription_ids = [sub.get('id', '') for sub in subscriptions]
+        
+        for feed_id, feed_name in target_feeds_config.items():
+            if feed_id in subscription_ids:
+                print(f"  ✅ {feed_name} - 已订阅")
+            else:
+                print(f"  ❌ {feed_name} - 未订阅")
+        
+        return True
+        
+    except Exception as e:
+        print(f"❌ 获取feeds列表失败: {e}")
+        return False
+
 def main():
     import glob
     import os
+    import sys
+    
+    # 检查命令行参数
+    if len(sys.argv) > 1 and sys.argv[1] == '--list-feeds':
+        # 只列出所有feeds，不执行主要逻辑
+        CLIENT_ID = "1000001559"
+        CLIENT_SECRET = "lDyl2_XuuueJYcFZOwNipRy79_TibMOH"
+        
+        client = InoreaderClient(CLIENT_ID, CLIENT_SECRET)
+        
+        if not client.is_authenticated():
+            print("⚠️ 需要认证，请运行 smart_client.py 先进行认证")
+            return
+        
+        list_all_feeds(client)
+        return
     
     # 检查是否已存在feeds文件
-    existing_files = glob.glob("crypto_feeds_unread_*.json")
+    existing_files = glob.glob("latest_feeds.json")
     if existing_files:
         latest_file = max(existing_files, key=os.path.getctime)
         file_time = datetime.fromtimestamp(os.path.getctime(latest_file))
@@ -88,19 +158,16 @@ def main():
         else:
             print("⚠️ 文件较旧，将重新下载最新feeds")
     
-    # 目标feeds
-    target_feeds = [
-        "feed/https://rss.panewslab.com/zh/gtimg/rss",
-        "feed/https://www.techflowpost.com/rss.aspx", 
-        "feed/https://wublockchain123.substack.com/feed",
-        "feed/https://cn.cointelegraph.com/rss"
-    ]
-    
-    feed_names = {
+    # 目标feeds配置（feed_id -> feed_name 映射）
+    target_feeds_config = {
         "feed/https://rss.panewslab.com/zh/gtimg/rss": "PANews",
         "feed/https://www.techflowpost.com/rss.aspx": "TechFlow",
         "feed/https://wublockchain123.substack.com/feed": "Wu Blockchain",
-        "feed/https://cn.cointelegraph.com/rss": "Cointelegraph中文"
+        "feed/https://cn.cointelegraph.com/rss": "Cointelegraph中文",
+        "feed/https://substack.chainfeeds.xyz/feed": "ChainFeeds",
+        "feed/https://api.theblockbeats.news/v1/open-api/home-xml": "The BlockBeats",
+        "feed/https://www.odaily.news/v1/openapi/odailyrss": "Odaily",
+        "feed/https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml": "Coindesk"
     }
     
     CLIENT_ID = "1000001559"
@@ -113,17 +180,20 @@ def main():
         print("⚠️ 需要认证，请运行 smart_client.py 先进行认证")
         return
     
-    print("=== 获取指定Feeds的未读文章 ===")
-    print(f"目标feeds: {len(target_feeds)} 个")
-    for feed_id in target_feeds:
-        feed_name = feed_names.get(feed_id, feed_id)
+    # 先列出所有feeds以便调试
+    # print("=== 调试信息：检查feeds订阅状态 ===")
+    # list_all_feeds(client)
+    
+    print("\n=== 获取指定Feeds的未读文章 ===")
+    print(f"目标feeds: {len(target_feeds_config)} 个")
+    
+    for feed_id, feed_name in target_feeds_config.items():
         print(f"  📰 {feed_name}")
     
     all_articles = []
     feed_stats = {}
     
-    for feed_id in target_feeds:
-        feed_name = feed_names.get(feed_id, feed_id)
+    for feed_id, feed_name in target_feeds_config.items():
         print(f"\n正在获取 {feed_name} 的未读文章...")
         
         try:
@@ -207,47 +277,82 @@ def main():
             'filter_days': 7,
             'filter_cutoff': seven_days_ago.isoformat(),
             'feeds_stats': feed_stats,
-            'target_feeds': list(feed_names.values())
+            'target_feeds': list(target_feeds_config.values())
         },
         'articles': all_articles
     }
     
-    # 如果存在旧的最新文件，将其合并到历史文件中
+    # 如果存在旧的最新文件，将其完整数据合并到历史文件中
     if os.path.exists(latest_filename):
         try:
             with open(latest_filename, 'r', encoding='utf-8') as f:
                 old_latest_data = json.load(f)
             
             # 读取或创建历史文件
-            historical_data = {'batches': []}
+            historical_data = {'all_articles': [], 'batches_metadata': []}
             if os.path.exists(historical_filename):
                 try:
                     with open(historical_filename, 'r', encoding='utf-8') as f:
-                        historical_data = json.load(f)
-                except:
-                    print("⚠️ 历史文件读取失败，将创建新的历史文件")
-                    historical_data = {'batches': []}
+                        loaded_data = json.load(f)
+                    
+                    # 检查文件格式兼容性
+                    if 'all_articles' in loaded_data:
+                        # 新格式（保存所有文章），直接使用
+                        historical_data = loaded_data
+                    elif 'batches' in loaded_data:
+                        # 中间格式（只保存摘要），转换为新格式
+                        print("🔄 检测到批次摘要格式，转换为完整文章存储格式...")
+                        historical_data = {'all_articles': [], 'batches_metadata': loaded_data.get('batches', [])}
+                    elif 'metadata' in loaded_data and 'articles' in loaded_data:
+                        # 旧格式（单批次完整数据），转换为新格式
+                        print("🔄 检测到旧格式历史文件，正在转换...")
+                        historical_data = {
+                            'all_articles': loaded_data['articles'],
+                            'batches_metadata': [{
+                                'generated_at': loaded_data['metadata']['generated_at'],
+                                'total_articles': loaded_data['metadata']['total_articles'],
+                                'feeds_stats': loaded_data['metadata'].get('feeds_stats', {})
+                            }]
+                        }
+                    else:
+                        # 未知格式，创建新的
+                        print("⚠️ 历史文件格式未知，将创建新的历史文件")
+                        historical_data = {'all_articles': [], 'batches_metadata': []}
+                        
+                except Exception as e:
+                    print(f"⚠️ 历史文件读取失败: {e}，将创建新的历史文件")
+                    historical_data = {'all_articles': [], 'batches_metadata': []}
             
-            # 将旧的最新数据添加到历史数据中
-            batch_info = {
-                'generated_at': old_latest_data['metadata']['generated_at'],
-                'total_articles': old_latest_data['metadata']['total_articles'],
-                'feeds_stats': old_latest_data['metadata']['feeds_stats']
-            }
-            historical_data['batches'].append(batch_info)
+            # 将旧的最新数据的所有文章添加到历史数据中
+            old_articles = old_latest_data.get('articles', [])
+            if old_articles:
+                # 给每个文章添加批次标识
+                batch_id = old_latest_data['metadata']['generated_at']
+                for article in old_articles:
+                    article['batch_id'] = batch_id
+                
+                # 合并到历史文章列表
+                historical_data['all_articles'].extend(old_articles)
+                
+                # 添加批次元数据
+                batch_metadata = {
+                    'generated_at': old_latest_data['metadata']['generated_at'],
+                    'total_articles': old_latest_data['metadata']['total_articles'],
+                    'feeds_stats': old_latest_data['metadata']['feeds_stats']
+                }
+                historical_data['batches_metadata'].append(batch_metadata)
+                
+                print(f"📚 已将 {len(old_articles)} 篇文章归档到历史文件")
             
-            # 保持历史记录在合理数量（最多保留50个批次）
-            if len(historical_data['batches']) > 50:
-                historical_data['batches'] = historical_data['batches'][-50:]
-            
-            # 更新历史文件
+            # 更新历史文件元数据
             historical_data['last_updated'] = datetime.now().isoformat()
-            historical_data['total_batches'] = len(historical_data['batches'])
+            historical_data['total_articles'] = len(historical_data['all_articles'])
+            historical_data['total_batches'] = len(historical_data['batches_metadata'])
             
             with open(historical_filename, 'w', encoding='utf-8') as f:
                 json.dump(historical_data, f, ensure_ascii=False, indent=2)
             
-            print(f"📚 旧数据已归档到历史文件 ({len(historical_data['batches'])} 个批次)")
+            print(f"📚 历史文件已更新，共包含 {historical_data['total_articles']} 篇文章，{historical_data['total_batches']} 个批次")
             
         except Exception as e:
             print(f"⚠️ 归档旧数据时出错: {e}")

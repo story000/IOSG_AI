@@ -6,3 +6,4 @@ python-socketio>=5.8.0
 python-dotenv>=1.0.0
 flask-mail>=0.9.1
 markdown>=3.4.0
+pyyaml>=6.0

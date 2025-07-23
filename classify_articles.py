@@ -7,160 +7,39 @@
 import json
 import os
 import re
+import yaml
 from datetime import datetime
 from collections import defaultdict
 
 class CryptoArticleClassifier:
     def __init__(self):
-        # 定义分类和对应的关键词和模式
-        self.portfolios = [
-            "Autonomys", "Avalanche", "Celestia", "Conflux", "Cosmos", "Dfinity", "IoTex", 
-            "Marlin", "Mina", "Near", "Oasis Labs", "Phala", "Polkadot", "Monad", "0x", 
-            "Morpho", "Brink", "Centrifuge", "ChainSafe", "DeBank", "dHEDGE", "DODO", 
-            "Bluefin", "Impossible Finance", "Kyber", "MakerDAO", "Mangata", "MCDEX", 
-            "Metapool", "Orderly Network", "prePO", "Solv", "SynFutures", "Synthetix", 
-            "Transak", "UMA", "Volmex Finance", "Wootrade", "Arbitrum", "Aurora", "Aztec", 
-            "BOB", "Celer", "Connext", "Debridge", "Fhenix", "Moonbeam", "NIL", "Scroll", 
-            "Starkware", "Taiko", "zkSync", "Optimism", "Polygon", "Atherscope", "AltLayer", 
-            "Arweave", "Automata", "Babylon", "Blocknative", "CARV", "ConsenSys", "Covalent", 
-            "Dappback", "EigenLayer", "Filecoin", "Flashbots", "Gelato", "Infura", "Ingonyama", 
-            "Kiln", "Kyve", "Liquifi", "Lisk", "Lurk Labs", "Plasm", "Astar Network", 
-            "Primev", "Renzo", "Redstone", "REDPILL", "Space and Time", "zCloak network", 
-            "Swell", "3rm", "WeaveDB", "Ancient8", "Artifact", "Mixmob", "Big Time", 
-            "Blade DAO", "NOR", "Gomble Games", "Illuvium", "Playmint", "Polemos", 
-            "Shrapnel", "The Beacon", "Kettle", "Alethea AI", "CyberConnect", "ETHSign", 
-            "GALXE", "Mintbase", "Mintgate", "PIANITY", "RMRK", "Roll", "Ardrive", "Coin98", 
-            "Kravata", "Push", "Safe", "Mask Network", "MetaMask", "Onekey", "DAOhaus", 
-            "DAOSquare", "DeFi Alliance", "Gitcoin", "LearnWeb3", "MetaCartel", 
-            "Permanent Ventures", "Seed Club", "Arkhivist", "Audit Wizard", "Hats", 
-            "Runtime Verification"
-        ]
+        # 从YAML配置文件加载配置
+        self.config = self._load_config()
+        self.portfolios = self.config.get('portfolio_projects', [])
+        self.categories = self.config.get('classification', {}).get('categories', {})
+        self.title_exclusion_keywords = self.config.get('content_filters', {}).get('title_exclusion_keywords', [])
 
-        self.categories = {
-            "项目融资": {
-                "keywords": [
-                    "A轮", "B轮", "C轮", "种子轮", "天使轮", "pre-seed", "seed",
-                    "Series A", "Series B", "Series C", "领投", "跟投", "估值", "风投", "VC",
-                    "融得", "筹集", "筹到", "募资", "募得", "轮融资", "投资方",
-                    "投资机构", "战略投资", "pre-A", "A+轮", "B+轮", "oversubscribed",
-                    "funding", "investment", "investor", "venture", "capital", "round"
-                ],
-                "patterns": [
-                    r"完成.*?融资",
-                    r"获得.*?融资", 
-                    r"宣布.*?融资",
-                    r"融资.*?万美元",
-                    r"融资.*?千万美元", 
-                    r"融资.*?亿美元",
-                    r"获投.*?万美元",
-                    r"获投.*?千万美元",
-                    r"获投.*?亿美元",
-                    r"筹集.*?万美元",
-                    r"筹集.*?千万美元",
-                    r"筹集.*?亿美元",
-                    r"raised.*?\$.*?million",
-                    r"raised.*?\$.*?billion",
-                    r"funding.*?\$.*?million",
-                    r"funding.*?\$.*?billion",
-                    r"投资.*?万美元",
-                    r"投资.*?千万美元",
-                    r"投资.*?亿美元"
-                ],
-                "weight": 1.0
-            },
-            "基金融资": {
-                "keywords": [
-                    "基金", "fund", "资管", "LP", "管理规模", "AUM", "募集基金", "基金管理",
-                    "投资基金", "crypto fund", "区块链基金", "数字资产基金", "风险投资基金",
-                    "hedge fund", "对冲基金", "私募基金", "公募基金", "基金规模", "基金成立",
-                    "基金启动", "基金募资", "资产管理", "investment fund", "venture fund",
-                    "新基金", "基金公司", "资管公司", "基金合伙人", "GP", "有限合伙人"
-                ],
-                "patterns": [
-                    r"设立.*?基金",
-                    r"成立.*?基金",
-                    r"推出.*?基金",
-                    r"启动.*?基金",
-                    r"基金.*?万美元",
-                    r"基金.*?千万美元",
-                    r"基金.*?亿美元",
-                    r"fund.*?\$.*?million",
-                    r"fund.*?\$.*?billion"
-                ],
-                "weight": 1.0
-            },
-            "基础设施/项目主网上线": {
-                "keywords": [
-                    "主网", "mainnet", "测试网", "testnet", "网络升级", "硬分叉", "软分叉", 
-                    "fork", "upgrade", "protocol", "协议", "区块链网络", "公链", "侧链", 
-                    "Layer 1", "Layer 2", "L1", "L2", "zkEVM", "Rollup", "bridging", 
-                    "跨链", "互操作", "interoperability", "节点", "node", "验证者", "validator", 
-                    "共识", "consensus", "PoS", "PoW", "DPoS", "分片", "sharding", "扩容", 
-                    "scaling", "TPS", "吞吐量", "网络性能"
-                ],
-                "patterns": [
-                    r"主网.*?上线",
-                    r"主网.*?启动", 
-                    r"mainnet.*?launch",
-                    r"测试网.*?上线",
-                    r"testnet.*?launch",
-                    r"正式.*?上线",
-                    r"宣布.*?上线",
-                    r"成功.*?上线"
-                ],
-                "weight": 1.0
-            },
-            "DeFi/RWA": {
-                "keywords": [
-                    "DeFi", "去中心化金融", "decentralized finance", "流动性", "liquidity",
-                    "AMM", "自动做市商", "yield farming", "流动性挖矿", "质押", "staking",
-                    "借贷", "lending", "borrowing", "抵押", "collateral", "TVL", "锁仓量",
-                    "DEX", "去中心化交易所", "swap", "兑换", "收益率", "APY", "APR",
-                    "RWA", "现实世界资产", "real world assets", "代币化", "tokenization",
-                    "资产代币化", "债券代币化", "房地产代币化", "商品代币化", "稳定币",
-                    "stablecoin", "USDT", "USDC", "DAI", "algorithmic stablecoin"
-                ],
-                "patterns": [],
-                "weight": 1.0
-            },
-            "NFT/GameFi/Metaverse": {
-                "keywords": [
-                    "NFT", "non-fungible token", "数字藏品", "数字收藏品", "艺术品", "头像",
-                    "PFP", "profile picture", "OpenSea", "marketplace", "铸造", "mint",
-                    "GameFi", "区块链游戏", "P2E", "play to earn", "边玩边赚", "游戏代币",
-                    "游戏NFT", "游戏道具", "虚拟土地", "land", "sandbox", "decentraland",
-                    "Metaverse", "元宇宙", "虚拟世界", "virtual world", "VR", "AR",
-                    "虚拟现实", "增强现实", "数字身份", "avatar", "虚拟人", "数字人",
-                    "社交代币", "social token", "创作者经济", "creator economy"
-                ],
-                "patterns": [],
-                "weight": 1.0
-            },
-            "交易所/钱包": {
-                "keywords": [
-                    "交易所", "exchange", "CEX", "中心化交易所", "币安", "Binance", "OKX",
-                    "Coinbase", "Kraken", "Bybit", "Gate", "Huobi", "FTX", "KuCoin",
-                    "上币", "listing", "下架", "delisting", "充值", "提现", "deposit", "withdraw",
-                    "钱包", "wallet", "metamask", "trust wallet", "冷钱包", "热钱包",
-                    "硬件钱包", "software wallet", "私钥", "private key", "助记词", "seed phrase",
-                    "多签", "multisig", "custody", "托管", "KYC", "实名认证", "监管合规",
-                    "牌照", "license", "合规", "compliance", "反洗钱", "AML",
-                    "爆仓", "liquidation", "合约", "futures", "期货", "杠杆", "leverage",
-                    "多单", "空单", "long", "short", "保证金", "margin", "强平", "强制平仓"
-                ],
-                "patterns": [],
-                "weight": 1.0
-            },
-            "portfolios": {
-                "keywords": [],  # 由portfolio检测逻辑单独处理
-                "patterns": [],
-                "weight": 0.0
-            },
-            "其他": {
-                "keywords": [],  # 兜底分类，无特定关键词
-                "patterns": [],
-                "weight": 0.0
-            }
+    def _load_config(self):
+        """从YAML文件加载配置"""
+        try:
+            config_file = "crypto_config.yaml"
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+            print(f"✅ 已加载配置文件: {config_file}")
+            return config
+        except FileNotFoundError:
+            print("❌ 未找到crypto_config.yaml配置文件，使用默认配置")
+            return self._get_default_config()
+        except Exception as e:
+            print(f"❌ 加载配置失败: {e}，使用默认配置")
+            return self._get_default_config()
+
+    def _get_default_config(self):
+        """返回默认配置（作为fallback）"""
+        return {
+            'portfolio_projects': [],
+            'classification': {'categories': {}},
+            'content_filters': {'title_exclusion_keywords': []}
         }
     
     def preprocess_text(self, text):
@@ -296,18 +175,6 @@ def main():
     # 读取最新的feeds文件
     input_file = "latest_feeds.json"
     
-    # 如果最新文件不存在，尝试查找旧格式的文件
-    if not os.path.exists(input_file):
-        import glob
-        old_files = glob.glob("crypto_feeds_unread_*.json")
-        if old_files:
-            input_file = max(old_files, key=os.path.getctime)
-            print(f"⚠️ 使用旧格式文件: {input_file}")
-        else:
-            print(f"❌ 未找到任何feeds文件")
-            print("请先运行 python fetch_specific_feeds.py")
-            return
-    
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -327,22 +194,29 @@ def main():
     print(f"文章总数: {len(articles)}")
     print(f"来源统计: {metadata.get('feeds_stats', {})}")
     
-    # 标题关键词筛选
-    title_keywords = ['上线','转移','活动','下架','24小时','24 小时','爆仓','涨幅','跌幅','奖励']
-    # 标题关键词筛选 - 只保留标题不包含任何关键词的文章
-    articles = [
-        article for article in articles 
-        if not any(keyword.lower() in article.get('title', '').lower() for keyword in title_keywords)
-    ]
-    
-    # 文章长度筛选
-    articles = [
-        article for article in articles 
-        if len(article.get('content_text', '')) < 300 
-    ]
-    
-    # 创建分类器并进行分类
+    # 创建分类器
     classifier = CryptoArticleClassifier()
+    
+    # 使用YAML配置中的标题关键词筛选
+    title_keywords = classifier.title_exclusion_keywords
+    
+    if title_keywords:
+        print(f"\n=== 应用标题关键词过滤 ===")
+        print(f"排除关键词: {len(title_keywords)} 个")
+        
+        original_count = len(articles)
+        # 标题关键词筛选 - 只保留标题不包含任何关键词的文章
+        articles = [
+            article for article in articles 
+            if not any(keyword.lower() in article.get('title', '').lower() for keyword in title_keywords)
+        ]
+        filtered_count = len(articles)
+        
+        print(f"原始文章数: {original_count}")
+        print(f"过滤后文章数: {filtered_count}")
+        print(f"过滤掉: {original_count - filtered_count} 篇（包含排除关键词）")
+    
+    # 进行分类
     classified_articles, category_stats = classifier.classify_articles(articles)
     
     
@@ -406,35 +280,48 @@ def main():
                 old_classified_data = json.load(f)
             
             # 读取或创建历史分类文件
-            historical_classified = {'classifications': []}
+            historical_classified = {'all_articles': []}
             if os.path.exists(historical_classified_file):
                 try:
                     with open(historical_classified_file, 'r', encoding='utf-8') as f:
-                        historical_classified = json.load(f)
-                except:
-                    print("⚠️ 历史分类文件读取失败，将创建新文件")
-                    historical_classified = {'classifications': []}
+                        loaded_data = json.load(f)
+                    
+                    # 检查文件格式
+                    if 'all_articles' in loaded_data:
+                        # 新格式，直接使用
+                        historical_classified = loaded_data
+                    elif 'articles' in loaded_data:
+                        # 旧格式，提取文章数据
+                        print("🔄 转换旧格式历史分类文件...")
+                        historical_classified = {'all_articles': loaded_data['articles']}
+                    else:
+                        # 其他格式，创建新的
+                        historical_classified = {'all_articles': []}
+                        
+                except Exception as e:
+                    print(f"⚠️ 历史分类文件读取失败: {e}，将创建新文件")
+                    historical_classified = {'all_articles': []}
             
-            # 将旧的分类数据添加到历史记录
-            classification_info = {
-                'classification_date': old_classified_data['metadata']['classification_date'],
-                'total_articles': old_classified_data['metadata']['total_articles'],
-                'category_stats': old_classified_data['metadata']['category_stats']
-            }
-            historical_classified['classifications'].append(classification_info)
+            # 将旧的分类数据的所有文章添加到历史记录
+            old_articles = old_classified_data.get('articles', [])
+            if old_articles:
+                # 给每个文章添加分类批次标识
+                batch_id = old_classified_data['metadata']['classification_date']
+                for article in old_articles:
+                    article['classification_batch_id'] = batch_id
+                
+                # 合并到历史文章列表
+                historical_classified['all_articles'].extend(old_articles)
+                print(f"📚 已将 {len(old_articles)} 篇分类文章归档到历史文件")
             
-            # 保持历史记录在合理数量（最多保留30个分类记录）
-            if len(historical_classified['classifications']) > 30:
-                historical_classified['classifications'] = historical_classified['classifications'][-30:]
-            
-            # 更新历史分类文件
+            # 更新历史分类文件元数据
             historical_classified['last_updated'] = datetime.now().isoformat()
-            historical_classified['total_classifications'] = len(historical_classified['classifications'])
+            historical_classified['total_articles'] = len(historical_classified['all_articles'])
             
             with open(historical_classified_file, 'w', encoding='utf-8') as f:
                 json.dump(historical_classified, f, ensure_ascii=False, indent=2)
             
-            print(f"📚 旧分类数据已归档 ({len(historical_classified['classifications'])} 个记录)")
+            print(f"📚 历史分类文件已更新，共包含 {historical_classified['total_articles']} 篇分类文章")
             
         except Exception as e:
             print(f"⚠️ 归档旧分类数据时出错: {e}")
@@ -456,29 +343,7 @@ def main():
     
     print(f"\n💾 分类结果已保存到: {output_file}")
     
-    # 保存简化的分类报告
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    report_file = f"classification_report_{timestamp}.txt"
-    with open(report_file, 'w', encoding='utf-8') as f:
-        f.write("=== 加密货币文章分类报告 ===\n\n")
-        f.write(f"分析时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"文章总数: {len(classified_articles)}\n\n")
-        
-        f.write("分类统计:\n")
-        for category, count in sorted(category_stats.items(), key=lambda x: x[1], reverse=True):
-            percentage = (count / total_classified) * 100
-            f.write(f"  {category}: {count} 篇 ({percentage:.1f}%)\n")
-        
-        f.write("\n各分类热门文章:\n")
-        for category, articles_list in articles_by_category.items():
-            f.write(f"\n{category}:\n")
-            sorted_articles = sorted(articles_list, 
-                                    key=lambda x: x['classification_confidence'], 
-                                    reverse=True)
-            for i, article in enumerate(sorted_articles[:5], 1):
-                f.write(f"  {i}. [{article['source_feed']}] {article['title']}\n")
-    
-    print(f"📄 分类报告已保存到: {report_file}")
+    # 输出分类结果
     print(f"\n🎯 分类完成！共处理 {len(classified_articles)} 篇文章")
 
 if __name__ == "__main__":
