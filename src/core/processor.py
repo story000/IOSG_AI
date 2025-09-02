@@ -10,7 +10,7 @@ from ..services.storage_service import StorageService
 from ..services.ai_service import AIService
 from ..services.email_service import EmailService
 from ..services.report_generator import ReportGenerator
-from ..services.deduplication_service import DeduplicationService
+from ..services.adaptive_deduplication_service import AdaptiveDeduplicationService
 from ..utils.config import get_settings, get_crypto_config
 from ..utils.logger import get_logger
 
@@ -260,27 +260,49 @@ class NewsProcessor:
                     article_type = category_mapping.get(category_name, category_name)
                     logger.info(f'Filtering {len(category_articles)} articles in {category_name}...')
                     
-                    # Portfolio articles don't need AI filtering
+                    # Portfolio articles don't need AI filtering, only internal deduplication
                     if category_name == "portfolios":
-                        deduplicated, dedup_stat = filter_instance.deduplicate_articles_by_title(category_articles, "Portfolio")
+                        # Use new adaptive deduplication service for portfolios
+                        adaptive_dedup_service = AdaptiveDeduplicationService(
+                            similarity_threshold=0.4,
+                            performance_mode='aggressive'
+                        )
+                        deduplicated, dedup_stats = adaptive_dedup_service.adaptive_deduplicate(category_articles, "portfolios")
                         filtered_results[article_type] = deduplicated
+                        logger.info(f"Portfolio deduplication: {dedup_stats.total_articles} → {len(deduplicated)} (removed: {dedup_stats.total_removed})")
                     else:
                         # Use original batch_filter method
                         ai_filtered = filter_instance.batch_filter_no_prompt(category_articles, batch_size, max_articles, article_type)
                         
-                        # Apply title deduplication
+                        # Apply adaptive deduplication
                         if ai_filtered:
-                            deduplicated, dedup_stat = filter_instance.deduplicate_articles_by_title(ai_filtered, category_name)
+                            # Use new adaptive deduplication service
+                            adaptive_dedup_service = AdaptiveDeduplicationService(
+                                similarity_threshold=0.4,
+                                performance_mode='aggressive'
+                            )
+                            deduplicated, dedup_stats = adaptive_dedup_service.adaptive_deduplicate(ai_filtered, category_name)
                             filtered_results[article_type] = deduplicated
+                            logger.info(f"{category_name} deduplication: {dedup_stats.total_articles} → {len(deduplicated)} (removed: {dedup_stats.total_removed})")
                         else:
                             filtered_results[article_type] = []
                 else:
                     article_type = category_mapping.get(category_name, category_name)
                     filtered_results[article_type] = []
             
-            # Apply cross-category deduplication using original logic
-            logger.info('Applying cross-category deduplication...')
-            filtered_results, cross_dedup_stats = filter_instance.cross_category_deduplication(filtered_results)
+            # Apply cross-category deduplication (excluding portfolios)
+            logger.info('Applying cross-category deduplication (portfolios excluded)...')
+            # Separate portfolios from other categories
+            portfolios_data = filtered_results.pop('portfolio', [])
+            
+            # Apply cross-category deduplication only to non-portfolio categories
+            if len(filtered_results) > 0:
+                filtered_results, cross_dedup_stats = filter_instance.cross_category_deduplication(filtered_results)
+            
+            # Add portfolios back without cross-category deduplication
+            if portfolios_data:
+                filtered_results['portfolio'] = portfolios_data
+                logger.info(f"Portfolios preserved from cross-category deduplication: {len(portfolios_data)} articles")
             
             # Convert back to Article objects
             final_articles = []

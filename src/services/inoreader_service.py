@@ -22,10 +22,10 @@ class InoreaderService:
         "feed/https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml": "Coindesk"
     }
     
-    def __init__(self, client_id: str = "1000001559", 
-                 client_secret: str = "lDyl2_XuuueJYcFZOwNipRy79_TibMOH"):
-        self.client_id = client_id
-        self.client_secret = client_secret
+    def __init__(self, client_id: str = None, client_secret: str = None):
+        # 优先使用传入的参数，其次使用环境变量，最后使用默认值
+        self.client_id = client_id or os.getenv('INOREADER_CLIENT_ID', '1000001559')
+        self.client_secret = client_secret or os.getenv('INOREADER_CLIENT_SECRET', 'lDyl2_XuuueJYcFZOwNipRy79_TibMOH')
         
     def clean_html(self, html_content: str) -> str:
         """Clean HTML tags from content"""

@@ -15,6 +15,23 @@ import difflib
 import time
 
 class AIFundingFilter:
+    # 类别名称映射 - 定义为类常量，避免代码重复
+    TYPE_NAME_MAPPING = {
+        "project": "项目融资",
+        "fund": "基金融资",
+        "blockchain": "公链/L2/主网",
+        "middleware": "中间件/工具协议",
+        "defi": "DeFi",
+        "rwa": "RWA",
+        "stablecoin": "稳定币",
+        "application": "应用协议",
+        "gamefi": "GameFi",
+        "exchange_wallet": "交易所/钱包",
+        "ai_crypto": "AI + Crypto",
+        "depin": "DePIN",
+        "portfolio": "Portfolio"
+    }
+    
     def __init__(self, api_key=None, provider="openai"):
         self.provider = provider.lower()
         self.api_key = api_key
@@ -835,7 +852,7 @@ class AIFundingFilter:
         if max_articles:
             articles = articles[:max_articles]
         
-        type_name = "项目融资" if article_type == "project" else "基金融资"
+        type_name = self.TYPE_NAME_MAPPING.get(article_type, article_type)
         print(f"开始使用OpenAI API批量筛选 {len(articles)} 篇{type_name}文章...")
         print(f"📦 批处理大小: {batch_size} 篇/次")
         
@@ -881,7 +898,7 @@ class AIFundingFilter:
         if max_articles:
             articles = articles[:max_articles]
         
-        type_name = "项目融资" if article_type == "project" else "基金融资"
+        type_name = self.TYPE_NAME_MAPPING.get(article_type, article_type)
         print(f"开始使用OpenAI API批量筛选 {len(articles)} 篇{type_name}文章...")
         print(f"📦 批处理大小: {batch_size} 篇/次")
         

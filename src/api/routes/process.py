@@ -12,7 +12,7 @@ from ...services.ai_service import create_ai_service
 from ...services.inoreader_service import InoreaderService
 from ...services.classification_service import ClassificationService
 from ...services.report_generator import ReportGenerator
-from ...services.deduplication_service import DeduplicationService
+from ...services.adaptive_deduplication_service import AdaptiveDeduplicationService
 from ...utils.logger import get_logger
 from ...utils.config import get_settings, get_crypto_config
 
@@ -300,15 +300,24 @@ def ai_filter():
                         # Use original batch_filter method
                         ai_filtered = filter_instance.batch_filter_no_prompt(articles, batch_size, max_articles, article_type)
                         
-                        # Apply title deduplication
+                        # Apply adaptive deduplication
                         if ai_filtered:
                             log_callback(f'Deduplicating {category_name}...')
-                            deduplicated, dedup_stat = filter_instance.deduplicate_articles_by_title(ai_filtered, category_name)
+                            # Use new adaptive deduplication service
+                            adaptive_dedup_service = AdaptiveDeduplicationService(
+                                similarity_threshold=0.4,
+                                performance_mode='aggressive'
+                            )
+                            deduplicated, dedup_stats_obj = adaptive_dedup_service.adaptive_deduplicate(ai_filtered, category_name)
                             filtered_results[article_type] = deduplicated
-                            dedup_stats[category_name] = dedup_stat
+                            dedup_stats[category_name] = {
+                                'removed_count': dedup_stats_obj.total_removed,
+                                'removal_rate': (dedup_stats_obj.total_removed / dedup_stats_obj.total_articles * 100) if dedup_stats_obj.total_articles > 0 else 0
+                            }
+                            log_callback(f'  {category_name}: {dedup_stats_obj.total_articles} → {len(deduplicated)} (removed: {dedup_stats_obj.total_removed})')
                         else:
                             filtered_results[article_type] = []
-                            dedup_stats[category_name] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
+                            dedup_stats[category_name] = {'removed_count': 0, 'removal_rate': 0}
                     else:
                         filtered_results[article_type] = []
                         dedup_stats[category_name] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
@@ -316,19 +325,39 @@ def ai_filter():
                     # Update progress
                     progress_callback(50, f'Processed {category_name}')
                 
-                # Portfolio articles - no AI filtering needed
+                # Portfolio articles - no AI filtering needed, only internal deduplication
                 if portfolio_articles:
-                    log_callback('Processing Portfolio articles (no AI filter)...')
-                    deduplicated_portfolio, portfolio_dedup_stat = filter_instance.deduplicate_articles_by_title(portfolio_articles, "Portfolio")
+                    log_callback('Processing Portfolio articles (internal deduplication only)...')
+                    # Use new adaptive deduplication service for portfolios
+                    adaptive_dedup_service = AdaptiveDeduplicationService(
+                        similarity_threshold=0.4,
+                        performance_mode='aggressive'
+                    )
+                    deduplicated_portfolio, portfolio_dedup_stats = adaptive_dedup_service.adaptive_deduplicate(portfolio_articles, "portfolios")
                     filtered_results["portfolio"] = deduplicated_portfolio
-                    dedup_stats["Portfolio"] = portfolio_dedup_stat
+                    dedup_stats["Portfolio"] = {
+                        'removed_count': portfolio_dedup_stats.total_removed,
+                        'removal_rate': (portfolio_dedup_stats.total_removed / portfolio_dedup_stats.total_articles * 100) if portfolio_dedup_stats.total_articles > 0 else 0
+                    }
+                    log_callback(f'  Portfolios: {portfolio_dedup_stats.total_articles} → {len(deduplicated_portfolio)} (removed: {portfolio_dedup_stats.total_removed})')
                 else:
                     filtered_results["portfolio"] = []
-                    dedup_stats["Portfolio"] = {'removed_count': 0, 'duplicate_groups': [], 'removal_rate': 0}
+                    dedup_stats["Portfolio"] = {'removed_count': 0, 'removal_rate': 0}
                 
-                # Apply cross-category deduplication
-                log_callback('Applying cross-category deduplication...')
-                filtered_results, cross_dedup_stats = filter_instance.cross_category_deduplication(filtered_results)
+                # Apply cross-category deduplication (excluding portfolios)
+                log_callback('Applying cross-category deduplication (portfolios excluded)...')
+                # Separate portfolios from other categories
+                portfolios_data = filtered_results.pop('portfolio', [])
+                
+                # Apply cross-category deduplication only to non-portfolio categories
+                if len(filtered_results) > 0:
+                    filtered_results, cross_dedup_stats = filter_instance.cross_category_deduplication(filtered_results)
+                
+                # Add portfolios back without cross-category deduplication
+                if portfolios_data:
+                    filtered_results['portfolio'] = portfolios_data
+                    log_callback(f'Portfolios preserved from cross-category deduplication: {len(portfolios_data)} articles')
+                
                 progress_callback(80, 'Cross-category deduplication completed')
                 
                 # Map results back to Chinese category names for ReportGenerator
