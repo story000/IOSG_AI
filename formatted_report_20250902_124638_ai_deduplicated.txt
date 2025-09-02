@@ -1,0 +1,856 @@
+# 📰 新闻
+
+## 项目融资介绍
+
+### 📊 投融资清单
+
+| 受资方 | 投资方 | 赛道 | 涉及金额 |
+|--------|--------|------|----------|
+| Obita | 元璟资本, Mirana Ventures, 君联资本, HashKey Capital, Web3.com Ventures 等知名机构及个人 | Payfi | $10M |
+| Everlyn | Mysten Labs, Baseline（阿联酋）, Selini Capital, NESA, Aethir Cloud, ionet, MH Ventures, 来自 Kling AI、谷歌、亚马逊、Meta 等公司的领导层 | AI | $15M |
+| Everlyn | Mysten Labs | AI | $15M |
+| Credit Coop | Maven 11, Lightspeed Faction, Coinbase Ventures, Signature Ventures, Veris Ventures, TRGC, dlab | DeFi | $4.5M |
+| Suzaku | 未披露 | Layer1 | $1.5M |
+| M0, Rain | 未披露 | Payfi | $100M |
+| aPriori | 未披露 | DeFi | $20M |
+| Portal to Bitcoin | Paloma Investments | Infra | $50M |
+| Portal to Bitcoin | Paloma Investments | Infra | $50M |
+| Multipli | Pantera, 红杉资本, Elevation Capital | DeFi | $5M |
+| aPriori | HashKey Capital, Pantera Capital, Primitive Ventures, IMC Trading, GEM, Gate Labs, Ambush Capital, Big Brain Collective | DeFi | $20M |
+| M0 | Polychain, Ribbit Capital, Endeavor Catalyst, Pantera, Bain Capital Crypto | Payfi | $40M |
+| Rain | Sapphire Ventures, Dragonfly, Galaxy Ventures, Endeavor Catalyst, Samsung Next, Lightspeed | Payfi | $58M |
+| DeAgentAI | Valkyrie Fund | AI | $10M |
+| FinChain星链 | Solana基金会, Animoca Brands等多家知名机构 | 其他 | $3M |
+| Metafyed | Block Tides, Positive Venture DAO, Cyberport Hong Kong, Draper, Stellar Development Foundation | RWA | $5.5M |
+| The Clearing Company | Union Square Ventures, Coinbase Ventures, Haun Ventures, Variant | DeFi | $15M |
+| The Clearing Company | Union Square Ventures, Haun Ventures, Variant, Coinbase Ventures, Compound | DeFi | $15M |
+| The Clearing Company | Union Square Ventures（USV）, Haun Ventures, Variant, Coinbase Ventures, Compound | DeFi | $15M |
+| Swarm Network | Sui, Ghaf Capital, Brinc, Y2Z, Zerostage | AI | $13M |
+| Swarm Network | Sui, Ghaf Capital, Brinc, Y2Z, Zerostage | AI | $13M |
+| MAGNE.AI | Castrum Capital, DuckDAO, TBVentures, Becker Ventures | DePIN | $10M |
+| MAGNE.AI | Castrum Capital, DuckDAO, TB Ventures, Becker Ventures | DePIN | $10M |
+| Gondor | Maven 11 | DeFi | 未披露 |
+| Panora | Frictionless Capital, Aptos Labs 联合创始人兼首席执行官 avery.apt, Aptos Labs 创始工程师兼 DevRel 负责人 greg.apt | Infra | 未披露 |
+| Centrifuge | Republic Digital | RWA | 未披露 |
+| Tazapay | Peak XV Partners, Ripple（美国）, Circle Ventures, Norinchukin Capital（日本）, GMO VenturePartners（日本）, January Capital, ARC180 | Payfi | 未披露 |
+| Panora | Frictionless Capital, Aptos Labs 联合创始人兼 CEO Avery Ching, 开发者关系负责人兼早期工程师 Greg Nazario | Infra | 未披露 |
+| Kira | Blockchange Ventures, Vamos Ventures, Stellar Blockchain, Grit Ventures, Credibly Neutral Ventures, Michael Seibel, Oso Trava | Payfi | $6.7M |
+| Kira | Blockchange Ventures, Vamos Ventures, Stellar 区块链基金会, Grit Ventures, Credibly Neutral Ventures, Michael Seibel, Oso Trava | Payfi | $6.7M |
+| Hemi | YZi Labs（前 Binance Labs）, Republic Digital, HyperChain Capital | Layer1 | $15M |
+
+
+### 📰 详细新闻
+
+1. [Obita 完成超千万美元天使轮融资，加速布局稳定币跨境支付“新基建”](https://www.panewslab.com/zh/articles/2ce9d9a6-2dc1-4633-9f6a-ee3907d57504)
+
+企业级跨境支付与数字金融网络Obita 宣布完成超千万美元天使轮融资，由元璟资本与Mirana Ventures 联合领投，君联资本、HashKey Capital、Web3.com Ventures 等知名机构及个人跟投。本轮资金将重点用于核心系统研发、合规建设及市场拓展，加速全球稳定币跨境支付网络的布局。 Obita 以合规稳定币为核心，正在搭建Obita Mesh框架下的区块链原生支付网络，让全球企业享有低成本、实时到账、可监管的结算体验。面对高汇兑成本、到账缓慢与资金流透明度不足等行业痛点，Obita 将企业级合规体系、跨境清算网络与一体化资金管理工具深度融合，重塑跨境贸易、跨境电商及供应链平台的资金流动方式，并率先布局东南亚、中亚、非洲与拉美等高增长市场。 Obita 核心团队汇聚了来自金融科技、跨境支付及加密资产等领域的顶尖人才，具备深厚的技术积累与前瞻性的行业洞察，在全球支付网络建设、合规运营及支付金融产品设计方面拥有丰富经验，旨在引领跨境数字支付行业的创新与迭代。
+
+2. [链上视频平台 Everlyn 完成 1500 万美元融资，Mysten Labs 等参投](https://www.techflowpost.com/newsletter/detail_96931.html)
+
+链上视频平台 Everlyn 宣布迎来 Sui 区块链开发团队 Mysten Labs 作为新投资方，加入其估值 2.5 亿美元的融资轮。据悉，Everlyn 迄今已完成总额 1500 万美元融资。 本轮投资方阵容还包括 Baseline（阿联酋）、Selini Capital、NESA、Aethir Cloud、ionet、MH Ventures 等机构投资者，以及来自 Kling AI、谷歌、亚马逊、Meta 等公司的领导层。Everlyn 表示，此次融资不仅是资金支持，更体现了投资方对其"让梦想机器属于每个人"愿景的长期信念。
+
+3. [Web3视频AI模型Everlyn披露迄今已完成1500万美元融资](https://www.panewslab.com/zh/articles/d63991ac-a1e6-49ce-9cd7-6638bdf15034)
+
+Web3视频AI模型Everlyn在X平台披露，该项目迄今已完成1500万美元融资，“用于打造电影级、链上视频的未来”。此外，其宣布Mysten Labs作为投资者加入Everlyn，参与其估值达2.5亿美元的融资轮。
+
+4. [区块链信贷协议Credit Coop完成450万美元种子轮融资，Maven 11和Lightspeed Faction领投](https://www.panewslab.com/zh/articles/f37d2778-6766-4992-a4f1-b3135b0bebfe)
+
+区块链信贷协议Credit Coop宣布完成450万美元种子轮融资，Maven 11和Lightspeed Faction领投，Coinbase Ventures、Signature Ventures、Veris Ventures、TRGC和dlab参投，新资金将用于支持其构建基于Spigot智能合约的商业现金流转化为可编程抵押品的信贷协议，以提供实时结算、自动化贷款服务和透明的信用监控。
+
+5. [Suzaku完成融资150万美元，用于扩展Avalanche Layer 1去中心化](https://www.panewslab.com/zh/articles/a9fb9976-9af3-4a9e-a962-2d7b4895e25f)
+
+据Avalanche官方博客，Layer 1区块链去中心化中心Suzaku宣布已完成150万美元的融资，融资方式包括种子轮、公开发售和赠款。 Avalanche介绍称，Suzaku是一个 (再) 质押协议，致力于帮助Avalanche的Layer1节点安全地扩展和去中心化其验证者集。该协议通过为Layer1节点提供从中心化验证到完全无需许可的去中心化的结构化路径，弥补了Avalanche生态系统中一个关键的基础设施缺口。
+
+6. [可编程货币获得关注，初创公司M0和Rain融资近1亿美元](https://cn.cointelegraph.com/news/programmable-money-100m-startup-raises?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+在稳定币总市值达到2800亿美元的同一天，初创公司M0和Rain宣布为可编程货币筹集近1亿美元的新一轮融资。
+
+7. [前Coinbase、Jump、Citadel量化交易员创立的aPriori为链上高频交易平台融资2000万美元](https://cn.cointelegraph.com/news/apriori-raises-20m-onchain-hft-defi?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Web3初创公司aPriori已筹集总计3000万美元资金，以扩展其链上交易平台，满足不断增长的机构DeFi需求。
+
+8. [比特币跨链基础设施 Portal to Bitcoin 完成 5000万美元融资，Paloma Investments 领投](https://www.techflowpost.com/newsletter/detail_96717.html)
+
+比特币网络跨链基础设施 Portal to Bitcoin 完成 5000 万美元融资，Paloma Investments 领投，这使得该项目融资总额达到 9200 万美元。 这笔资金将用于支持该公司适配器 BitScaler 的扩张。BitScaler 无需使用包装代币、托管桥接，也无需「消息传递或其他不安全的替代方案」，即可对原生比特币进行扩展。
+
+9. [比特币优先协议Portal to Bitcoin完成5000万美元新融资](https://www.panewslab.com/zh/articles/327fe563-0731-4644-b79f-8a5d4e8a4c60)
+
+比特币优先协议Portal to Bitcoin已获得由Paloma Investments领投的5000万美元新融资，这使得该项目融资总额达到9200万美元。这笔资金将用于支持该公司适配器BitScaler的扩张。BitScaler无需使用包装代币、托管桥接，也无需“消息传递或其他不安全的替代方案”，即可对原生比特币进行扩展。Portal计划利用这笔新资金扩大其资助计划，并吸纳机构和社区流动性提供者。目前，该公司还正在与钱包和托管平台进行试点集成，以展示非托管式代币交换。
+
+10. [实时收益协议Multipli完成500万美元新融资，总融资额达到2150万美元](https://www.panewslab.com/zh/articles/89bb2fe0-3573-479b-b22c-5c79559b7419)
+
+实时收益协议Multipli宣布完成500万美元新融资，使其总融资额达到2150万美元。这笔资金包括团队先前投资的Brine Fi的1650万美元战略性再分配。此次融资将加速Multipli面向比特币和代币化黄金等原生加密资产的机构级收益产品的扩展。 据介绍，Multipli是一个实时收益协，它能够为通常不产生收益的资产（包括比特币、代币化黄金、瑞波币以及稳定币）解锁卓越的风险调整后收益。在Pantera、红杉资本和Elevation Capital的支持下，该平台在主网上线后的几周内已筹集2150万美元，总锁定价值 (TVL) 达到9500万美元。
+
+11. [加密初创公司aPriori完成2000万美元新一轮融资，Pantera Capital等参投](https://www.panewslab.com/zh/articles/f3971557-627b-43ca-90fb-f66aec9966c1)
+
+加密交易基础设施初创公司aPriori完成2000万美元新一轮融资，使筹集的总资本达到3000万美元。此轮融资的参与者包括HashKey Capital、Pantera Capital、Primitive Ventures、IMC Trading、GEM、Gate Labs、Ambush Capital和Big Brain Collective。 APriori由一群前Jump Trading、Coinbase和 Citadel Securities工程师创立，该公司正在将高频交易方法应用于DeFi，以解决价差过大和MEV泄漏等问题，同时将MEV重新分配给质押者。该公司推出了流动性质押平台和人工智能驱动的DEX聚合器Swapr，并计划利用新资本扩大产品和招聘规模。
+
+12. [稳定币基础设施公司 M0 完成 4000 万美元融资，Polychain 和 Ribbit Capital 领投](https://www.techflowpost.com/newsletter/detail_96676.html)
+
+稳定币基础设施开发公司 M0 宣布完成 4000 万美元 B 轮融资，由 Polychain 和 Ribbit Capital 领投，Endeavor Catalyst、Pantera 和 Bain Capital Crypto 等参投。 M0 正在构建一个网络层，使不同的稳定币发行方能够实现互操作性和流动性互通，该公司迄今已累计融资近 1 亿美元。M0 联合创始人兼首席执行官 Luca Prosperi 表示，公司未来 2-5 年将专注于扩大网络规模。值得注意的是，加密货币钱包 MetaMask 最近宣布与 M0 合作推出其稳定币。
+
+13. [加密卡发行商 Rain 完成 5800 万美元 B 轮融资，Sapphire Ventures 领投](https://www.techflowpost.com/newsletter/detail_96665.html)
+
+加密卡发行商 Rain 完成 5800 万美元 B 轮融资，Sapphire Ventures 领投，Dragonfly、Galaxy Ventures、Endeavor Catalyst、Samsung Next 和 Lightspeed 参投。 Rain 推出支持 Visa 的银行卡，使稳定币能够在所有接受 Visa 的场所消费。Rain 允许新型银行和金融科技公司（如 Nuvei）提供稳定币支付服务。
+
+14. [DeAgentAI获Valkyrie Fund战略投资，累计融资金额破千万美元](https://www.panewslab.com/zh/articles/813063c0-b40c-4267-8702-2f870b806d6d)
+
+链上AI Agent基础设施项目DeAgentAI宣布获得硅谷知名风投Valkyrie Fund战略投资，累计融资金额突破千万美元。 Valkyrie Fund专注AI基建、能源与加密领域，曾投Chemix、Ferveret、exaBITS等知名项目。本次融资将助力DeAgentAI优化算力成本与效率，加速AI Agent基础设施落地。
+
+15. [复星财富控股旗下FinChain星链正式发布，并达成数百万美元融资](https://www.techflowpost.com/newsletter/detail_96614.html)
+
+8 月 28 日，由复星财富控股孵化的Web3品牌FinChain星链于8月27日在香港正式发布，并宣布完成首轮外部融资，金额达数百万美元，战略投资方包括Solana基金会、Animoca Brands等多家知名机构。
+
+16. [Metafyed完成550万美元融资亚洲RWA代币化市场](https://www.panewslab.com/zh/articles/c26231ad-935b-48b9-94fe-05e8c88ee017)
+
+Metafyed宣布已成功完成550万美元融资，用于扩展代币化真实资产（RWA）市场。投资方包括Block Tides、Positive Venture DAO等区块链投资者及风险DAO，另获Cyberport Hong Kong、Draper和Stellar Development Foundation支持。Metafyed致力于通过区块链、智能合约和AI合规评分。
+
+17. [预测市场平台 The Clearing 完成 1500 万美元种子轮融资，由 Union Square Ventures 领投](https://www.techflowpost.com/newsletter/detail_96573.html)
+
+前 Polymarket 和 Kalshi 增长主管 Toni Gemayel 创立的预测市场平台 The Clearing Company 宣布完成 1500 万美元种子轮融资。该轮由 Union Square Ventures 领投，Coinbase Ventures、Haun Ventures 和 Variant 等参投。
+
+18. [由前Polymarket和Kalshi员工创立的新预测平台The Clearing完成1500万美元融资，USV领投](https://m.theblockbeats.info/flash/309561)
+
+由前 Polymarket 和 Kalshi 员工创办的预测市场平台 The Clearing Company 宣布完成 1500 万美元种子轮融资，本轮融资由 Union Square Ventures 领投，Haun Ventures、Variant、Coinbase Ventures、Compound 等参投。The Clearing Company 将与市场领头羊 Polymarket 和 Kalshi 展开竞争。据该公司网站显示，曾担任 Polymarket 和 Kalshi 增长主管的 Toni Gemayel 将担任 The Clearing Company 的首席执行官。这家初创公司的其他员工中也包括曾在 Polymarket 工作过的人。
+
+19. [前Polymarket团队获1500万美元融资推出预测市场项目The Clearing Company，USV领投](https://www.panewslab.com/zh/articles/a09e155b-c3f0-4f93-9448-b26509e41f88)
+
+前预测市场平台Polymarket团队推出新项目The Clearing Company，并完成由Union Square Ventures（USV）领投的1500万美元种子轮融资。其他投资方包括Haun Ventures、Variant、Coinbase Ventures、Compound等。 联合创始人Toni Gemayel表示，预测市场结合互联网时代的集体智慧，可克服传统民意调查的缓慢和偏差问题。该项目致力于构建链上、无许可且符合监管标准的预测市场，同时为零售用户提供便捷参与方式。
+
+20. [Swarm Network完成1300万美元融资，Sui基金会等参投](https://m.theblockbeats.info/flash/309514)
+
+8 月 27 日，去中心化验证协议 Swarm Network 完成 1300 万美元融资，本轮融资部分资金来自 Sui 网络上 1000 万美元的代理许可证公开发售，另有 300 万美元的战略资本来自 Sui、Ghaf Capital、Brinc、Y2Z 和 Zerostage 等投资者。此轮融资将加速其去中心化 AI 验证协议的开发。
+
+21. [去中心化 AI 验证协议 Swarm Network 获 1300 万美元融资，Sui、Ghaf Capital 等参投](https://www.techflowpost.com/newsletter/detail_96548.html)
+
+去中心化 AI 验证协议 Swarm Network 完成 1300 万美元融资，其中包括在 Sui 网络上进行的 1000 万美元公开代理许可证销售，以及来自 Sui、Ghaf Capital、Brinc、Y2Z 和 Zerostage 等投资方的 300 万美元战略投资。 Swarm Network 计划利用此轮融资扩展 Rollup News 功能并部署其代理层，致力于在数字时代构建真实信息基础设施。
+
+22. [Web3 硬件开发商 MAGNE.AI 完成 1000 万美元战略融资，Castrum Capital、DuckDAO 等参投](https://www.techflowpost.com/newsletter/detail_96534.html)
+
+Web3 原生硬件开发商 MAGNE.AI 已完成 1000 万美元战略融资。本轮投资方包括 Castrum Capital、DuckDAO、TBVentures 和 Becker Ventures。 据悉，这笔资金将用于加速第一层和第二层双链移动原生 Web3 基础设施的研发，推进人工智能与区块链安全芯片的量产和优化，并拓展全球市场及生态系统建设。MAGNE.AI 致力于开创去中心化智能设备的新时代。
+
+23. [Web3智能硬件项目MAGNE.AI完成1000万美元战略融资](https://www.panewslab.com/zh/articles/6a32c509-08c9-4364-8587-21a6b6e07220)
+
+Web3智能硬件项目MAGNE.AI宣布完成1000万美元战略融资，Castrum Capital、DuckDAO、TB Ventures以及Becker Ventures参投，资金将加速其移动原生Web3基础设施的L1+L2双链研发，以及加速其AI+区块链安全芯片量产及优化。 据介绍，MAGNE.AI是一家由美国领衔的科技公司，致力于为去中心化互联网打造AI原生Web3智能手机和下一代移动基础设施。
+
+24. [预测市场DeFi层协议Gondor完成天使轮融资，Maven 11等参投](https://m.theblockbeats.info/flash/309420)
+
+预测市场 DeFi 层协议 Gondor 宣布完成天使轮融资，具体融资金额未披露。此轮融资由 Maven 11 参投。据悉，Gondor 的首款产品「Polymarket 头寸借贷协议」即将推出。
+
+25. [Aptos应用和执行层协议Panora完成新一轮融资，Frictionless Capital领投](https://m.theblockbeats.info/flash/309415)
+
+Aptos 应用和执行层协议 Panora 宣布完成新一轮融资，具体融资金额未披露。此轮融资由 Frictionless Capital 领投，Aptos Labs 联合创始人兼首席执行官 avery.apt 以及 Aptos Labs 创始工程师兼 DevRel 负责人 greg.apt 等参投。
+
+26. [去中心化金融平台Centrifuge完成新一轮融资，Republic Digital参投](https://www.techflowpost.com/newsletter/detail_96448.html)
+
+去中心化金融平台Centrifuge宣布完成新一轮融资，数字银行及投资平台Republic旗下Republic Digital参投，新资金将用于进行受监管数字资产和去中心化基础设施整合，以实现现实世界资产（RWA）的转让、组合和流动。Republic Digital暂未透露此次投资的具体规模，但表示将与Centrifuge共同把RWA打造成为下一代金融体系的基础。
+
+27. [跨境支付平台Tazapay完成B轮融资，Circle Ventures等参投](https://www.panewslab.com/zh/articles/b2721ab8-2a58-4b2b-afa7-15faf307d969)
+
+跨境支付平台 Tazapay 完成 B 轮融资，投资方包括 Peak XV Partners、Ripple（美国）、Circle Ventures、Norinchukin Capital（日本）和 GMO VenturePartners（日本）。现有投资者 Peak XV Partners 领投，另两家现有投资者 January Capital 和 ARC180 跟投。 Tazapay 在 70 多个市场提供无缝的本地收款和支付功能，已实现运营盈亏平衡，并且年增长率高达 300%。该公司已在新加坡、加拿大和欧盟获得牌照，并将利用新融资加速其在全球主要市场的牌照布局。目前，该公司正在申请阿联酋、美国、香港和澳大利亚的牌照，以及新加坡的数字支付代币(DPT)牌照。
+
+28. [Aptos 生态的超级应用与执行层 Panora 完成新一轮融资](https://www.techflowpost.com/newsletter/detail_96412.html)
+
+8 月 26 日，Aptos 生态的超级应用与执行层 Panora 近日完成新一轮融资。本轮由 Frictionless Capital 领投，Aptos Labs 联合创始人兼 CEO Avery Ching 与开发者关系负责人兼早期工程师 Greg Nazario 参投。 Panora 致力于为 Aptos 生态提供高效、可靠的交易基础设施，涵盖 DEX 聚合、跨链桥接、限价单、DCA 策略及开发者工具等功能，为开发者与交易者提供更优的体验。 Aptos 将持续与 Panora 紧密合作，支持其技术发展并共同推动 Aptos 生态在性能与规模上的进一步提升。
+
+29. [区块链支付基础设施Kira完成670万美元种子轮融资](https://www.panewslab.com/zh/articles/6eacb7d5-827d-40c1-a839-649920e4a011)
+
+区块链支付基础设施Kira完成670万美元种子轮融资，Blockchange Ventures、Vamos Ventures、Stellar Blockchain、Grit Ventures、Credibly Neutral Ventures、 Michael Seibel和Oso Trava参投。 据介绍，Kira利用Stellar区块链实现快速、低成本的支付服务，目前专注于拉丁美洲市场，并且支持大型企业或初创企业推出嵌入式金融产品。Kira使大型企业或小型初创公司能够通过一体化API为客户提供基于区块链的金融服务。Kira提供各种金融产品，包括支付、汇款、储蓄等。
+
+30. [区块链支付平台 Kira 完成 670 万美元种子轮融资，由 Blockchange Ventures 领投](https://www.techflowpost.com/newsletter/detail_96391.html)
+
+区块链支付基础设施平台 Kira 宣布完成 670 万美元种子轮融资。本轮融资由 Blockchange Ventures 领投，Vamos Ventures、Stellar 区块链基金会、Grit Ventures、Credibly Neutral Ventures 等机构参投，Michael Seibel 和 Oso Trava 等个人投资者跟投。 Kira 由前 Arcus（已被万事达收购）创始人 Edrizio De La Cruz 等人创立，致力于为企业提供基于区块链的金融服务基础设施。该平台结合稳定币、人工智能和企业级 API，使企业能够快速推出支付、汇款和储蓄等金融科技产品。
+
+31. [比特币可编程层协议 Hemi 完成 1500 万美元融资，由 YZi Labs 等领投](https://www.techflowpost.com/newsletter/detail_96388.html)
+
+比特币可编程性层协议 Hemi 完成 1500 万美元融资，由 YZi Labs（前 Binance Labs）、Republic Digital 和 HyperChain Capital 领投。本轮融资使 Hemi 的总融资额达到 3000 万美元。 据介绍，Hemi 的核心是将完整的比特币节点嵌入以太坊虚拟机的 Hemi 虚拟机（hVM），通过跨链通道和权益证明共识设计，实现在比特币网络上进行以太坊级别的智能合约开发。
+
+## 基金融资介绍
+
+32. [Falcon Finance设立链上保险基金，初始注资1000万美元](https://www.panewslab.com/zh/articles/040dd34a-1aba-4876-bfa4-bcd6eb5e2721)
+
+Falcon Finance今日宣布成立其专用链上保险基金，旨在提升透明度、加强风险管理，并为参与该协议的交易对手和机构合作伙伴提供保障。该基金初始注入1000万美元等值的USD1（Falcon Finance选定的首种储备货币），后续还将追加其他资产。此外，部分协议费用将直接计入保险基金，以确保该基金与Falcon生态系统的共同发展能够持续提供可持续的长期保障。Falcon Finance的保险基金充当金融缓冲器，旨在在市场承压时期为协议及其用户提供保护。
+
+33. [Unified Ventures完成3000万美元募资专注RWA与稳定币，菠菜为该基金创始合伙人](https://www.panewslab.com/zh/articles/e17a4181-7523-450b-90dd-3ef8e30e5d2b)
+
+Web3caff研究员菠菜（@bocaibocai_）宣布其新身份，即Unified Ventures创始合伙人，并披露Unified Ventures刚刚完成了3000万美金的募资，这是一只专门布局RWA和稳定币相关赛道的基金。菠菜表示，其今天也以复星集团新项目FinChain投资人的身份首次公开亮相；虽然基金刚刚成立，但该基金已经投资若干项目。目前可公开的除了复星的FinChain，该基金还投资了由前华夏基金数字资产负责人创立的AlloyX。
+
+34. [Animoca携手Antler推动日本动漫、漫画IP上链](https://cn.cointelegraph.com/news/animoca-antler-japan-web3-anime-manga-ip-fund?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Animoca Brands与Antler旗下Ibex Japan达成合作，推出Web3基金，致力于推动日本动漫和漫画IP上链。
+
+## 公链/L2/主网
+
+35. [BRC20协议升级：引入以太坊虚拟机集成](https://www.techflowpost.com/newsletter/detail_97055.html)
+
+比特币代币协议BRC20宣布重大升级，在比特币区块912,690引入以太坊虚拟机（EVM）集成。此次由Ordinals开发者Best in Slot与BRC20创始人Domo主导的升级（称为BRC2.0）将为比特币生态带来以太坊式的智能合约功能。 Best in Slot CEO Eril Binari Ezerel表示，此次升级使BRC20协议达到图灵完备，将为用户提供以太坊般的可组合性和可编程性体验，同时保持比特币网络的安全性和去中心化特性。
+
+36. [币安将于9月10日支持Celo（CELO）网络升级及硬分叉](https://www.techflowpost.com/newsletter/detail_96996.html)
+
+9 月 1 日，据官方公告，币安预计将于2025年09月10日22:00暂停Celo（CELO）网络的代币充值、提现业务，以支持其网络升级及硬分叉。项目方预计将于2025年09月10日进行网络升级及硬分叉。
+
+37. [币安将支持Conflux Network（CFX）网络升级及硬分叉](https://www.techflowpost.com/newsletter/detail_96780.html)
+
+8 月 29 日，据官方公告，币安预计将于2025年09月01日08:03（东八区时间）暂停Conflux Network（CFX）网络的代币充值、提现业务，以支持其网络升级及硬分叉。 项目方预计将于区块高度129,680,000进行网络升级及硬分叉。
+
+38. [Camp Network宣布主网上线](https://m.theblockbeats.info/flash/309683)
+
+8 月 28 日，Camp Network 宣布主网上线。Camp 的核心是 Origin 证明，这是一种将归属和许可直接嵌入执行层的协议，使创作者能够将具有可验证来源的 IP 标记化、强制执行许可证并自动化版税流程。其 mAItrix 支持在获得许可的用户拥有的数据集上部署和训练代理。
+
+39. [Solana「实现150ms区块最终确认重大共识升级」提案已进入投票阶段](https://m.theblockbeats.info/flash/309593)
+
+8 月 28 日，据相关治理页面，Solana「实现 150ms 区块最终确认重大共识升级」提案（SIMD-326）已进入投票阶段。投票表决规则为赞成票占比须达到（赞成+反对）总票数的 2/3 则通过。当前投票参与率约 9.87%，其中约 9.758% 为赞成票。
+
+40. [Camp Network上线主网并推出原生代币CAMP](https://www.panewslab.com/zh/articles/72395875-b91b-4474-bcc0-04fbe73e8f03)
+
+L1项目Camp Network宣布正式上线其基于Abundance Rollup L1堆栈的主网，同时推出原生代币CAMP。CAMP代币将用于创作者版税支付、AI代理内容货币化，并兼具gas费和治理功能。 Camp已与娱乐、游戏及消费领域的多个团队合作，包括《黑镜》系列授权方Banijay UK、日本IP公司Minto，以及漫画创作者Rob Feldman等。此前，Camp Network完成2500万美元A轮融资，1kx与Blockchain Capital领投，目标是构建长期支持创作者和IP持有者的生态系统。
+
+41. [Google Cloud推出L1网络GCUL，目前处于私有测试网阶段](https://m.theblockbeats.info/flash/309361)
+
+8 月 27 日，谷歌 Web3 战略负责人 Rich Widmann 发文称，最近关于 Layer 1 区块链的讨论，让谷歌自家的 Layer 1——称之为 Google Cloud Universal Ledger (GCUL) 进入了聚光灯下。作为加密领域的产品负责人，你清楚如果要打造一个 Layer 1，它必须具备差异化。GCUL 汇聚了谷歌多年的研发成果，目前处于私有测试网阶段，为金融机构提供了一种全新的 Layer 1：它高性能、可信中立，并支持基于 Python 的智能合约。除了利用谷歌的分发能力，GCUL 还是一个中立的基础设施层。Tether 不会使用 Circle 的区块链，Adyen 也很可能不会用 Stripe 的区块链。但任何金融机构都可以基于 GCUL 构建。将在未来几个月发布更多技术细节！
+
+## 中间件/工具协议
+
+42. [比特币BRC20协议完成BRC2.0升级](https://m.theblockbeats.info/flash/310277)
+
+比特币代币协议 BRC 20 已在区块 912,690 完成「BRC 2.0」升级，集成以太坊虚拟机（EVM），迈出支持以太坊式智能合约的重要一步。此次升级由 Ordinals 开发商 Best in Slot 与 BRC 20 创建者 Domo 共同执行。
+
+43. [比特币代币协议BRC20通过“BRC2.0”升级实现类EVM智能合约功能](https://www.panewslab.com/zh/articles/3bfad642-338c-4ada-b2fe-c2ab344f9c0c)
+
+比特币代币协议BRC20向实现以太坊式智能合约迈出一步。根据周一披露的公告，自比特币第912,690个区块起，该比特币代币协议已将以太坊虚拟机（EVM）集成至其核心逻辑中。此次升级被称为BRC2.0，由Ordinals协议开发者Best in Slot与BRC20匿名创始人Domo共同完成。Best in Slot首席执行官Eril Binari Ezerel表示，Ordinals等元协议此前依赖“计算器式”索引器，而集成EVM后，BRC20将具备图灵完备性。Domo进一步表示，终极目标是融合两大黄金标准：比特币作为最去中心化安全的网络，EVM作为最成熟的虚拟机，让用户既能体验以太坊的可组合与可编程特性，又能享受比特币级别的安全保障。
+
+44. [WLFI关联地址将10枚WLFI跨链至BSC网络，或为测试需求](https://m.theblockbeats.info/flash/310083)
+
+9 月 1 日，据链上分析师 AI 姨 @ai_9684xtpa 监测，WLFI 关联地址 45 分钟前将 10 枚 WLFI 通过 Chainlink CCIP 跨链至 BSC 网络，该笔交易目前仍为「等待手动执行」状态。
+
+45. [Bonk 团队确认 Freya 将成为Bonk生态 USD1 交易对 ICM协议，并将与 Solana 核心贡献者提供支持](https://www.techflowpost.com/newsletter/detail_96911.html)
+
+8 月 31 日，Freya将在Bonk和Solana生态核心贡献者的支持下成为Bonk生态的USD1交易对ICM（网络资本市场）协议。 创始人Natsuki于前日出席日本Solana生态大会SuperTokyo，初步公开了由单一ICM飞轮到ICM协议Freya Protocol的进化，并获得来自Jupiter、Jito、Backpack、Sphere、Metaplex、Superteam及Solana基金会等生态核心贡献者的支持。
+
+46. [Sei 生态头部协议 Yei Finance 宣布推出跨链清算执行层 Clovis，首批预存款额度90分钟内迅速售罄](https://www.techflowpost.com/newsletter/detail_96806.html)
+
+8 月 29 日，Sei 生态头部协议 Yei Finance 宣布，其颠覆性的全链清算与执行层产品 Clovis 正式上线，该产品旨在重新定义跨链流动性的新标准，首批预存款额度在短短90分钟内便告罄，下一轮存款窗口将于9月1日开放。 据悉，作为 Sei 上最大的借贷、DEX 与跨链一体化协议，Yei Finance 此次推出的 Clovis 核心在于构建 DeFi 领域的全链清算与执行层，旨在突破链间壁垒、整合全链流动性，从而显著提升资金效率。Clovis 的创新之处在于其采用独特的“清算层 + 轻量Vault” 机制。该架构能够聚合来自多条区块链的分散流动性，实现 “一资产多链收益、一存款多场景赋能”，全面支持借贷、交易及跨链桥接等多种应用场景。
+
+47. [Sei头部协议Yei Finance推出全链清算与执行层产品Clovis](https://m.theblockbeats.info/flash/309855)
+
+Sei 生态头部协议 Yei Finance 推出全链清算与执行层产品 Clovis，首个预存金库上线后 1 小时即触达存款上限。官方表示，下一次开放将于 9 月 1 日启动。Clovis 致力于整合链间碎片化流动性，构建统一的清算与结算架构：核心链上的 Clearing Layer 执行全局逻辑，连接链上的轻量化金库则负责托管与本地结算，从而形成共享流动性池。该机制可支持借贷、交易与跨链等多场景应用，使每笔存款可在多类产品中叠加收益。
+
+48. [美商务部“上链”：预言机起飞了](https://cn.cointelegraph.com/news/u-s-department-of-commerce-goes-on-chain?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+美国商务部携手 Chainlink 将核心经济数据上链，预言机由“幕后工具”跃升为连接现实与区块链的关键基础设施。
+
+49. [Tether公布RGB协议计划，1670亿美元USDT原生登陆比特币](https://cn.cointelegraph.com/news/tether-unveils-rgb-protocol-plan-dollar167b-usdt-to-natively-launch-on-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Tether计划在RGB协议上原生发行1670亿美元USDT，使比特币从“价值存储”进化为日常数字支付的基础层，开启支付革命。
+
+50. [Mantle 宣布与 Layerzero 合作，实现 MNT 代币的无缝跨链](https://www.techflowpost.com/newsletter/detail_96707.html)
+
+Mantle 宣布与全链互操作性协议 Layerzero 达成合作，通过 Mantle 原生桥实现 MNT 代币流动性无缝跨链，跨链将从 HyperEVM 开始。
+
+51. [美国商务部宣布将第二季度GDP数据发布到区块链](https://m.theblockbeats.info/flash/309724)
+
+8 月 28 日，据官方公告，美国商务部今日宣布，将从 2025 年 7 月开始，在区块链上发布实际国内生产总值（GDP）数据。根据美国经济分析局发布的修正估计，2025 年 7 月 GDP 按年化率增长 3.3%。这是联邦机构首次以这种方式在区块链上发布经济统计数据，也是商务部利用创新技术保护联邦数据并推动公众使用的最新举措。商务部已将 2025 年季度 GDP 数据发布的官方哈希值（在部分情况下还包括 GDP 总量数据）发布到以下九条区块链：比特币、以太坊、Solana、TRON、Stellar、Avalanche、Arbitrum One、Polygon PoS 和 Optimism。同时，通过与 Pyth 和 Chainlink 预言机的协调，这些数据进一步得到传播。交易平台 Coinbase、Gemini 和 Kraken 协助推动了商务部的数据发布。商务部还将继续创新，扩大未来数据集（如 GDP）发布的范围，包括使用更多区块链、预言机和交易平台。通过这一里程碑式的举措，商务部希望展示区块链技术的广泛应用价值，同时为整个政府提供概念验证，并延续特朗普政府将美国建设为全球区块链中心的历史性努力。
+
+52. [隐私支付项目Privacy Cash上线Solana支持私密转账](https://www.panewslab.com/zh/articles/11249382-fbf1-4386-a1b9-c8669fbb3eae)
+
+隐私支付项目Privacy Cash已正式上线Solana区块链，提供类似Tornado Cash的私密转账功能。该协议为去中心化、开源设计，并符合OFAC（美国财政部海外资产控制办公室）规定。截至目前，该项目已完成超过10,000 SOL的私密交易。
+
+53. [美国商品期货交易委员会（CFTC）整合纳斯达克金融监控工具以打击市场操纵](https://cn.cointelegraph.com/news/cftc-nasdaq-financial-surveillance-tool?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+该软件针对股票和加密货币市场的内幕交易和操纵等市场滥用行为。
+
+54. [Solana生态LST协议Sanctum上线V2版本](https://m.theblockbeats.info/flash/309538)
+
+8 月 27 日，Solana 生态 LST 协议 Sanctum 上线 V2 版本，涵盖新产品更新、全新网站以及专门主页。
+
+55. [美 CFTC：将采用纳斯达克监控系统来加强加密货币监管](https://www.techflowpost.com/newsletter/detail_96558.html)
+
+美国商品期货交易委员会（CFTC）周三表示，将采用纳斯达克的监控程序来保护市场免受欺诈、滥用和操纵。新监控系统将为该机构提供自动警报和跨市场分析功能，包括获取全面的订单簿数据，以支持实时分析和决策，防止和检测传统及加密资产市场滥用。
+
+56. [Jupiter：借贷协议Jupiter Lend公开测试版现已上线](https://www.panewslab.com/zh/articles/e4418dfe-ca18-4105-b13b-30656bcf2aeb)
+
+Solana生态DEX Jupiter在X平台宣布，借贷协议Jupiter Lend公开测试版现已上线，经过数周的测试、审计并收集反馈后，其联合40多个金库以及来自Jup、Fluid及其合作伙伴提供的超200万美元激励正式推出。
+
+57. [deBridge宣布已集成Tron网络](https://m.theblockbeats.info/flash/309338)
+
+多链互操作性协议 deBridge 宣布已集成 Tron 网络，用户可在 Tron、以太坊、Solana 以及其他二十多条区块链之间实时兑换资产。此次集成将 Tron 的高吞吐量网络纳入 deBridge 的路由系统，使几乎半数在流通中的 USDT 稳定币能够实现低滑点、受 MEV 保护的转账。
+
+58. [多链互操作性协议deBridge增加对Tron的支持](https://www.panewslab.com/zh/articles/3ee54748-d9d8-4a3b-9cfb-387a86c92b56)
+
+多链互操作性协议deBridge已集成Tron，允许用户在Tron、以太坊、Solana和其他二十多个区块链之间实时交换资产。此次部署将使Tron的高吞吐量网络接入deBridge的路由系统，以实现低滑点、受MEV保护的转账。deBridge 表示，此次整合带来了“全栈互操作性”，使Tron能够与领先的生态系统组合，并支持复杂的跨链交互，以便在用户的单笔交易中完成。
+
+## DeFi
+
+59. [WLFI团队提议将所有WLFI金库流动性费用用于回购和销毁](https://www.panewslab.com/zh/articles/68aac477-87cc-422a-abff-9e7e10b0e0b3)
+
+WLFI团队发起提案，提议将WLFI协议自有流动性（POL）所赚取的所有费用，用于在公开市场购买WLFI并永久销毁。仅包含WLFI控制的流动性所产生的费用，社区或第三方流动性提供者（LP）的费用不受影响。如果该提案获得通过，WLFI将视其为持续回购和销毁策略的基础。随着时间推移，将探索将该计划扩展至包括协议收入的更多来源，目标是随着生态系统的增长，稳步扩大WLFI回购和销毁的规模。
+
+60. [Chainlink与Solv合作推出Secure Exchange Rate，提升包装资产透明性](https://www.panewslab.com/zh/articles/6ef2629f-9810-4068-bd5b-bf3a9eea4de5)
+
+Solv Protocol宣布与Chainlink合作，在以太坊上线SolvBTC对BTC的Secure Exchange Rate数据。该数据结合Chainlink储备金证明与Solv的比特币金融基础设施，实时验证抵押资产并生成赎回汇率，为包装资产透明性制定新标准。SolvBTC作为1:1锚定BTC的包装资产，将通过该机制确保抵押可验证，提升DeFi借贷市场安全性。该功能未来将扩展至BOB等链，推动跨链资产抵押与透明化。
+
+61. [Hyperliquid上线LINEA U本位盘前永续合约，最高支持3倍杠杆](https://m.theblockbeats.info/flash/310165)
+
+9 月 1 日，据官网显示，Hyperliquid 上线 LINEA/USDC 盘前永续合约，最高支持 3 倍杠杆。
+
+62. [Gate Launchpool GUSD质押池年化收益现报8.63%](https://m.theblockbeats.info/flash/310111)
+
+9 月 1 日，据官方最新数据显示，Gate 第 304 期 Launchpool GUSD 质押池参考年化收益率为 8.63%，用户通过质押 GUSD 即可参与获取收益。GUSD 是一款由美国国债等现实世界资产（RWA）支持的数字化理财渠道，为用户提供风险更低、收益更稳的资产配置选择。Gate 已全面开放交易、充提及相关理财功能，用户可将 USDT 或 USDC 按 1:1 比例铸造成 GUSD。当前 GUSD 总铸造量为 1243.5 万，参考年化为 4.4%。
+
+63. [以太坊网络稳定币供应量突破1600亿美元，创历史新高](https://m.theblockbeats.info/flash/310031)
+
+8 月 31 日，据 Token Terminal 数据显示，以太坊网络稳定币供应量突破 1600 亿美元，创历史新高。较 2024 年 1 月稳定币供应量增加超一倍。
+
+64. [8月以太坊链上DEX交易量超1401亿美元，创下史上最高月度纪录](https://m.theblockbeats.info/flash/310020)
+
+8 月 31 日，据 Defillama 数据，8 月份以太坊网络月度链上 DEX 交易量超 1401 亿美元，创下史上最高月度纪录。活跃地址数 1677 万个，同创历史最高月度记录。以太坊 TVL 现报 925.8 亿美元，距离 2021 年年末牛市最高点的约 1088 亿美元仍需增加约 17%。
+
+65. [DeFi平台dYdX收益下滑，计划在路线图更新中推出Telegram交易](https://cn.cointelegraph.com/news/defi-dydx-telegram-trading-roadmap-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+dYdX正在从起伏不定的2024年中恢复，该去中心化交易所在10月裁员35%。
+
+66. [Binance升级执行交易服务，新增流动性供应商聚合功能](https://m.theblockbeats.info/flash/309702)
+
+Binance 全面升级执行交易服务，新增流动性供应商聚合功能。聚合来自业内最大的流动性供应商网络的现货和期权场外报价。该服务优先内化订单流以降低市场影响，为加密货币大宗交易提供更紧的价差、更快的执行速度和更具竞争力的报价。
+
+67. [Bio Protocol：AUBRAI质押已上线](https://m.theblockbeats.info/flash/309700)
+
+8 月 28 日，Bio Protocol 宣布首个 BioAgent Launch 项目 AUBRAI 质押已上线。质押者将在下一次 BioAgent 和 IP-Token 销售中获得 BioXP。此外，在前两周出售超 50% 从 Ignition Sale 中获得 AUBRAI 的用户将被关进「BioXP 监狱」三周，在此期间无法获得 BioXP。
+
+68. [Gate将首发上线MITO永续合约交易](https://www.panewslab.com/zh/articles/20972a1d-81bd-4735-ad8f-baa7bed5b7e4)
+
+据官方公告，Gate 将于 8 月 28 日 22:10 (UTC+8) 首发上线 MITO 永续合约交易（USDT结算），支持 1-20 倍杠杆。
+
+69. [稳定币USDT0和XAUt0在Polygon网络上推出](https://m.theblockbeats.info/flash/309528)
+
+USDT0 运营商 Everdawn Labs 宣布，由 LayerZero 的 Omnichain Fungible Token (OFT) 支持的跨链流动性美元稳定币 USDT0 和黄金稳定币 XAUt0 将在 Polygon 区块链上推出。
+
+70. [Kamino即将推出新的USDC和USDG高收益金库](https://m.theblockbeats.info/flash/309502)
+
+8 月 27 日，Solana 生态流动性协议 Kamino 宣布即将推出两个新的 USDC 和 USDG 高收益金库，基于 Steakhouse 托管。
+
+71. [Bybit上线BSU U本位永续合约，最高杠杆20倍](https://m.theblockbeats.info/flash/309475)
+
+8 月 27 日，Bybit 上线 BSU U 本位永续合约，最高杠杆 20 倍。
+
+72. [日本金融公司Monex Group考虑推出与日元挂钩的稳定币](https://m.theblockbeats.info/flash/309425)
+
+8 月 27 日，东京上市公司、金融服务企业 Monex Group 宣布正考虑推出与日元挂钩的稳定币。据 Monex Group 介绍，这款拟推出的日元挂钩稳定币，将以日本国债等资产作为背书，且可按 1:1 比例兑换日元。其潜在应用场景包括跨境汇款与企业结算。Monex Group 旗下拥有日本加密货币交易所 Coincheck，并运营着本土经纪业务。该集团计划借助这两大业务板块推进稳定币项目。
+
+73. [日本Monex集团考虑发行日元稳定币](https://cn.cointelegraph.com/news/japan-monex-group-considers-launching-yen-pegged-stablecoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+总部位于东京的Monex集团正在考虑推出与日元挂钩的稳定币，该集团董事长松本大（Oki Matsumoto）表示，这是为了在数字金融领域保持竞争力。
+
+74. [Boros上调ETH市场上限并提升BTC和ETH市场的最大杠杆率](https://www.panewslab.com/zh/articles/7b9f065a-c992-43c5-a30f-f95ac027c8a7)
+
+Pendle推出提供比特币和以太坊永续合约资金费率交易的新平台Boros。
+
+75. [dYdX发布新路线图：涵盖Telegram交易功能、性能优化和代币实用性拓展](https://www.panewslab.com/zh/articles/487a5ede-c715-46e8-a168-4735c3ad0466)
+
+dYdX发布新路线图，其核心开发公司dYdX Trading将更名为dYdX Labs。未来90天，dYdX计划进行软件升级，助力社区在性能、用户体验和代币实用性上取得重大突破，具体如下：1.合作伙伴费用分成：为dYdX带来交易量和流动性的合作伙伴，可赚取最高50%的协议费用；2.推出分段订单和TWAP订单；3.指定提议者，显著减少端到端交易延迟；4.改进订单网关；5.Telegram交易功能，可在网页端和Telegram无缝交易dYdX账户，2025年9月上线；5.社交登录功能，支持使用Google、Apple或Passkey立即登录并存款；6.前端集成Osmosis支持USDC与DYDX一键兑换和质押；7.DYDX质押以减免手续费。
+
+## RWA
+
+76. [以太坊财库上市公司华检医疗以31.42亿港元收购国富量子股权以推进RWA交易所战略](https://www.techflowpost.com/newsletter/detail_97103.html)
+
+9 月 2 日，据港交所公告，香港以太坊财库上市公司华检医疗发宣布以约31.42亿港元收购国富量子20.31%股权以推进RWA交易所战略，本次交易将以配发及发行代价股份的方式支付，发行价为每股9.69港元。收购完成后华检医疗将成为国富量子主要股东，并通过权益法将其纳入财务报表。本次收购是华检医疗推进RWA（Real World Asset，现实世界资产）交易所战略，实现从资产端到交易端的闭环生态构建，并将在稳定币市场布局。 今年八月，华检医疗宣布正式启动具备下行保护机制的全球增强版以太坊财库战略，并将以太坊作为核心储备资产。
+
+77. [福田投控宣布发行全球首单公链RWA公募上市数字债券](https://m.theblockbeats.info/flash/310271)
+
+福田投控（惠誉「A-」评级）宣布在香港成功发行离岸人民币债券，规模 5 亿元，期限 2 年，票面利率 2.62%。福田投控表示，本期债券为全球市场首单在以太坊公链发行的 RWA 公募上市数字债券。
+
+78. [德林控股补充公告：已认购Asseto股权及Pengu Software股份，将推出RWA数字资产平台](https://www.techflowpost.com/newsletter/detail_97096.html)
+
+9 月 2 日，港股上市公司德林控股于9月1日发布补充公告，披露已认购Asseto Holding Limited股权，以及集团管理基金认购Pangu Software Pte Ltd的股份。德林控股表示，Asseto股权认购交易后的估值为4000万美元，A类普通股持有量达到77352股，而认购Pangu Software Pte Ltd的金额为100万美元，双方将共同构建一个覆盖虚拟和现实世界代币化资产的数字资产平台。
+
+79. [随着贵金属价格逼近历史高位，代币化黄金市场规模突破25亿美元](https://www.panewslab.com/zh/articles/9f5ef2d6-048a-4dfd-b8cf-736f86fa9a8e)
+
+随着金价即将突破4月峰值，由贵金属支撑的加密代币市场规模已飙升至历史新高。CoinGecko数据显示，代币化黄金的总市值已突破25.7亿美元，近期两大领先产品——Tether的XAUT和Paxos的PAXG代币，均迎来了大量资金流入。其中，Tether发行的XAUT代币供应量激增4.37亿美元，创下13亿美元的历史新高。Paxos发行的黄金支持代币PAXG，市值已膨胀至创纪录的9.83亿美元；自6月以来该代币净流入资金达1.415亿美元。作为不确定性时期广泛认可的避险资产，黄金近期因美国国债收益率曲线陡峭化而重拾升势。
+
+80. [据报道，特朗普考虑战后加沙计划，拟推代币化土地](https://cn.cointelegraph.com/news/post-war-gaza-plan-uses-crypto-tokenization-report?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+特朗普政府正在流传一项计划，该计划将使美国接管加沙，并为巴勒斯坦人提供他们土地的数字代币。
+
+81. [美年健康：全资子公司与国富量子、京北方签署数字资产业务合作框架协议书](https://www.techflowpost.com/newsletter/detail_96883.html)
+
+日前，美年大健康产业控股股份有限公司全资子公司美年大健康产业有限公司与国富量子创新有限公司、京北方信息技术股份有限公司签署《数字资产业务合作框架协议书》，三方将依托各自资源禀赋，在数字资产RWA领域开展全方位业务探索与合作，探索健康医疗领域设备、数据资产价值释放新范式，助力大健康产业的升级与创新发展。
+
+82. [Cobo-京东科技 RWA项目获批香港数码港「区块链与数字资产试点资助计划」](https://www.techflowpost.com/newsletter/detail_96817.html)
+
+8 月 29 日，数字资产托管与钱包基础设施提供商 Cobo 宣布，其申报的由京东科技支持的下一代 RWA 代币化、托管与结算基础设施项目成功入选香港数码港 「区块链与数字资产试点资助计划」。 该项目聚焦于收益型资产，旨在打造覆盖代币化发行、合规托管与资金结算的一体化基础设施，服务于具备实际业务需求的机构场景，以提升资产的流动性、透明度和运营效率，并助力香港机构开展 RWA 试点及商业化落地。 「区块链与数字资产试点资助计划」 旨在推动具高影响力的区块链与 Web3 应用开发与测试，鼓励企业通过试点项目探索创新的商业化路径。按计划，获批项目可获两期资助，用于启动与完成试点测试。
+
+83. [路透社：港股上市公司“新城发展”宣布探索 RWA 并将推出 NFT 产品](https://www.techflowpost.com/newsletter/detail_96810.html)
+
+中国房地产开发商新城发展集团（Seazen Group）宣布将在香港成立研究所，推进现实资产代币化（RWA）进程。该公司计划探索将其知识产权资源和资产收入转化为区块链上可交易的数字代币。 路透社报道称，新城发展预计将在年底前设立数字资产管理部门，并推出与其五月广场投资物业相关的 NFT 产品。
+
+84. [创纪录的320亿美元ESG代币化：Blubird、Arx Veritas避免4亿吨二氧化碳排放](https://cn.cointelegraph.com/news/arx-veritas-blubird-tokenize-32b-esg-assets-co2-prevention?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+创纪录的ESG导向代币化举措将防止的排放量约为冰岛年度二氧化碳排放量的105倍。
+
+85. [Bluebird 和 Arx Veritas 完成 320 亿美元 ESG 资产代币化，减排近 4 亿吨二氧化碳](https://www.techflowpost.com/newsletter/detail_96694.html)
+
+资产代币化平台 Arx Veritas 与代币化基础设施公司 Bluebird 在 Redbelly Network 上完成了总值 320 亿美元的减排资产（ERAs）代币化，创下数字资产代币化行业新纪录。这些代币化资产包括封存的油井和煤矿，预计可减少 3.94 亿吨二氧化碳排放。
+
+86. [Arx Veritas与Blubird通过区块链技术完成价值320亿美元碳减排资产的代币化](https://www.panewslab.com/zh/articles/cb0b5cf3-72d7-40bc-9098-c3f889b8c6a9)
+
+财富代币化平台Arx Veritas与基础设施公司Blubird通过区块链技术完成价值320亿美元碳减排资产（ERA）的代币化，相当于阻止3.94亿吨二氧化碳排放，创数字资产代币化行业纪录。代币化资产包括封存的油井和煤矿，通过阻止煤炭开采运输燃烧及废弃油井污染物排放实现碳减排。该减排量相当于3.95亿次纽约至伦敦往返航班的碳排放，或9860亿英里轿车行驶里程。Blubird表示机构对ESG合规代币化资产需求强劲，正谈判超5亿美元交易并即将完成重大机构采购。此次合作旨在为可持续金融建立新的融资与追踪标准。
+
+87. [A股上市公司高伟达探索与稳定币RWA系统建设业务相关合作](https://m.theblockbeats.info/flash/309638)
+
+8 月 28 日，高伟达为积极探索新的科技领域与行业机会，推动与稳定币 RWA 系统建设业务相关的合作，近期，公司全资子公司高伟达信息科技有限公司已与数字资产清算服务有限公司签约并以 25 万美元认购 0.50% 股权，以深度参与稳定币及 RWA 技术服务。（智通财经）
+
+88. [HashKey Exchange 理财频道上线信达代币化票据 STBL](https://www.techflowpost.com/newsletter/detail_96631.html)
+
+8 月 28 日，香港最大持牌虚拟资产交易所 HashKey Exchange 理财频道将上线STBL代币化票据。 该票据由信达国际资管发行，相关资产为AAA级货币市场基金（MMFs）投资组合，支持每日申购赎回及24/7转让，仅限专业投资者参与，STBL/USD 交易于2025 年8月28日16:00（香港时间）开启申购。
+
+89. [Sygnum银行与Ledn完成5000万美元比特币抵押代币化贷款](https://www.techflowpost.com/newsletter/detail_96582.html)
+
+8 月 28 日，据官方公告，瑞士数字资产银行Sygnum与全球最大的比特币抵押贷款平台Ledn于2025年8月27日宣布完成一笔5000万美元的比特币抵押联合贷款，该贷款部分通过Sygnum的Desygnate平台进行代币化。
+
+90. [Aave Labs 推出 Horizon 平台，支持机构用户以代币化资产借贷稳定币](https://www.techflowpost.com/newsletter/detail_96541.html)
+
+去中心化借贷协议 Aave Labs 推出面向机构用户的新平台 Horizon，允许机构用户使用代币化实体资产（RWA）作为抵押物来借入稳定币。 用户可通过该平台借入 USDC、RLUSD 和 GHO 等稳定币，可接受的抵押品包括 Superstate 的短期美国国债和加密货币套利基金、Circle 收益基金以及 Centrifuge 的代币化 Janus Henderson 产品等。 该平台运行在去中心化借贷协议 Aave V3 上，Chainlink 的预言机服务将为平台提供实时定价数据。VanEck、WisdomTree 等知名机构已成为首批合作伙伴。
+
+91. [香港财经事务及库务局副局长：将为已在港交所上市的 ETF 探索代币化方式](https://www.techflowpost.com/newsletter/detail_96509.html)
+
+在香港数字资产上市公司联合会成立仪式上，香港特别行政区财经事务及库务局副局长陈浩濂表示，“在代币化产品种类方面，在三年以前，香港特区政府每年都在积极发行绿色债券，未来将计划把这类债券发行常规化，同时也将探索代币化在可再生能源等多种领域的应用。 此外，香港特区政府还将采取一些措施，为已经在香港联合交易所上市的 ETF 探索代币化方式，进一步吸引投资者参与。”
+
+92. [陈浩濂：将为已在港交所上市的ETF探索代币化方式，进一步吸引投资者参与](https://www.panewslab.com/zh/articles/afaaf548-0f8b-439e-9bdc-434d8abe1369)
+
+在香港数字资产上市公司联合会成立仪式上，香港特别行政区财经事务及库务局副局长陈浩濂表示，在代币化产品种类方面，在三年以前，香港特区政府每年都在积极发行绿色债券，未来将计划把这类债券发行常规化，同时也将探索代币化在可再生能源等多种领域的应用。此外，香港特区政府还将采取一些措施，为已经在香港联合交易所上市的ETF探索代币化方式，进一步吸引投资者参与。
+
+93. [KuCoin成为首个支持泰国政府G-Token发行的全球加密交易所](https://www.panewslab.com/zh/articles/013b7aa1-895f-4e70-baea-fc80204daa06)
+
+KuCoin携手 KuCoin Thailand、XSpring Digital、Krungthai XSpring及SIX Network，正式成为首个也是唯一一家支持泰国历史性 G-Token 项目的全球加密货币交易所。 G-Token 是全球首个由主权国家财政部发行的代币化政府债券，也是泰国首个在数字资产交易所上市的政府债券。该项目由泰国财政部主导，KuCoin Thailand 作为指定首发数字资产交易所负责技术开发与上市，KuCoin Global 则为项目提供技术顾问、二级市场流动性支持及国际市场拓展。
+
+94. [代币化 Pre-IPO 股票能否打破私募股权市场的壁垒？](https://cn.cointelegraph.com/news/can-tokenized-pre-ipo-stocks-break-down-barriers-in-the-private-equity-market?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+通过 Ventuals、Jarsy 和 PreStocks 的案例研究，探讨代币化如何降低 Pre-IPO 股权市场的投资壁垒。
+
+95. [盛业在 HashKey Chain 成功发行亚太区首单供应链资产 RWA 代币化项目](https://www.techflowpost.com/newsletter/detail_96476.html)
+
+“AI+产业供应链”的数智科技公司盛业控股集团有限公司（简称“盛业”，股份代号：6069.HK）在亚洲数字资产金融服务集团 HashKey Group 旗下的以太坊 Layer-2 公链 HashKey Chain 上，成功发行亚太区首单供应链资产 RWA（Real World Assets）代币化项目。 首期产品设立1亿美元等值的储架规模，通过多币种、开放稳定币结算等创新模式分期发行，并挂钩盛业供应链科技平台内涵盖电商等多个产业板块的优质供应链资产真实收益，已获得国际投资者积极认购。 此次 RWA 代币化项目的顺利落地，与盛业开启全球化布局及打造“AI+国际供应链科技平台”的战略高度契合，将加速推动“真实资产的确定性”转化为“链上价值的可配置性”。
+
+96. [VersaBank宣布其美国分行在启动代币化存款试点项目](https://www.panewslab.com/zh/articles/cd8f0d28-61e7-4e31-8be4-1b58b20f97ca)
+
+B2B 数字银行和网络安全技术解决方案提供商 VersaBank 宣布，其全资子公司 VersaBank USA 已在美国启动其 USDVB（即其专有数字存款收据 DDR 的美元版​​本）的内部试点计划（“USDVB 试点计划”）。 DDR 由 VersaBank 使用其专有技术独家开发，是银行发行的代币化存款，是高度加密的 1:1 数字形式，与实际现金存款相比，具有比稳定币更高的安全性、稳定性和合规性。 与该行在加拿大完成的类似试点项目一致，USDVB 试点项目旨在演示 VersaBank USA DDR 在美元环境下的功能性、安全性和运行完整性，并确保符合美国银行业法规，包括《银行保密法》(BSA) 和美国外国资产控制办公室 (OFAC)。
+
+97. [联易融与XRP Ledger宣布战略合作，共同推动全球数字供应链金融应用](https://www.panewslab.com/zh/articles/660098b3-049e-4459-b94f-39b936d4b76b)
+
+近日，中国供应链金融科技服务商联易融(09959)正式宣布与企业级区块链解决方案提供商XRPL建立战略合作伙伴关系，双方将共同推动联易融全球数字供应链金融应用在XRP Ledger主网上完成部署，同时推动该应用实现规模化落地。作为本次合作的核心内容，联易融将正式在XRPL主网上部署其全球数字供应链金融应用，以支持真实贸易背景下的数字资产的流通与跨境结算。未来，双方将探索在稳定币和供应链金融创新等领域更深层次合作，基于智能合约的供应链金融RWA资产交易、以及区块链和AI在全球贸易金融场景中的生态融合，进一步扩展 XRPL 在企业级真实资产领域的技术边界。
+
+98. [Kraken会见SEC加密货币工作组讨论资产代币化](https://cn.cointelegraph.com/news/crypto-exchange-kraken-met-with-sec-crypto-task-force-discuss-tokenization?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+目前，全球监管机构及传统交易所协会正敦促美国证券交易委员会（SEC）加强对代币化股票的监管，此次会议正值这一关键时期。
+
+99. [MANTRA即将推出首个合规RWA产品：Pyse E-Bike Fleet](https://www.panewslab.com/zh/articles/530e1174-9a3c-4695-bf4e-7545371d52f5)
+
+其首个合规化实物资产代币化（RWA）产品即将在MANTRA Finance平台上线。该产品为Pyse E-Bike Fleet，符合VARA法规。 投资者将能够拥有由阿联酋顶级食品及电商公司运营的商用电动车租赁所产生的部分租赁收入，标志着MANTRA在RWA领域的重要进展。
+
+## 稳定币
+
+100. [77家机构表达申请香港稳定币牌照意向，金管局仅初步安排会面](https://www.panewslab.com/zh/articles/783b5dcb-d8de-4d57-9020-0b2c814e1ef9)
+
+香港金管局截至8月底共收到77家机构表达申请稳定币发行人牌照意向，涵盖银行、科技企业、证券及资产管理公司、电商、支付机构及Web3初创等。金管局已陆续安排与相关机构会面，强调表达意向及会面不代表批准，最终发牌将视乎申请是否符合条件，初阶段仅批出少数牌照，并提醒市民警惕无牌稳定币宣传。
+
+101. [诺奖得主警告：稳定币监管不足可能引发政府被迫救助](https://www.panewslab.com/zh/articles/5e0fea56-540c-4e0a-90d7-8896dff9a191)
+
+诺贝尔经济学奖得主Jean Tirole警告称，目前对稳定币的监管“力度不足”，一旦未来金融危机中这些代币崩盘，政府可能被迫投入数十亿美元进行救助。 其在接受采访时表示，他“非常、非常担心”稳定币的监管，以及如果对与这些数字代币挂钩的基础储备资产产生怀疑，储户可能会挤兑。Tirole称，尽管稳定币在普通用户眼中可能被视为“绝对安全的存款”，但它们却可能成为损失的来源，并引发要求政府斥巨资救助的呼声。他还警告称，用美国国债作为稳定币支持资产的做法可能会变得不受欢迎，因为这些基础资产的收益率相对较低。因此，稳定币发行方可能会被诱导去投资“回报更高但风险更大的”其他资产。
+
+102. [诺贝尔经济学奖得主：稳定币监管不足，若崩溃或导致政府数十亿美元的救市风险](https://www.techflowpost.com/newsletter/detail_96978.html)
+
+诺贝尔经济学奖得主Jean Tirole警告称，目前对稳定币的监管“力度不足”，一旦未来金融危机中这些代币崩盘，政府可能被迫投入数十亿美元进行救助。 在接受采访时，这位2014年诺贝尔经济学奖得主表示，他“非常、非常担心”稳定币的监管，以及如果对与这些数字代币挂钩的基础储备资产产生怀疑，储户可能会挤兑。Tirole称，尽管稳定币在普通用户眼中可能被视为“绝对安全的存款”，但它们却可能成为损失的来源，并引发要求政府斥巨资救助的呼声。 他还警告称，用美国国债作为稳定币支持资产的做法可能会变得不受欢迎，因为这些基础资产的收益率相对较低。因此，稳定币发行方可能会被诱导去投资“回报更高但风险更大的”其他资产。
+
+103. [WLFI：稳定币USD1现已在Solana上线](https://www.panewslab.com/zh/articles/069d637a-74a0-4d8b-bfc4-4e3a68deecd3)
+
+特朗普家族加密项目WLFI在X平台表示，稳定币USD1现已在Solana上线，USD1带来稳定性，Solana带来规模化。
+
+104. [市场消息：中银香港拟申请稳定币发行人牌照](https://www.techflowpost.com/newsletter/detail_96927.html)
+
+在渣打香港牵头成立的合营公司正式表态有意申请牌照后，中银香港计划申请稳定币发行人牌照，并争取成为首批获批牌照的发行人。
+
+105. [香港稳定币条例草案法案委员会委员：敦促监管机构尽快完成发牌工作并公布名单](https://www.techflowpost.com/newsletter/detail_96864.html)
+
+香港稳定币条例草案法案委员会委员及立法会议员黄俊硕敦促监管机构在经过完善严谨审查后尽早完成持牌稳定币发行人发牌工作并公布名单，使市民大众能够在获得法律保障及规管下投资及使用。黄俊硕表示，稳定币各种实际应用场境尚在探索阶段，因此不应存有炒卖空间，近期坊间出现涉及炒作及骗案，促请加强各种数字资产的公众宣传及教育工作，提高警觉性，避免堕入骗局。
+
+106. [中石油：将研究稳定币在跨境结算应用中的可能性](https://www.techflowpost.com/newsletter/detail_96784.html)
+
+中国石油（00857）财务总监兼董事会秘书王华在半年业绩发布会上表示，公司正密切关注香港金管局拟为稳定币发行人发出牌照的举措，并将研究通过稳定币进行跨境结算及支付的可能性。
+
+107. [可编程隐私网络Aleo加入稳定币网络Global Dollar Network](https://www.techflowpost.com/newsletter/detail_96746.html)
+
+可编程隐私Layer 1网络Aleo宣布加入稳定币网络Global Dollar Network，该网络由Paxos Digital Singapore和Paxos Issuance Europe发行的美元稳定币USDG提供支持，据悉Aleo基金会将使用USDG实现资金管理和供应商支付。
+
+108. [Circle向韩国金融部门表态：无意合作韩元稳定币，提议开展美元稳定币合作](https://www.panewslab.com/zh/articles/32e9ba4e-8fa6-4dae-a00b-aa4cbfd7400a)
+
+Circle已向韩国金融部门提议发行美元稳定币，而非韩元稳定币。Circle总裁Circle总裁Heath Tarbert在与该国四大金融机构主要高管会面时表示：“无意就韩元稳定币开展合作”，并介绍了Circle发行的美元稳定币，同时提出了合作建议。 四大金融机构认为，Circle总裁访韩实际上是从确保Circle代币市场份额的角度出发的。然而，近期韩国国内金融界有人呼吁，应尽快对海外发行的离岸稳定币进行监管。因为如果离岸发行的稳定币在国内流通，可能会给市场带来混乱。这正是Tarbert访韩被解读为在离岸稳定币监管政策出台前说服银行的一种策略的原因。
+
+109. [区块链技术创新迈进，央行数字货币与传统金融开启融合之路](https://cn.cointelegraph.com/news/blockchain-innovation-advances-cbdcs-and-traditional-finance-begin-integration?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+近期，区块链技术在监管政策、央行数字货币（CBDC）与传统金融基础设施领域不断突破，推动技术应用从加密市场走向实际金融场景，为行业发展注入新动能。
+
+110. [中国前央行行长：稳定币发展需多维度平衡与监管](https://www.techflowpost.com/newsletter/detail_96569.html)
+
+8 月 28 日，据金融四十人论坛报告，中国人民银行原行长周小川近日发表观点，从六大维度全面审视稳定币的发展前景与潜在风险。他指出，稳定币可能引发货币超发与高杠杆放大风险，其放大效应通过存贷、抵押融资及资产市场交易渠道显现。 周小川质疑去中心化和代币化的实际需求，认为现有集中管理的账户系统表现良好。他强调稳定币市场交易需防范价格操纵，商业机构发行稳定币应平衡盈利动机与公共服务精神，并指出跨境支付应用场景吸引力有限。周小川呼吁多维度分析稳定币发展路径，避免单向思维与概念不严谨的使用。
+
+111. [稳定币发行商Circle和Paxos测试新技术以验证加密货币支付](https://www.panewslab.com/zh/articles/6f7ec78c-9fbc-4a90-a6d0-82ede8236dc4)
+
+稳定币巨头Circle Internet Group Inc.和Paxos Trust Co.已试行一种新方法，以防止模仿者并帮助公司验证其数字资产持有量。两家公司与乔治城大学法学院教授Chris Brummer创立的金融科技初创公司Bluprynt合作，利用加密技术和区块链技术，在公司发行稳定币时提供发行人验证。该试点项目利用Bluprynt的技术，提供了一种将代币追溯到已验证发行人的方法。Brummer表示，Bluprynt的技术“预先提供来源证明，降低复杂性，并为监管机构和投资者提供所需的透明度。”他指出，这有助于减少因伪造代币和冒充攻击造成的损失。
+
+112. [稳定币巨头Circle和Paxos正在测试全新加密货币发行验证技术](https://m.theblockbeats.info/flash/309539)
+
+稳定币巨头 Circle 和 Paxos 正在测试全新加密货币发行验证技术，以帮助实体验证其数字资产持有量。Circle 和 Paxos 与由乔治城法学院教授 Chris Brummer 创立的金融科技初创公司 Bluprynt 合作，利用密码学和区块链技术，在实体发行稳定币时提供发行者验证，将能够追溯代币直到经过验证的发行方。
+
+113. [BIT Mining 与 Brale 宣布合作推出基于 Solana 的稳定币 DOLAI](https://www.techflowpost.com/newsletter/detail_96423.html)
+
+8 月 26 日，美股上市加密矿企 BIT Mining（纽交所代码：BTCM）与合规平台 Brale 宣布合作推出了基于美元支持的稳定币 DOLAI。该稳定币发行于 Solana 区块链，由现金和短期美国国债完全支持。 BIT Mining 董事长兼首席运营官 Bo Yu 表示，DOLAI 是一种合规、高效率的 AI 原生美元稳定币，旨在支持代理和机器对机器支付。
+
+114. [东京电视台：Monex正考虑在日本发行与日元挂钩的稳定币](https://www.techflowpost.com/newsletter/detail_96378.html)
+
+8 月 26 日，据金十数据援引东京电视台消息称：日本金融集团 Monex Group 正考虑在日本发行与日元挂钩的稳定币。Monex董事长Matsumoto表示，公司正在考虑收购一家欧洲加密公司，预计将在“几天内”宣布消息。
+
+115. [日本金融服务公司Monex考虑发行日元稳定币，并计划收购一家欧洲加密公司](https://www.panewslab.com/zh/articles/b04c32a3-82d0-42f3-8b06-6946956fa3c5)
+
+日本金融服务公司Monex正考虑在日本发行与日元挂钩的稳定币。Monex董事长Matsumoto表示，公司正在考虑收购一家欧洲加密公司，预计将在“几天内”宣布消息。
+
+116. [堪萨斯城联储：银行存款转向稳定币的潜在资金流或将增加美债需求](https://www.techflowpost.com/newsletter/detail_96359.html)
+
+堪萨斯城联储发布数据显示，稳定币发行商持有约1250亿美元的国库券，不到6万亿美元未偿国库券总量的2%，相比之下保险公司持有的数量大约是其五倍，而最大的私人买家共同基金则持有4.5万亿美元，是其36倍。 堪萨斯城联储经济学家Stefan Jacewitz研究分析指出，尽管稳定币市场目前规模太小，无法对美国国债需求产生巨大影响，但预计该市场规模在未来几年将大幅增长，因为随着资金将从银行存款中流出转向稳定币，潜在资金流能会增加国债需求，但同时也可能减少经济中的贷款供应。
+
+## 应用协议
+
+117. [Binance公布WLFI于Solana、BSC和以太坊链上合约地址](https://m.theblockbeats.info/flash/310098)
+
+9 月 1 日，Binance 在 WLFI 上币公告中公布了 WLFI 代币于 Solana、BSC 和以太坊链上合约地址。Solana 网络：WLFinEv6ypjkczcS83FZqFpgFZYwQXutRbxGe7oC16g以太坊：0xdA5e1988097297dCdc1f90D4dFE7909e847CBeF6BSC：0x47474747477b199288bF72a1D702f7Fe0Fb1DEeA
+
+118. [数据：Solana链上新增铸造1亿枚USD1](https://www.panewslab.com/zh/articles/fe291f55-7c04-4788-9049-7003cfc84603)
+
+据 Lookonchain 监测，约 55 分钟前 Solana 链上新增铸造 1 亿枚 USD 1。
+
+119. [美国政府推行区块链应用期间，Avalanche引领交易量增长浪潮](https://cn.cointelegraph.com/news/avalanche-transaction-growth-gdp-data-etf?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Avalanche 交易增长以 66% 的速度超过了所有区块链网络，因为该智能合约网络看到了更多的政府实施和新的 ETF 申请。
+
+120. [Time.fun推出移动应用程序，iOS和安卓版本均已上线](https://www.panewslab.com/zh/articles/4073932f-1f4e-404a-a617-eb241ba30ce2)
+
+时间代币化平台 Time.fun 发推表示，已推出 Timefun 移动应用程序，iOS 和 Android 版本均可使用。
+
+121. [美国商务部选择Pyth Network进行链上经济数据验证和分发](https://www.techflowpost.com/newsletter/detail_96700.html)
+
+美国商务部选择 Pyth Network 进行链上经济数据验证和分发。
+
+122. [美国政府开始在区块链上发布GDP数据，最初将覆盖九个区块链](https://www.panewslab.com/zh/articles/897c51ff-e84c-4eb4-ad0b-e34456d97bb8)
+
+美国政府周四开始在公共区块链上发布国内生产总值（GDP）数据，此举标志着特朗普政府对加密货币行业的最新支持。据商务部官员介绍，此举将为发布经济数据开辟另一条途径——但并非取代现有途径。美国政府此举最初将覆盖九个区块链，包括比特币、以太坊和Solana。计划是将这些数据的所谓加密哈希值置于这些区块链上。 商务部官员表示，特朗普政府打算今后寻求扩大该计划的覆盖范围。商务部官员表示，区块链计划与劳工统计局局长的解职无关。官员们称，商务部长Howard Lutnick是推动在区块链上发布数据的幕后推手。今年早些时候，Lutnick还表示，他计划改变GDP的报告方式，以消除政府支出的影响。GDP数据由商务部下属的经济分析局发布。
+
+123. [菲律宾参议员提议将国家预算上链](https://www.techflowpost.com/newsletter/detail_96604.html)
+
+菲律宾参议员Bam Aquino在周三举行的马尼拉科技峰会上提出将国家预算放置于区块链平台，使每一比索支出都能被公民追踪。"如果我们能做到这一点，我认为我们将成为第一个将预算放在区块链上的国家，"Aquino表示。
+
+124. [The Sandbox创始人辞职，公司裁员50%并转向Web3应用和Launchpad计划](https://www.techflowpost.com/newsletter/detail_96596.html)
+
+8 月 28 日，据The Big Whale披露，元宇宙项目The Sandbox正经历重大变革。联合创始人Arthur Madrid和Sébastien Borget已退出日常运营，Animoca Brands执行官Robby Yung接任CEO。Borget将转任全球大使，Madrid则成为非执行主席。 公司同时进行大规模裁员，超过50%的员工受到影响，并关闭多个国家办公室，包括阿根廷、乌拉圭、韩国、泰国、土耳其以及法国里昂办公室。 The Sandbox正减少对元宇宙的专注，转向开发更广泛的Web3应用，包括基于Base的memecoin启动平台。
+
+125. [DappRadar数据显示，Base链NFT 30天交易量跃居前三](https://cn.cointelegraph.com/news/base-third-nft-trading-volume-over-solana-30-days?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Base在过去30天的NFT交易量激增70%，达到4700万美元，超越了Immutable和索拉纳（SOL）等竞争对手。
+
+126. [阿里云向Sui Move开发者提供AI编码助手](https://m.theblockbeats.info/flash/309411)
+
+阿里云（Alibaba Cloud）宣布与 Sui 达成合作，将其 AI 编码助手提供给 Sui Move 开发人员，并提供英语、中文和韩语的全面支持。开发者可通过自然语言生成 Move 代码，获得智能自动完成和实时安全检查以及自动生成文档并使用现成的模板。
+
+127. [美国商务部将开始在区块链上发布统计数据，正敲定利用区块链发布GDP的细节](https://m.theblockbeats.info/flash/309350)
+
+8 月 27 日，美国商务部长卢特尼克表示，商务部将开始在区块链上发布统计数据。我们正在敲定利用区块链发布 GDP 的细节。
+
+128. [法币到加密货币链上原生购币闭环解决方案——以Chainlink和万事达牵头协作的最新实践为例](https://cn.cointelegraph.com/news/a-case-study-of-chainlink-and-mastercard-s-latest-collaboration?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Chainlink与万事达卡等多方合作构建链上原生购币闭环，实现法币到加密资产的安全、便捷、合规转换，并优化用户体验与跨链流动性。
+
+## 交易所/钱包
+
+129. [Coinbase和OKX推动加密货币进入澳大利亚退休金体系](https://cn.cointelegraph.com/news/coinbase-okx-crypto-australia-retirement-system?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Coinbase和OKX通过自管养老基金（SMSFs）进军澳大利亚养老金市场，同时美国正在修订加密货币如何融入退休政策计划的规则。
+
+130. [BTTC 质押正式接入币安钱包](https://www.techflowpost.com/newsletter/detail_97094.html)
+
+波场TRON网络宣布其跨链质押解决方案BTTC（BitTorrent Chain）现已正式接入币安钱包，用户可通过币安钱包直接参与BTTC质押，享受更低门槛、更高效率的资产增值服务。此次集成进一步强化了波场TRON与币安生态的协同，为全球用户提供更无缝的跨链质押体验。
+
+131. [Coinbase和OKX正推出针对澳大利亚4.3万亿澳元养老金体系的加密产品](https://m.theblockbeats.info/flash/310244)
+
+澳大利亚规模达 4.3 万亿澳元（2.8 万亿美元）的养老退休金体系正成为加密货币进军的新领域。两大数字资产交易平台 Coinbase Global Inc. 和 OKX 相继推出旨在引导养老金流入加密货币的产品。据 Coinbase 亚太董事总经理约翰·奥洛克伦透露，该公司即将推出专属 SMSF 服务，等待名单已超 500 名投资者。OKX 澳大利亚首席执行官凯特·库珀称，其六月推出的类似产品需求远超预期。OKX 的产品与 Coinbase 的计划中服务还将通过推荐会计师和律师事务所等第三方提供商，协助投资者设立 SMSF。虽然无最低余额要求，但包括强制独立审计在内的持续管理成本，意味着 SMSF 通常仅对大额账户具有成本效益。
+
+132. [币安推出墨西哥法币支付机构Medá，计划4年投资超10亿比索](https://www.techflowpost.com/newsletter/detail_97068.html)
+
+9 月 1 日，据官方公告，币安今日宣布推出获得墨西哥监管授权的电子支付资金机构(IFPE) Medá，计划在未来四年内投资超过10亿比索（约5300万美元）。Medá将作为独立运营实体，为用户提供比索存取款服务，致力于成为墨西哥金融科技领域的领先服务商。这是继法国、意大利、迪拜等22个司法管辖区后，币安在全球范围内获得的又一重要监管里程碑。
+
+133. [Binance暂停AIO项目买入交易，称因多签钱包安全漏洞](https://www.techflowpost.com/newsletter/detail_97028.html)
+
+9 月 1 日，据官方公告，Binance宣布因AIO项目团队多重签名钱包出现安全漏洞，平台已将该项目交易限制为仅可卖出状态。Binance表示将尽快分享更多相关信息，并强调用户资金安全（SAFU）未受影响。具体漏洞细节及影响范围尚待官方进一步披露。
+
+134. [Binance：AIO交易现仅限卖出，因项目团队多签钱包出现安全漏洞](https://m.theblockbeats.info/flash/310175)
+
+Binance 宣布出于用户安全考虑，AIO 交易现在仅限于卖出，因为项目团队的多重签名钱包出现安全漏洞。
+
+135. [Binance任命SB Seker为新亚太区负责人，其早年曾担任央行律师](https://m.theblockbeats.info/flash/310095)
+
+Binance 宣布任命 SB Seker 为新任亚太区负责人，其将负责指导亚太市场的区域战略、运营和监管参与。加入 Binance 之前，Seker 曾担任 Crypto.com 集团高级副总裁，负责全球产品开发以及亚太地区和中东及北非地区（MENASA）的法律和监管事务。他还曾在蚂蚁集团、Rothschild & Co 和 Amicorp Group 担任高级法律职位。职业生涯早期，他曾在澳大利亚担任诉讼律师，之后在新加坡金融管理局担任央行律师。
+
+136. [币安宣布任命 SB Seker 为亚太区负责人，推进合规发展](https://www.techflowpost.com/newsletter/detail_96953.html)
+
+币安任命 SB Seker 为亚太区新任负责人。Seker 将负责管理币安在亚太地区的战略、运营和监管合作事务。 Seker 拥有超过 20 年的公共部门、金融科技和区块链行业经验，此前曾在 Crypto.com 集团担任高级副总裁，并在蚂蚁集团、罗斯柴尔德公司等机构任职。币安首席执行官 Richard Teng 表示，Seker 在金融服务和监管市场的丰富经验，将有助于币安在亚太地区推进可持续发展和合规建设。 Seker 表示，将与监管机构、合作伙伴和社区密切合作，推动亚太地区数字资产生态系统的创新发展。
+
+137. [币安任命SB Seker为新任亚太区负责人，推动负责任增长和监管合作](https://www.panewslab.com/zh/articles/dc58714d-f44f-4f65-8fcb-fdacd19b4e46)
+
+据官方博客，币安宣布任命SB Seker为新任亚太区负责人，其将负责指导亚太市场的区域战略、运营和监管参与。据介绍，加入币安之前，Seker曾担任Crypto.com集团高级副总裁，负责全球产品开发以及亚太地区和中东及北非地区（MENASA）的法律和监管事务。他还曾在蚂蚁集团、Rothschild & Co和Amicorp Group担任高级法律职位。职业生涯早期，他曾在澳大利亚担任诉讼律师，之后在新加坡金融管理局担任央行律师。
+
+138. [币安：若每小时结算的U本位合约资金费率连续36个周期不高于0.002%，将从每小时结算恢复为每四小时](https://www.panewslab.com/zh/articles/96660190-bd92-4286-9f7a-033f70684bad)
+
+据官方公告，币安宣布自 2025 年 09 月 01 日 08:00（东八区时间）起，若每一小时结算一次的 U 本位永续合约的资金费率连续 36 个周期小于或等于 0.002% 的绝对值，Binance 合约将于第 37 个周期将资金费率结算频率从每一小时恢复为每四小时。
+
+139. [21Shares推出追踪HYPE的交易所交易产品21Shares Hyperliquid ETP](https://www.panewslab.com/zh/articles/fee64a56-1e52-4116-ab6f-02cca47a27d5)
+
+加密货币ETP发行商21Shares宣布推出首只追踪HYPE的交易所交易产品21Shares Hyperliquid ETP，该ETP将在瑞士证券交易所SIX Swiss Exchange上市，费率为2.5%，以为投资者提供机构级的Hyperliquid投资机会。
+
+140. [Anoma 官方 NFT 项目 Shrimpers 宣布与 OKX 钱包达成合作，将赠送 350 个白名单](https://www.techflowpost.com/newsletter/detail_96854.html)
+
+Anoma 官方 NFT 项目 Shrimpers 宣布与 OKX 钱包达成合作，将赠送 350 个白名单，用户完成规定任务即可参与。
+
+141. [萨尔瓦多将比特币储备分散至14个钱包持有，以防范潜在量子计算威胁](https://m.theblockbeats.info/flash/309968)
+
+萨尔瓦多已将其比特币储备重新分配到 14 个新钱包地址，以防范潜在的量子计算威胁。萨尔瓦多比特币办公室表示，通过将资金分散为较小的金额，可以最大程度地减少潜在量子攻击的影响，每个比特币地址将最多持有 500 枚比特币。
+
+142. [OKX在欧洲推出Wallet与DEX服务](https://m.theblockbeats.info/flash/309890)
+
+OKX Wallet 与 DEX 服务现已在欧洲上线，为用户带来覆盖 140+条公链的自托管体验、聚合 500 余家 DEX 的最佳价格、提供极速闪兑体验，并可无缝接入各类 dApp 等等，从而打造更加便捷和丰富的 Web3 使用场景。OKX CEO Star 表示，欧洲正迎来 Web3 发展的新篇章。随着 MiCA 监管牌照的落地，OKX 将在欧盟范围内为数百万用户提供安全、受监管且无缝的链上金融服务。
+
+143. [OKX第 34 期PoR：BTC、ETH、USDT、USDC总计价值达337 亿美元](https://www.panewslab.com/zh/articles/e242f9c8-5616-412e-a837-a8579fca4d17)
+
+OKX发布第34 期储备金证明，22个公示币种的储备金率均达 100%，其中BTC、ETH、USDT、USDC的储备金率分别为106%、104%、105%以及100%，四者总计价值达 33,700,118,320美元。 据悉，OKX是行业首家达成POR连续发布超两年的加密交易所。在此期间，OKX坚持按月发布PoR，公示币种数量从3个增至22个，并接连通过默克尔树、全览默克尔树、以及zk-STARK等技术不断升级PoR系统，致力于用户资产透明化。
+
+144. [CFTC：美国境外公司可申请注册“海外交易所”在美国开展业务](https://www.panewslab.com/zh/articles/bf70af93-ac52-424b-97fb-b62df61177f5)
+
+美国商品期货交易委员会（CFTC）在一份以海外交易所（FBOT）为重点的员工咨询报告中澄清了其立场，称那些感到压力而离开美国的公司，它们仍然可以作为“外国交易所”在国内开展业务。 CFTC 代理主席 Caroline Pham 表示：“那些被迫在外国司法管辖区开设机构以促进加密资产交易的美国公司现在可以重返美国市场。”该咨询声明并未对机构政策做出任何改变，但旨在“提醒”此类公司可能采取的措施。
+
+145. [CFTC放宽海外加密交易所进入美国市场的规定](https://www.techflowpost.com/newsletter/detail_96722.html)
+
+商品期货交易委员会（CFTC）近日发布指导意见，允许部分海外加密货币交易所合法向美国交易者提供衍生品。这一举措为如币安控股有限公司等公司重新进入美国市场提供了可能性。根据新规，外国平台需注册为“外国交易板”，并在CFTC认定的与美国监管水平相当的监管制度下获得全面许可。
+
+146. [Coinbase 成为美国经济数据上链的加密基础设施合作伙伴](https://www.techflowpost.com/newsletter/detail_96708.html)
+
+该公司已成为美国经济数据上链的加密基础设施合作伙伴。Coinbase 表示，链上数据将带来更高的透明度和更好的可访问性。
+
+147. [BitMart撤回香港虚拟资产服务提供商（VASP）牌照申请](https://cn.cointelegraph.com/news/bitmart-withdraw-hong-kong-crypto-exchange-license?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+BitMart已撤回其在香港申请虚拟资产服务提供商牌照的申请，成为最新一家采取此举的主流交易所。
+
+148. [币安推出Alpha 2.0限价单流动性提供商计划](https://www.techflowpost.com/newsletter/detail_96671.html)
+
+8 月 28 日，据官方公告，币安推出 BinanceAlpha2.0 限价单流动性提供商计划，邀请合格用户申请。参与者可享受零买卖交易费、专属 API 访问及 24*7 专属支持等福利。申请需提供交易量证明至指定邮箱或联系销售团队。
+
+149. [Gate携手BitGo上线Go Network场外结算，机构交易更安全高效](https://m.theblockbeats.info/flash/309636)
+
+8 月 28 日，Gate 已完成与 Go Network 场外结算（OES）的集成，助力机构客户在享受 Gate 丰富流动性的同时，将资产安全托管于获得相关监管许可且投保的 BitGo Singapore Pte. Ltd（「BitGo」）冷钱包中。此次集成让机构投资者无需将资产存放于交易平台，即可直接在 Gate 平台进行交易，有效简化运营流程并保障资金安全。此次合作引入了与传统金融模式高度契合的交易结构，实现托管与交易执行的独立运作，显著降低系统性风险。Gate 与 BitGo 的携手为机构投资者提供了包括现货、杠杆和永续合约在内的多元交易产品，并通过自动化结算流程，最大程度地减少操作摩擦和风险。这一举措标志着 Gate 在构建更加稳健、可扩展的机构数字资产交易基础设施方面迈出了关键一步。
+
+150. [详解新“掩隐罪司法解释”，对币圈而言意味着什么？](https://cn.cointelegraph.com/news/detailed-analysis-of-the-new-concealment-crime-judicial-interpretation?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+新司法解释扩大了“掩隐罪”的规制范围，细化了认定和量刑标准，并对虚拟货币交易和平台提出更高合规要求，币圈从业者需警惕刑事风险。
+
+151. [112家加密公司敦促参议院在市场结构法案中保护开发者](https://cn.cointelegraph.com/news/crypto-industry-urges-senate-developer-protections-market-structure-bill?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+Coinbase、Kraken、Ripple、a16z等公司敦促参议院在市场结构法案中为开发者和非托管服务增加明确保护条款。
+
+152. [MetaMask推出社交登录功能，用户可通过Google或Apple账户创建钱包](https://www.techflowpost.com/newsletter/detail_96485.html)
+
+MetaMask已推出新的"社交登录"功能，允许用户通过Google或Apple账户创建、备份和恢复加密货币钱包。该功能简化了非托管钱包的创建和管理流程，用户只需使用社交账户登录并创建密码，系统将在后台自动生成12字助记词(SRP)。MetaMask强调，即使是MetaMask本身也无法获取用户的完整恢复信息，从而保持钱包的自托管特性。不过，用户需注意妥善保管密码，一旦丢失将无法恢复钱包。
+
+153. [OKX CEO Star：OKX Wallet完全基于自托管，本质上是一款软件服务商](https://m.theblockbeats.info/flash/309342)
+
+8 月 26 日，OKX CEO Star 在社交媒体上发文表示，OKX Wallet 一切都基于自托管，包括邀请关系在内。OKX 从原理上既无法触碰或划转用户的资金，也无法更改用户的邀请关系。OKX 对自托管的重视体现了对用户资产安全的承诺，也符合全球主流监管要求。OKX Wallet 本质上是一款软件服务商，像区块链的搜索引擎和 Chrome 浏览器，为用户提供进入 Web3 世界的入口。
+
+154. [特朗普媒体科技集团将整合Crypto.com钱包并引入CRO代币](https://m.theblockbeats.info/flash/309315)
+
+特朗普媒体科技集团将集成 Crypto.com 数字钱包，并将在 Truth Social 和 Truth+ 平台集成 CRO 代币。
+
+155. [从冻结风波到公链布局，OKX能否换来上市通行证？](https://cn.cointelegraph.com/news/from-account-freezes-to-public-chain-expansion-can-okx-secure-its-ticket-to-ipo?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+OKB短期回调至173美元，但OKX在账户冻结、合规扩张及OKB转型方面的动作，显示其正在为潜在美股IPO做准备，合规与市场布局成关键看点。
+
+156. [日本Web3革命正当时：首相亲临WebX峰会，各大交易所角逐新市场](https://cn.cointelegraph.com/news/japan-s-web3-revolution-in-full-swing-prime-minister-attends-webx-summit-as-major-exchanges-compete-for-new-market?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound)
+
+2025年8月25日，东京WebX峰会现场，日本首相石破茂的一席讲话揭示了该国将Web3技术置于国家创新战略核心地位的决心，一场由区块链驱动的社会经济转型正在日本悄然上演。
+
+157. [币安推出无密钥安全的钱包浏览器扩展](https://www.techflowpost.com/newsletter/detail_96349.html)
+
+8 月 26 日，据官方公告，币安于2025年8月26日宣布推出Binance Wallet浏览器扩展(Beta版)，允许用户直接通过桌面浏览器管理加密资产并与Web3应用交互。该扩展采用Keyless(MPC)技术，用户可通过币安App扫码登录，无需记忆助记词，大幅降低安全风险。扩展支持EVM、Solana和TRON多链资产管理，并提供风险警告功能。目前仅支持Chrome浏览器，更多功能将在未来版本中推出。
+
+158. [币安钱包插件测试版上线，支持无私钥安全访问](https://www.panewslab.com/zh/articles/64d50e9a-6168-47ec-9118-32ebe628cbe6)
+
+币安钱包推出全新插件（Beta版），用户可通过谷歌Chrome浏览器安全管理加密资产、连接去中心化应用（dApps）并探索Web3生态。插件采用无私钥（MPC多方安全计算）技术，将私钥分片独立存储，提升安全性，同时支持EVM、Solana和TRON等多链资产管理。用户可通过币安App扫码登录或导入现有钱包，无需复杂设置即可开始使用。此外，插件提供移动端与浏览器端的同步体验，目前仅支持谷歌Chrome浏览器，未来将扩展至其他浏览器。
+
+159. [Binance钱包推出钱包插件Beta测试版](https://m.theblockbeats.info/flash/309247)
+
+Binance 钱包正式推出钱包插件（Beta 测试版），用户现在可以直接通过电脑端谷歌 Chrome 浏览器，管理加密资产、与去中心化应用（dApp）、探索 Web3。
+
+## AI + Crypto
+
+160. [Quack AI公布Q代币经济学，空投占比12%](https://m.theblockbeats.info/flash/310173)
+
+AI 驱动的治理协议 Quack AI 公布 Q 代币经济学，该代币总供应量为 100 亿枚，其中 10% 分配给核心团队，11% 分配给投资者和顾问，79% 分配给社区和生态系统，具体分配为：社区占 30%；生态系统与合作伙伴占 15%；空投占 12%；项目财库占 11%；营销与增长占 6%；流动性占 5%。Q 的首次流通供应量为 16.16%。
+
+161. [DeSci生态AI代理yesnoerror宣布进入公测阶段](https://m.theblockbeats.info/flash/309794)
+
+8 月 29 日，DeSci 生态 AI 代理 yesnoerror 宣布进入公测阶段，团队正在使用由 YNE 代币支持的最新 AI 模型，审核和分析每篇关于 AI 和计算机科学主题的新论文（每天超 500 篇）。yesnoerror 未来计划将 YNE 代币跨链至 Base（即将公告，技术开发已完成）、扩展审计范围至 arXiv 以外的期刊、开发个性化研究 AI 代理。
+
+162. [IoTeX获Animoca Brands战略投资，携手加速Real World AI全球布局](https://m.theblockbeats.info/flash/309608)
+
+8 月 28 日，DePIN + AI 开放生态平台 IoTeX 今日宣布获得 Web3 投资机构 Animoca Brands 的战略投资。此次合作超越传统投资，Animoca Brands 将同时担任网络验证节点和生态合作伙伴，双方携手推动 Real World AI 在亚洲及全球的规模化应用。作为 AI 与区块链融合的基础设施先驱，IoTeX 自 2017 年以来专注为 AI 系统提供可验证的实时物理世界数据，已赋能 100+ 项目和 4000 万台设备，覆盖出行、机器人、能源、医疗等领域。凭借完整的数据、身份与 AI 技术栈，与 Google、Samsung、ARM 等科技巨头的合作，IoTeX 已占据万亿级 AI 与数据经济战略高点，此次 Animoca 的加入，将通过资金与生态深度合作加速 Real World AI 的全球商业化落地。
+
+163. [Lagrange与LazAI合作，将DeepProve的可验证AI技术上链](https://www.panewslab.com/zh/articles/c3bcd695-68c3-4186-a1a6-0ce3d820f497)
+
+AI项目Lagrange宣布与LazAI Network达成合作，将DeepProve的可验证AI技术引入区块链并实现规模化。通过此次整合，DeepProve将支持在LazAI上铸造AI模型、代理和数据流的DAT（数据资产代币），这些DAT将具备可验证性、可拥有性、可交易性和可编程性。
+
+164. [Demether加入Chainlink Build以增强AI驱动DeFi功能，并将为Chainlink服务提供商分配部分代币](https://www.panewslab.com/zh/articles/cc1053c2-ff16-4eb6-9098-fcea1e446f85)
+
+AI原生DeFi协议Demether已加入Chainlink Build计划，以获得链上预言机服务及技术支持，提升其AI驱动的DeFi金库安全性与使用体验。作为回报，Demether将向Chainlink服务提供商（包括质押者）分配部分原生代币供应。 Demether正在开发名为demAI的AI驱动金库套件，用户可通过稳定币或比特币存款，利用Demether动态优化收益策略、实时管理风险，并跨链部署资金。其界面设计注重简易操作，策略可通过下拉菜单、对话式AI或Telegram机器人启动。
+
+165. [Bio Protocol首个BioAgent Launch项目Aubrai已在Base网络上线](https://m.theblockbeats.info/flash/309499)
+
+8 月 27 日，Bio Protocol 首个 BioAgent Launch 项目 Aubrai 已在 Base 网络上线，市值现报 700 万美元。
+
+166. [去中心化 AI 基础设施 Mira 宣布成立基金会，或暗示即将 TGE](https://www.techflowpost.com/newsletter/detail_96530.html)
+
+8 月 27 日，据去中心化 AI 基础设施 Mira 基金会官方 X 账号披露，Mira 基金会已正式宣布成立，作为一个独立机构，致力于推进去信任人工智能基础设施建设并支持 Mira 生态系统发展。 据悉，Mira 基金会将作为 Mira Network 的长期管理者，重点关注去中心化网络和协议治理，为开发者、研究人员和社区提供工具支持。基金会将通过原型参考实现、机构合作、人才招募以及资助基础设施初创企业等方式，积极推动去中心化 AI 基础设施生态系统的建设。
+
+167. [Mind Network宣布与蚂蚁集团旗下蚂蚁数科成为技术伙伴持续进行全同态加密技术链上应用的创新探索](https://www.techflowpost.com/newsletter/detail_96384.html)
+
+8 月 25 日，全同态加密（FHE）基础设施项目 Mind Network 宣布与蚂蚁数科成为技术伙伴，持续进行创新探索。双方将共同聚焦加密RWA、链上隐私数据传输、端到端自动加密等领域，致力于打造全新的数据安全体验。 本次合作基于此前发布的 链上报文系统（Encrypted Messaging Onchain），旨在为房地产、稳定币清算、跨境支付等真实世界资产（RWA）场景提供原生的合规隐私及通信能力。为资产在链上的安全、合规隐私流转提供支持，加速链上资产的落地与普及。 作为抗量子攻击的 FHE 基础设施，Mind Network 正在通过安全的数据与 AI 计算，驱动一个全面加密的互联网，并与行业领导者合作，共同推进 零信任互联网协议 HTTPZ 的发展，为 Web3 与 AI 生态建立可信 AI 与加密数据处理的新标准。
+
+## DePIN
+
+168. [Animoca Brands投资IoTeX加速真实世界AI发展](https://www.panewslab.com/zh/articles/163549f9-ceb6-4ce8-ae63-da24d0fbaa54)
+
+Animoca Brands已对IoTeX进行战略投资，并成为其网络验证者及生态合作伙伴。此外，Animoca还将作为生态合作伙伴，凭借其在Web3领域的丰富经验和超过540家投资组合公司，为IoTeX生态引入更多资源和合作机会。双方合作将重点推动真实世界AI应用的落地，包括自动化移动网络和智能能源系统等，同时帮助IoTeX在亚洲市场加速扩展，并在全球范围内推动主流采用。 IoTeX目前已支持超过100个项目和4000万台设备，覆盖移动出行、机器人、能源和医疗等行业。
+
+169. [BTFS推出网络可用性评分体系](https://www.techflowpost.com/newsletter/detail_96512.html)
+
+8 月 27 日，据官方公告，BTFS全新网络可用性评分体系正式上，该体系通过综合监测存储服务提供商（SP）网络的延迟与在线稳定性，系统性评估BTFS网络整体可靠性，旨在为用户提供更优质的去中心化存储服务。该评分将作为节点排名与激励分配的核心依据，持续推动网络服务质量优化与生态健康发展。作为波场TRON生态分布式存储核心基础设施，本次升级将进一步强化BTFS与TRON主链的协同效能，共同构建更强大的去中心化存储生态。
+
+## Our portfolio
+
+170. [过去一个月链上资金流向：Polygon PoS 净流出 13 亿美元，以太坊净流入 21 亿美元](https://www.techflowpost.com/newsletter/detail_96897.html)
+
+8 月 31 日，据 Artemis 数据显示，过去一个月 Polygon PoS 净流出 13 亿美元，Unichain 净流出 5.22 亿美元；以太坊净流入 21 亿美元，WorldChain 净流入 9730 万美元。
+
+171. [Willy Woo：比特币网络几周来首次资金流入增长，显示结构筑底迹象](https://m.theblockbeats.info/flash/309978)
+
+8 月 30 日，加密分析师 Willy Woo 发文表示，在连续几周资金流入下降后，比特币网络迎来了首次资金流入增长的日子，这是比特币结构筑底的第一个迹象。比特币正在企稳，若要形成看涨结构，投资者需要继续进行抄底购买。目前这一过程已开始。
+
+172. [灰度向美国 SEC 分别提交 Polkadot 和 Cardano ETF 的 S-1 文件](https://www.techflowpost.com/newsletter/detail_96850.html)
+
+8 月 30 日，Grayscale 向美国证券交易委员会提交了 S-1 注册声明，以推出 Polkadot(DOT) 和 Cardano (ADA) ETF。
+
+173. [美国 GDP 上链细节披露：基于 Chainlink，首批支持 Arbitrum、Avalanche、Base 等公链](https://www.techflowpost.com/newsletter/detail_96698.html)
+
+美国商务部长昨日宣布将在区块链上发布 GDP 等经济数据。
+
+174. [巴拉圭计划投资 600 万美元在 Polkadot 链上发行代币化股权](https://www.techflowpost.com/newsletter/detail_96705.html)
+
+巴拉圭计划投资 600 万美元在波卡（Polkadot）区块链上发行代币化股权，用于发展亚松森创新谷（Assuncion Innovation Valley）项目。该项目将包括酒店、大学和数据中心等基础设施建设。
+
+175. [美国政府向比特币、以太坊、SOLANA、TRON、STELLAR、AVALANCHE、ARBITRUM和POLYGON公布了最新GDP数据](https://www.panewslab.com/zh/articles/21650daa-6749-40ed-8888-b52b3d7eb253)
+
+美国商务部表示，美国政府向比特币、以太坊、SOLANA、TRON、STELLAR、AVALANCHE、ARBITRUM和POLYGON公布了最新的GDP数据。
+
+176. [Willy Woo：当前ETH的每日资金流入量约9亿美元，已接近BTC](https://m.theblockbeats.info/flash/309487)
+
+8 月 27 日，加密分析师 Willy Woo 发文表示，资金一直在从 BTC 至 ETH 进行轮换，当前 ETH 的每日资金流入量为 9 亿美元（银色），已接近 BTC 的流入量（橙色）。自从 Tom Lee 旗下的以太坊资金管理公司 BitMine 开始积累 ETH 时，以太坊的资金流量便开始攀升。
+
+177. [MetaMask 推出社交账户登录功能，简化钱包创建与恢复流程](https://www.techflowpost.com/newsletter/detail_96417.html)
+
+8 月 26 日，据 MetaMask 官方公告，该公司推出社交账户登录功能，用户现可通过 Google 或 Apple 账号创建和管理非托管加密货币钱包。 新功能将传统的 12 个助记词管理方式简化为两步：使用 Google 或 Apple ID 登录，并创建专属密码。系统会在后台自动生成助记词，用户可在之后通过相同的社交账号和密码恢复钱包。
+
+# 📊 研报
+
+## 项目融资介绍
+
+178. [Startup M0 Raises $40M Series B as VCs Pile Into Stablecoins: Report](https://www.coindesk.com/business/2025/08/28/startup-mo-raises-usd40m-series-b-as-vcs-pile-into-stablecoins-report)
+
+Stablecoin startup M0 has raised $40 million in Series B funding as venture capital firms continue to pile money into the sector.The funding round was led by Polychain and Ribbit Capital and included contributions from the Endeavor Catalyst fund and existing investors Pantera and Bain Capital Crypto, according to an emailed announcement on Thursday.The news was reported earlier by Fortune. M0, which has now raised almost $100 million in capital do far, declined to disclose its valuation in the funding round, according to the report.The startup is building a network for stablecoin issuers to deploy tokens without having to build their own software for transferring assets across chains or changing one token for another.Luca Prosperi, co-founder and CEO, sums up the project's aim as building "the layer zero of money," according to Fortune's report.Stablecoins - token pegged to the value of a traditional financial asset such as a fiat currency - have proliferated in 2025, driven by the promise of clear regulation in the U.S., which came to fruition with the passing of the GENIUS act last month.The market capitalization of stablecoins exceeded $289 billion as this month, more than doubling in size in 2025. This trend has been accompanied by venture capital firms piling money into stablecoin projects through a string of funding rounds, of which M0's is one of the largest.Read More: Tether-Focused Blockchain Stable Raises $28M to Power Stablecoin PaymentsUPDATE (Aug. 28, 16:30 UTC): Updates to reflect primary sourcing is M0's emailed announcement, rather than Fortune's report.CORRECTION (Aug. 28, 16:30 UTC): Corrects the company's name from Mo to M0.
+
+179. [Jump Trading Alums Raise $20M for aPriori to Bring High-Frequency Trading Tools On-Chain](https://www.coindesk.com/business/2025/08/28/jump-trading-alums-raise-usd20m-for-apriori-to-bring-high-frequency-trading-tools-on-chain)
+
+UNDER EMBARGO UNTIL AUG 28 9AM ETA group of former Jump Trading, Coinbase (COIN) and Citadel Securities engineers said it raised $20 million in new funding for trading infrastructure startup aPriori, bringing the total capital raised to $30 million.The round included participation from HashKey Capital, Pantera Capital, Primitive Ventures, IMC Trading, GEM, Gate Labs, Ambush Capital and Big Brain Collective, according to a release.San Francisco-based aPriori is building what it calls an execution layer for on-chain markets, designed for high-performance Ethereum Virtual Machine (EVM) networks.The firm uses high-frequency trading practices in an attempt to reduce issues that plague crypto markets like wide spreads and maximal extractable value (MEV) leakage.Founder Ray Song said the company’s system segments order flow in real time and redistributes MEV to stakers in an attempt to improve yields and network alignment.APriori has developed a liquid-staking platform and an AI-powered decentralized exchange aggregator called Swapr, both of which are intended to improve execution for traders and liquidity providers.Pantera Capital’s Nihal Maunder said the firm increased its investment because aPriori is one of the few projects with the technical capability to bring traditional execution standards to decentralized finance (DeFi). The company plans to use the new funds to expand hiring, accelerate product rollouts and deepen partnerships across the trading and staking ecosystem.
+
+180. [Hemi Labs Raises $15M to Expand Bitcoin Programmability](https://www.coindesk.com/tech/2025/08/27/hemi-labs-raises-usd15m-to-expand-bitcoin-programmability)
+
+Hemi Labs, the Bitcoin programmability network founded by Jeff Garzik, has raised $15 million in funding to accelerate development and expand its ecosystem.The round included YZi Labs (formerly Binance Labs), Republic Digital, HyperChain Capital, Breyer Capital, Big Brain Holdings, Crypto.com and others, according to an emailed announcement on Tuesday.The company said the funds will support applications for borrowing, lending, and trading on Bitcoin while further developing its Hemi Virtual Machine (hVM), a layer that embeds a Bitcoin node inside an Ethereum VM - the term for a decentralized system that can execute smart contracts and process transactions on Ethereum.“Bitcoin doesn’t need to be reinvented; it just needs the right tools around it,” said Garzik, who is one of Bitcoin’s earliest developers. “Hemi provides DeFi protocols with a familiar way to build on Bitcoin, without requiring new skills, compromising on security, or sacrificing decentralization.”Hemi now counts more than 100,000 verified users and 400,000 community members. Its ecosystem of 70 plus partners includes Sushi, LayerZero, MetaMask and Redstone. Total value locked has climbed to $1.2 billion.The raise follows Hemi’s mainnet debut in March, which launched with $440 million already committed. Hemi's ecosystem includes Sushi, LayerZero, MetaMask and Redstone. Total value locked has climbed to $1.2 billion, Hemi said in the announcement.Hemi’s growth reflects a broader wave of Bitcoin DeFi projects seeking to mobilize BTC’s $2.3 trillion market cap. Competitors like Lombard, with its liquid staking token LBTC, and BOB, a hybrid chain combining Bitcoin and Ethereum, are also building infrastructure to transform Bitcoin from a passive store of value into an active component of decentralized finance.
+
+## 中间件/工具协议
+
+181. [Bitcoin Token Protocol BRC20 Enables EVM-Style Smart Contracts With 'BRC2.0'](https://www.coindesk.com/tech/2025/09/01/bitcoin-token-protocol-brc20-enables-evm-style-smart-contracts-with-brc2-0)
+
+Bitcoin token protocol BRC20 has taken a step toward enabling Ethereum-style smart contracts.The Bitcoin token protocol has integrated Ethereum Virtual Machine (EVM) into its core logic as of Bitcoin block 912,690, according to an announcement shared with CoinDesk on Monday.BRC20 is a token standard for issuing fungible tokens on the Bitcoin blockchain via the Ordinals protocol, which allows data to be inscribed on individual satoshis (the smallest denomination of BTC, equivalent to one hundred millionth of a bitcoin).EVM is the operating system on Ethereum that allows the execution of smart contracts, making tokens programmable and removing the need for centralized governance.The upgrade, dubbed BRC2.0, was executed by Ordinals developer Best in Slot alongside BRC20's pseudonymous creator Domo."Bitcoin meta-protocols like Ordinals, Runes and BRC20 run on indexers, which function like simple calculators. We upgraded this 'calculator-style' indexer with EVM, making BRC20 Turing complete,” Best in Slot CEO Eril Binari Ezerel said in the announcement.The advent of the Ordinals protocol at the start of 2023 provided much of the impetus for subsequent developments of greater utility on Bitcoin, such as allowing smart contract capabilities akin to those inherent to Ethereum and other networks.“The holy grail is combining the two gold standards: Bitcoin as the most decentralized and secure network, and the EVM as the most proven virtual machine," Domo said. "The aim is to give users the Ethereum experience of composability and programmability, but secured by Bitcoin.”
+
+182. [Ethereum Foundation Targets Interoperability as Top UX Priority](https://www.coindesk.com/tech/2025/08/29/ethereum-foundation-targets-interoperability-as-top-ux-priority)
+
+The Ethereum Foundation shared a new blog post on Friday detailing a major initiative aimed at breaking down the barriers between Ethereum’s growing constellation of Layer-2 networks.The initiative marks a strategic pivot: after years spent scaling throughput and lowering costs, the protocol team is now zeroing in on interoperability as the key to user experience.“We see interoperability, and related projects presented in this note, as the highest leverage opportunity within the broader UX domain over the next 6-12 months, in our position as a public, core Ethereum R&D group,” the team wrote in the blog post.At its core, the update zeroes in on three goals: interoperability, speed, and finality. The most immediate push comes from the Improve UX roadmap, which builds on earlier work to scale Ethereum’s base layer and its data availability solutions. Now, developers are turning their attention toward making the network feel faster, simpler, and more unified—especially across the sprawling landscape of Layer-2 rollups.The heart of the effort lies in the planned Ethereum Interoperability Layer (EIL), a trustless, censorship-resistant messaging system designed to make cross-chain interactions “feel like single-chain execution,” according to the foundation. A public design document is slated for release in October, setting the stage for a standard approach to bridging assets and data across rollups.Complementing EIL is the Open Intents Framework, a shared infrastructure for “intents,” a feature where a user-declared goals like moving funds or trading assets, can abstract away the fragmented tooling that forces developers to stitch together custom bridges and relayers. The framework was first introduced by ecosystem developers in February 2025 and gained popularity among some of the most well-known Ethereum projects. The goal: a unified UX across chains where users don’t need to care which network they’re on.At the same time, Standards work is moving in tandem, with proposals such as ERC-7828 and ERC-7683 aimed at harmonizing wallet behavior and transaction flows across rollups. Together, these efforts point toward an Ethereum where applications can span multiple chains without sacrificing security or composability.Speed improvements are also on the roadmap, with a Fast L1 Confirmation Rule expected by early 2026 to bring Ethereum confirmation times down to 15–30 seconds. Faster Layer-2 settlement and research into halving block times from 12 seconds to six could further reduce latency for cross-chain interactions.The implications of these improvements are significant not just for rolllups but also for applications and DeFi. If developers succeed in making rollups feel like one network, liquidity and capital efficiency could surge, unlocking new kinds of products without the friction and risk of today’s bridging solutions.Read more: Ethereum Developers Release New Initiative to Simplify Cross-Chain Transactions
+
+## 应用协议
+
+183. [美国商务部：已在比特币、以太坊、Solana 等链上发布了最新的 GDP 数据](https://www.techflowpost.com/newsletter/detail_96706.html)
+
+8 月 28 日，据 Zoomer 监测，美国商务部已在Bitcoin、Ethereum、Solana、TRON、Avalanche、Arbitrum、Polygon、Optimism 链上发布了最新 GDP 数据。 每个区块链的交易哈希值或智能合约地址如下： 1、比特币交易哈希：fcf172401ca9d89013f13f5bbf0fc7577cb8a3588bf5cbc3b458ff36635fec00 2、以太坊智能合约地址：0x36ccdF11044f60F196e981970d592a7DE567ed7b 3、Solana 交易哈希：43dJVBK4hiXy1rpC5BifT8LU2NDNHKmdWyqyYDaTfyEeX8y3LMtUtajW3Q22rCSbmneny56CBtkictQRQJXV1ybp 4、TRON交易哈希：3f05633fb894aa6d6610c980975cca732a051edbbf5d8667799782cf2ae04040 5、Stellar交易哈希：89e4d300d237db6b67c510f71c8cd2f690868806a6b40a40a5a9755f4954144a 6、Avalanche智能合约地址：0x36ccdF11044f60F196e981970d592a7DE567ed7b 7、Arbitrum One智能合约地址：0x36ccdF11044f60F196e981970d592a7DE567ed7b 8、Polygon PoS智能合约地址：0x36ccdF11044f60F196e981970d592a7DE567ed7b 9、Optimism智能合约地址：0x36ccdF11044f60F196e981970d592a7DE567ed7b
+
+## 交易所/钱包
+
+184. [HashKey Exchange 保险覆盖规模再创行业新高，携 OneInfinity、Arch、Elmore、Evertas 保障用户资金安全](https://www.techflowpost.com/article/detail_27825.html)
+
+香港最大持牌虚拟资产交易平台 HashKey Exchange 宣布，与亚洲领先 Web3 保险服务商 OneDegree 旗下品牌 OneInfinity 深化合作，并携手多家国际顶级保险公司，升级托管保险方案，保险覆盖规模再创行业新高，蝉联全球保险规模最大的持牌虚拟资产交易所地位，进一步保障用户投资利益。 此次升级后，HashKey Exchange 托管资产保险期将达 18 个月，其保障范围也进一步扩大，可覆盖至少 50% 托管资产。该安排将显著降低平台资产风险，为零售与机构客户筑牢安全屏障。 此次合作涉及的保险计划，其覆盖规模曾创造全球记录。这项保险计划由OneInfinity 提供，并由 Arch Insurance International 及其他具备 AM Best “A-” 和标准普尔（S&P）“AA-” 信用评级的再保险公司共同支持。Arch Insurance International 隶属于全球最著名的保险市场 Lloyd’s of London，是其重要承保成员。 此外，HashKey Exchange 通过本次合作优化了托管架构，强化了对生态核心资产的安全防护，进而在整体风险管理与风险缓释方面取得了重要进展。 Evertas 也是促成此次升级的关键保险商之一，Evertas 作为 Lloyd's of London 授权承保人，与 Elmore 共同促成了 OneInfinity、HashKey 与 Arch Insurance International 的协作。各方基于长期互信形成的合作关系，为数字资产行业的稳健发展和持续创新奠定了基础。 关于HashKey Exchange HashKey Exchange 致力於在合规丶资金保障丶平台安全方面为虚拟资产交易所定义新标杆，Hash Blockchain Limited（HashKey Exchange）是香港首批持牌零售虚拟资产交易所。目前已获得香港证券及期货事务监察委员会（证监会）批准，持有在《证券及期货条例》下的第1类（证券交易）丶第7类（提供自动化交易服务），以及在《打击洗钱条例》下的经营虚拟资产交易平台牌照，合规运营虚拟资产交易平台。作为HashKey Group旗舰业务，HashKey Exchange 为专业投资者（PI）与零售投资者提供一站式虚拟资产交易服务。HashKey Exchange已获得ISO 27001（资讯安全）和ISO 27701（资料私隐）管理系统认证。为遵守法律法规，HashKey Exchange不向中国大陆丶美国和某些其他司法辖区的用户提供服务。 * 截至 2025年8月27日，HashKey Exchange 在 CoinGecko 排行第 15，是排行最高的香港持牌虚拟资产交易所。 **据OneDegree，截至2025年8月27日，HashKey Exchange的虚拟资产保险规模为世界第一。 关于OneDegree 旗下品牌 OneInfinity OneDegree 旗下品牌 OneInfinity 为全球数字资产行业提供科技驱动的保险与风险管理解决方案。其定制化保险覆盖数字资产全产业链，包括交易平台、托管机构、资产管理人、银行、家族办公室及科技服务商等，帮助客户建立健全的风险管理体系，并为托管资产建立安全保障。 OneInfinity 由 OneDegree 旗下网络安全公司 Cymetrics 提供领先的技术支持。其解决方案涵盖 数字资产钱包保险（包括犯罪险、保管险[specie]）以及企业责任险（职业责任险[Professional Indemnity]、董事及高管责任险[D&O]、投资管理险及网络安全险）。 详情请访问：https://oneinfinity.global/ 关于Elmore Elmore Insurance Brokers Limited（Elmore）是一家独立的特殊保险经纪公司，被公认为商業犯罪与数字资产保险领域的先行者和领先实践者。公司为交易所、托管方、支付平台及其他金融科技企业设计并安排保险方案，涵盖的风险包括数字资产犯罪与盗窃（冷热钱包）、社会工程与欺诈、网络攻击、科技责任、董事及高管责任，以及勒索风险。 Elmore 由 Simon Gilbert 于 2015 年创立，凭借专业知识、严谨的风险评估、理赔代理以及协同制定保险条款的能力，持续满足不断演进的监管与机构标准。Elmore 已获得英国金融行为监管局（FCA）、葡萄牙 ASF 及瑞士 FINMA 的授权与监管。 更多信息请访问：https://elmorebrokers.com/ 关于Arch Insurance International Arch Insurance International 是 Arch Capital Group Ltd. 的子公司，其业务涵盖 Arch Insurance UK 和 Arch Insurance (EU) dac 在内的财产与意外（再）保险业务，以及 Arch 在欧洲、百慕达和澳大利亚的（再）保险业务。 更多信息请访问：http://www.archgroup.com 关于Evertas Evertas 是一家专注加密资产保险的先锋企业，服务对象为机构级数字资产持有方。公司总部位于美国佛罗里达州迈阿密，是获百慕大金融管理局授权的 3A 类保险人。Evertas 是首家获准成为劳合社授权承保人的加密保险公司，可为托管方或交易所提供最高超 4 亿美元的保险额度，或为加密矿机硬件提供最高 2 亿美元保障。其加密原生的承保流程能够针对行业特有风险定制保单，并实现高效理赔与快速赔付。 更多信息请访问：www.evertas.com HashKey Exchange新闻发布及广告标准条款和免责声明
+
+## Our portfolio
+
+185. [XRP Price Holds Near $2.75 as Analyst Maps Path Between $2.40 Risk and $3.70 Upside](https://www.coindesk.com/markets/2025/09/01/xrp-price-holds-near-usd2-75-as-analyst-maps-path-between-usd2-40-risk-and-usd3-70-upside)
+
+XRP hovered near $2.75 on Monday, down 2.38% over 24 hours, as traders weighed key support and resistance levels flagged by crypto analyst Ali Martinez.In a post on Aug. 31, Martinez stressed that XRP “must hold above $2.77” or risk falling toward $2.40. His chart illustrated a clear floor around $2.77 that had previously attracted buying interest. Breaking beneath that zone, he suggested, would take away the safety net and leave the token vulnerable to deeper losses. For non-technical readers, the message was straightforward: $2.77 represents the line where bulls need to show strength, and if they don’t, the next major level of support sits all the way down at $2.40.In a post on Sept. 1, Martinez followed up with a more optimistic roadmap. His chart highlighted $2.70 as a crucial level to defend, a slightly lower support zone than before, and $2.90 as the barrier that XRP would need to break to turn momentum positive. If both conditions are met — holding the base and clearing the ceiling — his chart pointed to a potential rally toward $3.70. In plain terms, Martinez laid out a step-by-step path: first avoid slipping lower, then push through resistance, and only then aim for a larger breakout.CoinDesk’s 24-hour chart shows how this battle is playing out in real time. XRP reached as high as $2.8325 during the day before sellers pushed it back down, while the low of $2.7034 showed buyers stepping in to protect the lower end of the range. That tug-of-war between bulls and bears fits neatly into Martinez’s framework. The $2.70–$2.77 area is being tested as a foundation, while the zone above $2.80 is acting as the ceiling. Trading volume spiked whenever XRP tried to break higher, reflecting resistance from sellers who are not yet willing to let the price climb further.The price action underscores why Martinez’s levels matter: XRP is boxed in between the supports he identified and the resistance just overhead, leaving traders to watch whether buyers or sellers will seize control first.For now, XRP’s direction hinges on whether it can stay anchored above its lower support zone long enough to gather the strength needed for a push toward $3.70.
+
+186. [Polygon Leads Crypto Gains With 16% Weekend Surge as CoinDesk 20 Index Holds Steady](https://www.coindesk.com/markets/2025/09/01/polygon-leads-crypto-gains-with-16-surge-as-coindesk-20-index-holds-steady)
+
+The native token of Polygon (POL), an Ethereum scaling network, led gains through the weekend in the broad-market crypto benchmark CoinDesk 20 Index (CD20).POL surged 16% from Friday through early Monday, topping $0.29 for the first time since early March, CoinDesk data shows. Recently, it pared back some of the advance slipping below $0.28.The move happened as the CD20 remained little changed with bitcoin (BTC) and Ethereum's ether (ETH) posting only modest gains.While there wasn't any clear catalyst behind POL's surge, some positive developments may have bolstered the token's performance.Polygon was one of the chains mentioned last week in the U.S. government's initiative to release key economic data such as GDP on blockchain rails.The network also announced an integration last week with USDT0, a Tether-focused cross-chain stablecoin protocol, that could help boost the network's position as a key liquidity hub for stablecoin flows.On the technical front, POL's breakout signals strong bullish momentum, CoinDesk's Research model showed. Despite the consolidation from its recent peak, buying pressure in the $0.277-$0.278 range could signals continued support for further gains, the model said.Read more: U.S. Government Starts Pushing Economic Data Onto Blockchains as 'Proof of Concept'
+
+187. [Sonic Community Approves $150M Token Issuance for U.S. ETF Push, Nasdaq Vehicle](https://www.coindesk.com/business/2025/09/01/sonic-community-approves-usd150m-token-issuance-for-u-s-etf-push-nasdaq-vehicle)
+
+Community members of Sonic, the rebranded Fantom blockchain, approved a large bet on institutional adoption with a vote to fund a U.S. expansion strategy that includes the creation of a $50 million ETF initiative, a $100 million investment program and the creation of a Delaware-registered company.The vote found support from 99.99% of participants. The community rejected the alternative “no-change” option almost unanimously, with just 51,200 votes against the plan and 860.6 million in favor.Sonic Labs pitched the proposal as a necessary break from its “2018 tokenomics,” which involved Fantom Foundation giving away most of its supply to the community. That structure left the foundation holding just 3% of tokens at launch, compared with 50%–90% held by peers. While community-friendly, the team argued it hobbled its ability to fund listings on crypto exchanges, acquisitions and partnerships. The new issuance is designed to close that gap and make Sonic competitive in a market where blockchains increasingly act like companies.In addition to the ETF initiative, the vote authorizes private investment in a public equity (PIPE) vehicle on Nasdaq, and the seeding of 150 million S tokens for Sonic USA, which will be based in New York City. S were created as part of last year's rebranding.The ETF plan will involve a regulated provider with over $10 billion in assets under management, with custody handled by BitGo. The PIPE vehicle aims to seed a Nasdaq-listed entity’s balance sheet with S tokens locked for at least three years in exchange for strategic treasury purchases.At the network level, fees will also be redirected under a revised mechanism to burn more tokens and reduce inflation — a nod to token holder demands for deflationary pressure.Whether these moves translate into real adoption remains to be seen, but Sonic now has both the mandate and the war chest to compete directly in the ETF and traditional finance arena.
+
+188. [Solv and Chainlink Bring Real-Time Collateral Verification to SolvBTC Pricing](https://www.coindesk.com/markets/2025/09/01/solv-and-chainlink-bring-real-time-collateral-verification-to-solvbtc-pricing)
+
+Solv Protocol, a financial services provider for bitcoin (BTC) holders, has partnered with decentralized oracle network Chainlink to integrate real-time verification of Solv's actual BTC reserves backing its liquid token, SolvBTC, directly into its price feed. This integration enhances transparency and builds greater trust for users.Unlike traditional price feeds that rely solely on market data, the new SolvBTC-BTC Secure Exchange Rate feed combines exchange rate calculations with real-time proof of reserves, delivering an on-chain redemption rate firmly anchored in verifiable collateral.Additionally, the mechanism features built-in upper and lower bounds based on reserve data, making it resistant to manipulation and safer for use in decentralized lending markets such as Aave.“We’re excited to work with Chainlink to launch a Secure Exchange Rate feed. This marks a major evolution in DeFi security, allowing protocols to more accurately price wrapped assets by leveraging redemption rates rooted in verifiable collateral, powered by the Chainlink standard,” said Ryan Chow, Co-Founder and CEO of Solv, in a press release shared with CoinDesk.The SolvBTC-BTC Secure Exchange Rate feed is now live on the Ethereum mainnet, with plans to expand to other chains, including BOB.SolvBTC, launched in April 2024, is a bitcoin-backed liquid staking token that enables BTC holders to participate in decentralised finance (DeFi) ecosystems and earn yield while maintaining BTC exposure. Users can deposit BTC and mint SolvBTC, a liquid representation of staked BTC, usable across various DeFi protocols, including vaults, decentralized exchanges (DEXs), and lending platforms.Chainlink’s Proof of Reserve (PoR) leverages its decentralized oracle network to verify that the on-chain supply of tokenized assets, like stablecoins or wrapped assets, is fully backed by actual reserves held off-chain or on other blockchains.With billions of dollars in wrapped assets circulating within DeFi, transparent, reliable pricing mechanisms are increasingly critical. By combining PoR with price feeds atop Chainlink's existing cross-chain interoperability via CCIP, Solv enables wrapped assets to function securely as collateral across multiple blockchains.Johann Eid, Chief Business Officer at Chainlink Labs, summarized it well: “By combining real-time collateral verification with exchange rate logic, this solution delivers a redemption rate rooted in cryptographic truth, raising the security standard for wrapped assets across DeFi.”
+
+189. [Bitcoin Miner IREN's AI Push Gains Momentum, Price Target Hiked 60% to $37: Canaccord](https://www.coindesk.com/markets/2025/08/29/bitcoin-miner-iren-s-ai-push-gains-momentum-price-target-hiked-60-to-usd37-canaccord)
+
+IREN (IREN) reported fourth-quarter results that highlighted rapid progress in both its bitcoin mining and artificial intelligence infrastructure businesses, according to a Friday research report by broker Canaccord Genuity.The broker reiterated its buy rating on the stock and hiked its price target 60% to $37 from $24, citing stronger visibility in both mining and AI revenue streams.In early trading, shares are higher by 25% to $28.75.The company’s mining unit reached an annualized revenue run rate above $1 billion, powered by 50 exahash per second (EH/s) of capacity and one of the industry’s most efficient fleets at 15 J/TH, operating on 3.5 cent/kWh power, analysts led by Joseph Vafi wrote. That translates into a $36,000 cost to mine a bitcoin, well below market levels.Bitcoin mining revenue came in at $187.3 million for the quarter, up 33% sequentially, while adjusted EBITDA jumped 46% to $121.9 million.On the AI side, IREN is accelerating expansion, the report noted. The bitcoin miner quadrupled its hashrate and added another megawatt of power capacity, now totaling 3 MW, with further growth expected in fiscal 2025.The hashrate refers to the total combined computational power used to mine and process transactions on a proof-of-work blockchain, and is a proxy for competition in the industry and mining difficulty.Canaccord also noted IREN's recent designation as an NVIDIA (NVDA) preferred partner, which came almost simultaneously with the announcement of the purchase of an additional 2,400 GPUs.With 2,910 MW of secured power capacity and some of the lowest all-in cash costs in the industry, Canaccord argues IREN is positioned to become one of the largest and most efficient publicly listed miners, with significant optionality in high-performance computing.Read more: IREN Posts First Full-Year Profit on AI Cloud Growth, Mining Expansion; Shares Climb
+
+190. [Bitcoin ‘Short Strangle’ Preferred as Market Signals Near-Term Calm: 10x Research](https://www.coindesk.com/markets/2025/08/29/bitcoin-short-strangle-preferred-as-market-signals-near-term-calm-10x-research)
+
+Bitcoin (BTC) defied expectations for significant volatility in August, trading within a range. As market dynamics indicate a continued low-volatility regime in the near term, 10x Research highlights the "short strangle" as an ideal play."Given the current dynamics in the bitcoin options market, a short strangle looks well-suited for the next month. With bitcoin trading around $113,000 and an expected range between $95,000 and $125,000, selling an out-of-the-money [September expiry] put near $95,000 alongside an out-of-the-money [September expiry] call near $125,000 provides an opportunity to capture premium," Markus Thielen, founder of 10x Research, said in a report to clients Thursday.Short strangle involves a simultaneous writing (selling) of out-of-the-money higher strike calls and OTM lower strike puts with the same expiry, positioned equidistant from the underlying asset's spot price.The strategy is similar to selling insurance against both bullish and bearish moves in exchange for a premium, which represents the maximum profit achievable if the spot price remains between the two strike prices - $95,000 and $125,000 in this case.Selling options (or strangles) is a common strategy when implied volatility (IV) exceeds realized volatility, as this allows traders to capture richer premiums, and the market is expected to remain relatively stable."The strategy works because the implied volatility curve is trading above realized levels, signaling options are overpriced, and the market is unlikely to deliver large moves outside your defined range in the short run," Thielen noted. "The options implied volatility term structure indicates near-term calm."The implied volatility (IV) term structure is a graphical representation showing how volatility is expected to evolve across different future time horizons. It is typically upward sloping, reflecting increasing uncertainty and risk as the time to expiration lengthens.Risk-reward profileBTC needs to continue trading between $95,000 and $125,000 for the suggested strategy to generate profits. The rangebound trading will reduce the demand for OTM calls and puts, thereby draining premium from these options and generating a profit for strangle sellers.Thielen’s previous recommendation from early August was also a short strangle, involving a $105,000 put and a $130,000 call. This strategy generated a yield of 3.5%.Note, however, that short strangles carry significant risks, particularly in the event of a sudden spike in volatility, which can lead to substantial losses. Therefore, traders must continuously monitor the position and relevant market variables to manage risk effectively.Read more: Bitcoin Headed to $190K on Institutional Wave, Research Firm Says
+
+191. [Polkadot's DOT Returns to $3.90 Support After Earlier Gain](https://www.coindesk.com/markets/2025/08/28/polkadot-s-dot-returns-to-usd3-90-support-after-earlier-gain)
+
+Polkadot's DOT earlier Thurwday rose more than 2%, with institutional volume patterns suggesting professional participation, according to CoinDesk Research's technical analysis model.The model showed the digital asset demonstrating textbook institutional accumulation behavior, initially testing support at $3.81 before executing a measured advance to $4.02 accompanied by substantial volume of 4.6 million units.Trading volumes exceeding 320,000 units during the initial decline phase indicate institutional repositioning rather than retail panic, with subsequent buying interest establishing clear support levels around $3.90-$3.91, according to the model.The move higher in Polkadot reversed though, with the price slipping back to that $3.90 support.On the news front, the Republic of Paraguay has committed $6 million to a Polkadot-based tokenization initiative, according to a post on X , a landmark government endorsement of blockchain technology for sovereign infrastructure development.Technical Analysis:DOT established a trading range of $0.21 representing 5.2% volatility between $3.81 floor and $4.02 ceiling during 24-hour sessionProfessional support formation confirmed at $3.90-$3.91 levels with institutional buying interestResistance threshold identified at $4.02 with volume-driven price discovery mechanismsInstitutional volume patterns exceeding 320,000 units indicate sophisticated market participationRecovery trajectory from $3.81 to $4.02 supported by 4.6 million trading units demonstrating market depthConsolidation range between $3.91-$3.95 suggests institutional accumulation during market weakness.Disclaimer: Parts of this article were generated with the assistance from AI tools and reviewed by our editorial team to ensure accuracy and adherence to our standards. For more information, see CoinDesk's full AI Policy.
+
+192. [Solana Targets Near-Instant Finality as Alpenglow Upgrade Heads to Vote](https://www.coindesk.com/tech/2025/08/28/solana-targets-near-instant-finality-as-alpenglow-upgrade-heads-to-vote)
+
+Solana developers are pushing a major consensus overhaul with the Alpenglow proposal, now in the validator voting stage.Just over 10% of validators have backed the upgrade as of European morning hours on Thursday, a tracker shows, with over 88% of eligible participants yet to cast their choice.If passed, it would replace Proof-of-History and TowerBFT with a faster, more resilient design centered on two new components: Votor and Rotor.Proof of history is Solana’s existing consensus mechanism. It timestamps transactions, allowing validators to determine the correct order without wasting time on syncing (which creates a slower network). TowerBFT is the network’s voting system. Validators use previous votes as a guide, helping them quickly agree on the next block while resisting attacks.The big draw in the new consensus proposal Votor, which would cut the time it takes for a transaction to be finalized from more than 12 seconds to around 150 milliseconds, making network confirmations feel effectively instant for users.Rotor, planned for a later stage, aims to make the network more efficient by reducing the number of times data needs to be transferred between validators — an upgrade designed to support high-activity applications, such as DeFi and gaming.Alpenglow also introduces a “20+20” resilience model, which promises to keep the chain running even if 20% of validators are adversarial and another 20% are offline.The proposal frames this as a step toward achieving faster speeds while enhancing security and fairness for validators.
+
+193. [As Bitcoin Bounces, On-Chain Data Point to Selling Pressure Near $113.6K](https://www.coindesk.com/markets/2025/08/28/as-bitcoin-bounces-on-chain-data-point-to-sell-pressure-near-usd113-6k)
+
+As bitcoin (BTC) bulls aim to reestablish an upward price trajectory, they may face resistance from sellers near the $113,600 level, according to on-chain data.BTC has already bounced to $112,800 from sub-$108,800 levels hit Tuesday, CoinDesk data show. The bounce is likely fueled by a fresh all-time high in the S&P 500 and a better-than-expected earnings report by Nvidia, one of the largest publicly listed companies in the world by market value and a bellwether for all things artificial intelligence.The path ahead may prove challenging, as investors holding at a loss may look to sell into any price rebound."Currently, bitcoin trades beneath the cost basis of both the 1-month ($115.6k) and 3-month ($113.6k) cohorts, leaving these investors under stress. Any relief rally is therefore likely to encounter resistance, as short-term holders seek to exit at breakeven," analytics firm Glassnode said in a report published Wednesday.Glassnode's cost basis metric reveals the average purchase prices at which digital assets have been acquired by wallets with varying holding durations. For example, the three-month cost basis of $113,600 indicates that investors holding assets purchased within the past three months paid, on average, this price level.Mixed flowsAs of now, the spot market flows suggest an uphill battle for the bulls ahead, while ETF and corporate activity suggest otherwise."Spot demand remains neutral, as perpetuals tilt bearish with CVD negative. The current funding rate of ~0.01% points to a fragile neutrality. If price breaks above $112.4K with volume, it opens the pathway to $114K – $116K," Timothy Misir, head of research, BRN.That said, ETF inflows and corporate adoption of BTC continues to suck out significant supply from the market, offering a bullish hope, Misir explained. "ETF flows continue to strengthen with $81 million for Bitcoin ETFs and $307 million for Ether ETFs over the past day. ETFs, corporates, and governments are now absorbing ~3,600 BTC/day, which translates to ~4x miner issuance. Metaplanet announced a new plan to raise $881 million to buy $837 million BTC in Sep–Oct, adding to its 18,991 BTC," he noted. Gauging key supportShould BTC turn lower, then $107,000 is the key support level to watch.That's because analysis by Glassnode shows that the six-month cost basis is at that level. So, a break lower would prompt these holdings to sell, potentially causing a more profound decline."The 6-month cost basis sits near ~$107k. A sustained move below this level risks triggering fear, which could accelerate downside momentum," Glassnode said.
+
+194. [Filecoin Rebounds 6% From Lows in Bullish Reversal](https://www.coindesk.com/markets/2025/08/26/filecoin-rebounds-6-from-lows-in-bullish-reversal)
+
+Filecoin (FIL) rebounded 6% from its 24 hour lows in a strong bullish reversal, according to CoinDesk Research's technical analysis model.The model showed that FIL demonstrated resilience with a steady climb from the $2.15 low to close at $2.31, delivering a 6.4% rebound that signals underlying accumulation and potential trend reversal momentum.FIL trading volume was 75% above 30-day averages, signaling heightened institutional interest.The storage token established strong support levels during the rebound, according to the model.The bounce in Filecoin came as the wider crypto market fell, with the broader market gauge, the Coindesk 20, down 2.1%.In recent trading, FIL was 0.9% higher over 24 hours, trading around $2.31.Technical Analysis:Price range spans $0.15 (6.8%) between $2.31 peak and $2.15 trough during 24-hour session.Sharp decline from $2.26 to $2.15 on Aug. 25 between 7-8 p.m. UTC, with heavy volume of 15.1 million establishes support.The recovery pattern shows a 6.4% bounce from $2.15 low to $2.28 close, indicating underlying accumulation.Breakout above $2.27 resistance at 11:50 a.m. UTC on Aug. 26 triggers sustained buying pressure.Final 20-minute rally from $2.27 to $2.89 with elevated volume exceeding 150,000 tokens confirms institutional flows.Classic accumulation behavior with consolidation around $2.27 support zone through 11:47 a.m. UTC.Disclaimer: Parts of this article were generated with the assistance from AI tools and reviewed by our editorial team to ensure accuracy and adherence to our standards. For more information, see CoinDesk's full AI Policy.
+
+195. [Large Liquidations Mask Whale's Buy-the-Bitcoin-Dip Strategy: Crypto Daybook Americas](https://www.coindesk.com/daybook-us/2025/08/26/large-liquidations-mask-whale-s-buy-the-bitcoin-dip-strategy-crypto-daybook-americas)
+
+By Omkar Godbole (All times ET unless indicated otherwise)The sell-off in the cryptocurrency market deepened over the past 24 hours, with bitcoin (BTC) falling below $109,000 for the first time since July 9 and ether (ETH) posting a 13% correction from the record high of around $4,950 it hit just two days ago.The CoinDesk 20 (CD20) and CoinDesk 80 (CD80) indices have dropped 2% and 3.3%, respectively, indicating larger losses in the broader altcoin market.The downside volatility toasted leveraged futures bets worth over $900 million, with long positions accounting for the majority of the tally. The slide kicked off on Sunday, when a whale sold 25,000 BTC in an illiquid market, sparking a flash crash. Several theories have been proposed to explain the whale's strategy, the most prominent being that they intentionally removed the bid wall — or block of buy orders — assuming that institutions would buy more through ETFs during the week, thereby lifting prices."This whale is showing us something bigger, they know the ETF/sovereign bid is infinite. So the only way to win is to force weak hands to puke and then accumulate back into the structural wall," pseudonymous observer SightBringer said on X.According to MEXC Ventures, BTC is now at an inflexion point. It could enter a period of consolidation between $110,000 and $120,000 or break lower toward $105,000 to $100,000. "The absence of a fresh macro catalyst, such as a dovish Fed policy pivot, rate cuts, or renewed inflows, is likely to drive BTC into a period of market consolidation as the market digests the recent distribution," MEXC's Investment Director Leo Zhao said in an email.Similarly, the consensus remains bullish on ether. However, the sharp decline from Sunday's record suggests a sustained breakout to new highs will probably require a significant catalyst beyond just corporate treasury adoption.XRP, meanwhile, lacks a clear directional trend. "With Bollinger Bands constricting and RSI sitting at a neutral 44, but thin on buying volume, the chart is whispering of a potential retest of $2.60 to $2.00," Ryan Lee, the chief analyst at Bitget said. "A break above the $3.10 level with conviction and volume, and a run toward $3.40 could follow. But derivative markets are skewed short, and upside stays guarded until momentum firms."In traditional markets, the Treasury yield curve, represented by the spread between 10- and two-year yields and 30- and two-year yields, continues to steepen as traders bet on a September Fed rate cut. Meanwhile, longer-duration Japanese government bond yields are on the verge of hitting new multidecade highs, which could potentially inject volatility into global financial markets. Stay alert!What to WatchCryptoAug. 27, 3 a.m.: Mantle Network (MNT), an Ethereum layer-2 blockchain, will roll out its mainnet upgrade to version 1.3.1, enabling support for Ethereum’s Prague update and introducing new features for platform users and developers.MacroAug. 26, 8:30 a.m.: The U.S. Census Bureau releases July manufactured durable goods orders data.Durable Goods Orders MoM Est. -4% vs. Prev. -9.3%Durable Goods Orders Ex Defense MoM Prev. -9.4%Durable Goods Orders Ex Transportation MoM Est. 0.2% vs. Prev. 0.2%Aug. 26, 10 a.m.: The Conference Board (CB) releases August U.S. consumer confidence data.CB Consumer Confidence Est. 96.4 vs. Prev. 97.2Aug. 27: The U.S. will impose an additional 25% tariff on Indian imports related to Russian oil purchases, raising total tariffs on many goods to about 50%.Aug. 28, 8 a.m.: Mexico's National Institute of Statistics and Geography releases July unemployment rate data.Unemployment Rate Est. 2.9% vs. Prev. 2.7%Aug. 28, 8:30 a.m.: The U.S. Bureau of Economic Analysis (BEA) releases (2nd Estimate) Q2 GDP data.Core PCE Prices QoQ st. 2.6% vs. Prev. 3.5%GDP Growth Rate QoQ Est. 3.1% vs. Prev. -0.5%GDP Price Index QoQ Est. 2% vs. Prev. 3.8%GDP Sales QoQEst. 6.3% vs. Prev. -3.1%PCE Prices QoQ Est. 2.1% vs. Prev. 3.7%Real Consumer Spending QoQ Est. 1.4% vs. Prev. 0.5%Aug. 28, 1:30 p.m.: Uruguay's National Statistics Institute releases July unemployment rate data.Unemployment Rate Prev. 7.3%Aug. 28, 6:00 p.m.: Fed Governor Christopher J. Waller will speak on “Payments” at the Economic Club of Miami Dinner, Miami, Fla. Watch live.Earnings (Estimates based on FactSet data)Aug. 27: NVIDIA (NVDA), post-market, $1.00Aug. 28: IREN (IREN), post-market, $0.18Token EventsGovernance votes & callsIOTA (IOTA) is voting on whether to "go all-in IOTA infrastructure and growth with Tangle DAO." Voting closes Aug. 26.IoTeX (IOTX) is voting on whether to introduce slashing for underperforming IoTeX delegates. Voting closes Aug. 26.Aug. 26: Zebec Network (ZBCN) to host ask me anything with World Mobile at 10 a.m.Aug. 26: Solana (SOL) to host Solana Live at 4.30 p.m.UnlocksAug. 28: Jupiter (JUP) to unlock 1.78% of its circulating supply worth $26.36 million.Sep. 1: Sui (SUI) to release 1.25% of its circulating supply worth $153.1 million.Sep. 2: Ethena (ENA) to release 0.64% of its circulating supply worth $25.64 million.Token LaunchesAug. 26: Centrifuge (CFG) to list on Bybit and Bitrue.Aug. 26: alt.town (TOWN) to list on Gate.io and Bitget.ConferencesThe CoinDesk Policy & Regulation conference (formerly known as State of Crypto) is a one-day boutique event held in Washington on Sept. 10 that allows general counsels, compliance officers and regulatory executives to meet with public officials responsible for crypto legislation and regulatory oversight. Space is limited. Use code CDB10 for 10% off your registration through Aug. 31.Aug. 26: WebX 2025 (Tokyo)Aug. 27: Blockchain Leaders Summit 2025 (Tokyo)Aug. 27-28: Stablecoin Conference 2025 (Mexico City)Aug. 28-29: Bitcoin Asia 2025 (Hong Kong)Token TalkBy Shaurya MalwaBlue-chip NFT collections faced steep weekly losses as ether (ETH) pulled back from record highs, wiping more than 10% off the value of most top projects.Pudgy Penguins, the leading collection by trading volume, dropped 17% to a 10.32 ETH floor, showing that even the sector’s strongest liquidity magnet couldn’t escape the downturn.Bored Ape Yacht Club (BAYC) lost 14.7% to 9.59 ETH, while Doodles recorded one of the sharpest corrections, falling 18.9% to 0.73 ETH.Secondary projects also slumped: Moonbirds fell 10.5%, and Lil Pudgys shed 14.6%, reflecting how price pressure cascaded across both flagship and derivative collections.CryptoPunks proved most resilient, losing just 1.35% over the week, underscoring its status as the market’s defensive benchmark when risk appetite collapses.Despite lower floors, trading activity stayed high. Pudgy Penguins saw 2,112 ETH ($9.36 million) in weekly volume, followed by Moonbirds (1,979 ETH), CryptoPunks (1,879 ETH), and BAYC (809 ETH).Overall NFT market capitalization shrank nearly 5% to $7.7 billion, down from a $9.3 billion peak on Aug. 13. The $1.6 billion drawdown highlights how quickly capital flees when ETH slumps.The sharp contrast between resilient CryptoPunks and sliding newer collections strengthens its appeal as a collateral asset. Its liquidity holds up even as broader NFT floors collapse.For investors, the sell-off signals that NFT blue chips remain high-beta ETH proxies, with only legacy projects like CryptoPunks showing the defensive value that makes them the safer long-term institutional bet.Derivatives PositioningLeveraged crypto bulls have been burned, with futures bets worth $940 million liquidated in the past 24 hours. More than $800 million were long positions betting on price gains. Ether alone accounted for $320 million in liquidations.Still, overall open interest (OI) in BTC remains elevated near lifetime highs above 740K BTC. In ether's case, the OI has pulled back to 14 million ETH from 14.60 million ETH.OI in SOL, XRP, DOGE, ADA, and LINK also dropped in the past 24 hours, indicating net capital outflows.Despite the price volatility, funding rates for most major tokens, excluding SHIB, ADA and SOL, remains positive to suggest dominance of bullish long positions.OI in the CME-listed standard BTC futures has fallen back to 137.3K from 145.2K, reversing the minor bounce from early this month. It shows that institutional interest in trading these regulated derivatives remains low. OI in options, however, has continued to increase, reaching its highest since late May,CME's ether futures OI remains elevated at 2.05 million ETH, just shy of the record 2.15 million ETH on Aug. 22. Meanwhile, OI in ether options is now at its highest since September last year.On Deribit, the impending multibillion-dollar expiry on Friday shows a bias towards BTC puts, indicative of concerns prices are set to drop further. The impending ether expiry paints a more balanced picture.Flows on the OTC desk at Paradigm have been mixed, featuring strategies such as outright put buying and put spreads in BTC, as well as calls and risk reversals in ETH.Market MovementsBTC is up 0.55% from 4 p.m. ET Monday at $111,825.43 (24hrs: -0.66%)ETH is up 1.55% at $4,420.50(24hrs: -2.56%)CoinDesk 20 is up 1.45% at 4,003.25 (24hrs: -2.14%)Ether CESR Composite Staking Rate is up 12 bps at 2.95%BTC funding rate is at 0.0038% (4.1194% annualized) on BinanceDXY is down 0.11% at 98.32Gold futures are unchanged at $3,419.60Silver futures are down 0.36% at $38.56Nikkei 225 closed down 0.97% at 42,394.40Hang Seng closed down 1.18% at 25,524.92FTSE is down 0.61% at 9,264.86Euro Stoxx 50 is down 0.87% at 5,396.84DJIA closed on Monday down 0.77% at 45,282.47S&P 500 closed down 0.43% at 6,439.32Nasdaq Composite closed down 0.22% at 21,449.29S&P/TSX Composite closed down 0.58% at 28,169.94S&P 40 Latin America closed down 0.38% at 2,727.04U.S. 10-Year Treasury rate is up 2.5 bps at 4.30%E-mini S&P 500 futures are down 0.12% at 6,447.75E-mini Nasdaq-100 futures are down 0.13% at 23,468.75E-mini Dow Jones Industrial Average Index are down 0.13% at 45,293.00Bitcoin StatsBTC Dominance: 58.6% (-0.33%)Ether-bitcoin ratio: 0.04007 (0.79%)Hashrate (seven-day moving average): 944 EH/sHashprice (spot): $53.67Total fees: 2.85 BTC / $318,222CME Futures Open Interest: 137,315 BTCBTC priced in gold: 32.6 oz.BTC vs gold market cap: 9.27%Technical AnalysisBTC's recent breakdown of the ascending channel and a horizontal support line (right) looks quite similar to the bearish turnaround from $110,000 from early this year. The latest move could invite stronger selling pressure, potentially yielding a deeper pullback as seen in March and early April. Crypto EquitiesStrategy (MSTR): closed on Monday at $343.2 (-4.17%), unchanged in pre-marketCoinbase Global (COIN): closed at $306 (-4.33%), +0.49% at $307.49Circle (CRCL): closed at $125.24 (-7.26%), unchanged in pre-marketGalaxy Digital (GLXY): closed at $24.55 (-3.99%), -0.45% at $24.44Bullish (BLSH): closed at $65.18 (-7.96%), -1.20% at $64.40MARA Holdings (MARA): closed at $15.4 (-5.46%), -0.32% at $15.35Riot Platforms (RIOT): closed at $13.28 (+0.45%), -1.28% at $13.11Core Scientific (CORZ): closed at $13.68 (+0.96%), -0.44% at $13.62CleanSpark (CLSK): closed at $9.45 (-3.77%), unchanged in pre-marketCoinShares Valkyrie Bitcoin Miners ETF (WGMI): closed at $28.61 (+1.13%), -0.63% at $28.43Semler Scientific (SMLR): closed at $30.02 (-4.49%)Exodus Movement (EXOD): closed at $26.26 (-3.92%), unchanged in pre-marketSharpLink Gaming (SBET): closed at $19.17 (-8.15%), +0.78% at $19.32ETF FlowsSpot BTC ETFsDaily net flows: $219.1 millionCumulative net flows: $54 billionTotal BTC holdings ~1.29 millionSpot ETH ETFsDaily net flows: $443.9 millionCumulative net flows: $12.89 billionTotal ETH holdings ~6.34 millionSource: Farside InvestorsChart of the DayThe total stablecoin supply on the Solana blockchain has increased by $11.9 billion this month, the highest since April. However, the transaction volume has held low near $200 billion, having peaked at over $2 trillion in December. It shows that while stablecoin supplies continue to increase, the on-chain activity has cooled. While You Were SleepingMassive $14.6B Bitcoin and Ether Options Expiry Shows Bias for Bitcoin Protection (CoinDesk): On Deribit, Friday’s expiry shows traders piling into bitcoin puts around $110,000 for protection from declines, while ether positions look more evenly split between bullish and bearish bets.Bitcoin Suffers Technical Setback, Loses 100-Day Average as XRP, ETH and SOL Hold Ground (CoinDesk): Bitcoin faces a bearish outlook after losing key support, with XRP stuck in uncertainty, while ETH and SOL maintain stronger footing that could let them outperform BTC and XRP in risk-on conditions.Polymarket Bettors Doubt Trump Can Topple Jerome Powell or Lisa Cook This Year (CoinDesk): The decentralized crypto-based prediction market sees only a 10% chance of Powell exiting before his term ends in May 2026 and a 27% chance that Cook departs her post this year.‘Powerful Optics’: China’s Xi To Welcome Putin, Modi in Grand Show of Solidarity (Reuters): Although the Shanghai Cooperation Organization has brought little economic cooperation, analysts say next week’s summit gives China a stage to parade Global South solidarity against the U.S. amid geopolitical uncertainty.Peter Thiel-Backed Crypto Exchange Bitpanda Rules Out U.K. Listing (Financial Times): Co-founder Eric Demuth said Bitpanda ruled out a London IPO, citing thin share liquidity on the LSE and the fact it earns more in mainland Europe than the U.K.Lisa Cook Says She Will Not Step Down From the Fed (The New York Times): Trump cited unproven mortgage-fraud allegations to justify firing the Fed governor. Her lawyer called the move unlawful and warned it could undermine the central bank’s independence.In the Ether

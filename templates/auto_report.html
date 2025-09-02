@@ -314,7 +314,7 @@
         document.getElementById('progress-card').style.display = 'block';
 
         // 发送请求开始自动生成
-        fetch('/auto_generate_report', {
+        fetch('/api/auto_generate_report', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -341,7 +341,7 @@
 
       function startStatusPolling() {
         processInterval = setInterval(() => {
-          fetch('/auto_report_status')
+          fetch('/api/auto_report_status')
             .then(response => response.json())
             .then(data => {
               updateProgress(data);

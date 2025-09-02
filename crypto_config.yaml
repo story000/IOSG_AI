@@ -439,39 +439,42 @@ classification:
         - "传统.*?资产.*?上链"
       weight: 1.0
 
-    NFT:
+    稳定币:
       keywords:
-        - "NFT"
-        - "non-fungible token"
-        - "数字藏品"
-        - "数字收藏品"
-        - "艺术品"
-        - "art"
-        - "头像"
-        - "PFP"
-        - "profile picture"
-        - "OpenSea"
-        - "marketplace"
-        - "铸造"
-        - "mint"
-        - "minting"
-        - "收藏品"
-        - "collectibles"
-        - "数字艺术"
-        - "digital art"
-        - "创作者"
-        - "creator"
-        - "版税"
-        - "royalty"
-        - "稀有度"
-        - "rarity"
-        - "地板价"
-        - "floor price"
-        - "交易量"
-        - "volume"
-        - "二级市场"
-        - "secondary market"
-      patterns: []
+        - "稳定币"
+        - "stablecoin"
+        - "USDT"
+        - "USDC"
+        - "DAI"
+        - "BUSD"
+        - "FRAX"
+        - "LUSD"
+        - "抵押稳定币"
+        - "collateralized stablecoin"
+        - "央行数字货币"
+        - "CBDC"
+        - "数字美元"
+        - "数字人民币"
+        - "法币锚定"
+        - "fiat-pegged"
+        - "脱锚"
+        - "depeg"
+        - "赎回"
+        - "redemption"
+        - "铸造销毁"
+        - "mint and burn"
+        - "储备资产"
+        - "reserve assets"
+        - "稳定机制"
+        - "stability mechanism"
+        - "价格稳定"
+        - "price stability"
+      patterns:
+        - "稳定币.*?发行"
+        - "稳定币.*?上线"
+        - ".*?稳定币.*?机制"
+        - "稳定币.*?脱锚"
+        - "稳定币.*?储备"
       weight: 1.0
 
     GameFi:
@@ -505,43 +508,49 @@ classification:
       patterns: []
       weight: 1.0
 
-    Metaverse/Web3社交:
+    应用协议:
       keywords:
-        - "Metaverse"
-        - "元宇宙"
-        - "虚拟世界"
-        - "virtual world"
-        - "VR"
-        - "AR"
-        - "虚拟现实"
-        - "增强现实"
-        - "数字身份"
-        - "digital identity"
-        - "avatar"
-        - "虚拟人"
-        - "数字人"
-        - "虚拟土地"
-        - "virtual land"
-        - "land"
-        - "sandbox"
-        - "decentraland"
-        - "Web3社交"
-        - "Web3 social"
-        - "去中心化社交"
-        - "decentralized social"
-        - "社交网络"
-        - "social network"
-        - "社交代币"
-        - "social token"
-        - "创作者经济"
-        - "creator economy"
-        - "社区代币"
-        - "community token"
-        - "粉丝代币"
-        - "fan token"
-        - "去中心化内容"
-        - "decentralized content"
-      patterns: []
+        - "应用协议"
+        - "application protocol"
+        - "dApp"
+        - "去中心化应用"
+        - "decentralized application"
+        - "智能合约"
+        - "smart contract"
+        - "链上"
+        - "on-chain"
+        - "协议应用"
+        - "protocol application"
+        - "用户界面"
+        - "user interface"
+        - "Web3应用"
+        - "Web3 application"
+        - "区块链应用"
+        - "blockchain application"
+        - "消费"
+        - "consumer application"
+        - "社交"
+        - "social application"
+        - "内容"
+        - "content platform"
+        - "创作者平台"
+        - "creator platform"
+        - "应用生态"
+        - "application ecosystem"
+        - "用户体验"
+        - "user experience"
+        - "UX"
+        - "UI"
+        - "移动应用"
+        - "mobile app"
+        - "桌面应用"
+        - "desktop app"
+      patterns:
+        - "应用.*?上线"
+        - "应用.*?发布"
+        - "dApp.*?推出"
+        - "去中心化应用.*?发布"
+        - "Web3应用.*?上线"
       weight: 1.0
 
     交易所/钱包:
@@ -721,6 +730,7 @@ content_filters:
     - "存入"
     - "下跌"
     - "上涨"
+    - "今日链上"
 
 # AI Filter Prompts Configuration
 ai_filter:
@@ -902,9 +912,9 @@ ai_filter:
           - "融资相关内容"
           - "概念性讨论、市场预测"
 
-    NFT:
+    稳定币:
       prompt_template: |
-        请分析以下{count}篇加密货币新闻，判断哪些是真实的NFT新闻。
+        请分析以下{count}篇加密货币新闻，判断哪些是真实的稳定币新闻。
 
         筛选标准：
         {criteria}
@@ -918,20 +928,22 @@ ai_filter:
 
       criteria:
         keep:
-          - "重要NFT项目发布、合作伙伴关系"
-          - "知名品牌、IP进入NFT领域"
-          - "NFT技术标准、协议重大更新"
-          - "大型NFT交易平台功能更新"
-          - "NFT在艺术、收藏品领域的创新应用"
-          - "数字艺术、创作者经济相关NFT项目"
+          - "新稳定币发行、协议上线"
+          - "稳定币储备机制、抵押资产变化"
+          - "央行数字货币(CBDC)重要进展"
+          - "稳定币监管政策、合规措施"
+          - "稳定币脱锚事件、稳定机制调整"
+          - "算法稳定币创新、机制升级"
+          - "稳定币跨链部署、互操作性"
+          - "大型机构发行或采用稳定币"
 
         discard:
-          - "纯粹的价格变动、地板价变化"
+          - "纯粹的价格波动、交易量数据"
           - "融资相关内容"
-          - "个人收藏、小型NFT项目"
-          - "市场炒作、价格预测"
-          - "游戏相关NFT（属于GameFi类别）"
-          - "元宇宙相关NFT（属于Metaverse类别）"
+          - "一般性的稳定币转账、交易"
+          - "主流稳定币铸造、销毁操作（如Tether 铸造，除非涉及重大机制变更）"
+          - "市场分析、价格预测"
+          - "技术教程、使用指南"
 
     GameFi:
       prompt_template: |
@@ -963,9 +975,9 @@ ai_filter:
           - "市场炒作、价格预测"
           - "纯NFT项目（无游戏属性）"
 
-    Metaverse/Web3社交:
+    应用协议:
       prompt_template: |
-        请分析以下{count}篇加密货币新闻，判断哪些是真实的Metaverse/Web3社交新闻。
+        请分析以下{count}篇加密货币新闻，判断哪些是真实的应用协议新闻。
 
         筛选标准：
         {criteria}
@@ -979,20 +991,22 @@ ai_filter:
 
       criteria:
         keep:
-          - "元宇宙平台重要功能发布、技术突破"
-          - "虚拟世界、虚拟土地重大发展"
-          - "Web3社交平台、去中心化社交网络"
-          - "VR/AR与区块链结合的重要应用"
-          - "数字身份、去中心化身份管理"
-          - "创作者经济、社交代币创新"
-          - "大型品牌进入元宇宙的重要合作"
+          - "新的去中心化应用(dApp)正式上线"
+          - "重要Web3应用功能更新、技术突破"
+          - "消费级区块链应用推出、用户体验改进"
+          - "社交应用、内容平台的区块链集成"
+          - "移动端、桌面端Web3应用发布"
+          - "应用协议的用户增长、生态发展"
+          - "跨平台应用、多链部署"
+          - "大型品牌推出区块链应用"
 
         discard:
-          - "纯粹的价格变动、土地价格变化"
+          - "纯粹的价格变动、代币价格"
           - "融资相关内容"
-          - "简单的元宇宙活动、虚拟会议"
-          - "市场炒作、概念性讨论"
-          - "纯游戏内容（属于GameFi类别）"
+          - "概念性讨论、技术教程"
+          - "底层基础设施（属于中间件类别）"
+          - "DeFi协议（属于DeFi类别）"
+          - "游戏应用（属于GameFi类别）"
 
     交易所/钱包:
       prompt_template: |
@@ -1095,9 +1109,9 @@ ai_filter:
     "中间件/工具协议": "middleware"
     "DeFi": "defi"
     "RWA": "rwa"
-    "NFT": "nft"
+    "稳定币": "stablecoin"
+    "应用协议": "application"
     "GameFi": "gamefi"
-    "Metaverse/Web3社交": "metaverse"
     "交易所/钱包": "exchange_wallet"
     "AI + Crypto": "ai_crypto"
     "DePIN": "depin"
