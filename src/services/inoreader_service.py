@@ -103,19 +103,10 @@ class InoreaderService:
                 with open(latest_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         
-        # Import InoreaderClient dynamically
+        # Import InoreaderClient from project root; fallback to mock on failure
         try:
-            import sys
-            old_version_path = Path(__file__).parent.parent.parent / 'old_version'
-            if old_version_path.exists():
-                sys.path.insert(0, str(old_version_path))
-                from inoreader_client import InoreaderClient
-                sys.path.pop(0)
-            else:
-                # Fallback: create mock data if old_version doesn't exist
-                return self._create_mock_data(progress_callback, log_callback)
-                
-        except ImportError:
+            from inoreader_client import InoreaderClient
+        except Exception:
             return self._create_mock_data(progress_callback, log_callback)
         
         if log_callback:

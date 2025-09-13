@@ -205,7 +205,13 @@ def ai_filter():
             try:
                 # Import the original ai_filter module
                 import sys
-                sys.path.insert(0, '/Users/liusiyuan/Desktop/AIVC/IOSG/src/services')
+                import os
+                from dotenv import load_dotenv
+                load_dotenv()
+                service_path = os.getenv("SERVICE_PATH")
+                if service_path is None:
+                    raise RuntimeError("Missing SERVICE_PATH in .env!")
+                sys.path.insert(0, service_path)
                 from ai_filter_original import AIFundingFilter
                 
                 log_entry = {
